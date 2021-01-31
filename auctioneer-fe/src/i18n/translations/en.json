@@ -10,6 +10,8 @@
     "products": "Products",
     "prev": "Previous",
     "next": "Next",
+    "priceAsc": "Price: low to high",
+    "priceDesc": "Price: high to low",
     "starting_price": "Starting price",
     "current_price": "Current price",
     "submitBid": "Submit Bid",

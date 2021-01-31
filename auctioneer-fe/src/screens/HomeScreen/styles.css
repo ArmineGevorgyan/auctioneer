@@ -26,3 +26,22 @@
 .floatLeft {
   float: left;
 }
+
+#home_screen .button {
+  margin: 20px 0;
+  width: 150px;
+}
+
+#home_screen .pagination .button {
+  margin: 0;
+}
+
+#home_screen .sorting {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#home_screen .sorting .button {
+  margin: 20px 0 20px 10px;
+  width: auto;
+}

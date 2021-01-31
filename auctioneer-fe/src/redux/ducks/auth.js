@@ -7,6 +7,8 @@ const initialState = {
   loading: false,
   isAuthenticated: false,
   error: null,
+  user: null,
+  isAdmin: null,
 };
 
 const authSlice = createSlice({
@@ -17,17 +19,21 @@ const authSlice = createSlice({
       ...state,
       loading: true,
     }),
-    loginSuccess: (state) => ({
+    loginSuccess: (state, action) => ({
       ...state,
       loading: false,
       error: null,
       isAuthenticated: true,
+      user: action.payload,
+      isAdmin: action.payload.is_admin,
     }),
     loginFail: (state, action) => ({
       ...state,
       loading: false,
       error: action.payload,
       isAuthenticated: false,
+      user: null,
+      isAdmin: null,
     }),
     authenticate: (state) => ({
       ...state,
@@ -36,6 +42,8 @@ const authSlice = createSlice({
     clearAuthentication: (state) => ({
       ...state,
       isAuthenticated: false,
+      user: null,
+      isAdmin: null,
     }),
   },
 });
@@ -69,9 +77,10 @@ export const login = (data) => {
       .then((r) => r.data)
       .then((data) => {
         const token = data.token;
+        const user = data.user;
         if (token) {
           setToken(token);
-          dispatch(authSlice.actions.loginSuccess());
+          dispatch(authSlice.actions.loginSuccess(user));
         } else {
           dispatch(authSlice.actions.loginFail());
         }

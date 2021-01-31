@@ -41,7 +41,7 @@ const ProductScreen = ({ t, loading, product, getProductById }) => {
             </Item.Extra>
           </Item.Content>
           <Button secondary className="button">
-            {t("products.bidNow")}
+            {t("products.submitBid")}
           </Button>
         </Item>
       </div>

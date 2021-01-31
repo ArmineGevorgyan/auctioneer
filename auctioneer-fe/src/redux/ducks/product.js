@@ -8,6 +8,8 @@ const initialState = {
   product: null,
   productList: null,
   current_page: 1,
+  col: "created_at",
+  dir: "desc",
 };
 
 const productSlice = createSlice({
@@ -17,7 +19,9 @@ const productSlice = createSlice({
     getProducts: (state, action) => ({
       ...state,
       loading: true,
-      current_page: action.payload,
+      current_page: action.payload.current_page,
+      col: action.payload.col,
+      dir: action.payload.dir,
     }),
     getProductsSuccess: (state, action) => ({
       ...state,
@@ -99,12 +103,12 @@ const productSlice = createSlice({
 
 const productReducer = productSlice.reducer;
 
-export const getProducts = (page = 1) => {
+export const getProducts = (page = 1, col = "created_at", dir = "desc") => {
   return (dispatch) => {
     dispatch(productSlice.actions.getProducts(page));
 
     axios
-      .get(`${API_URL}/products?page=${page}`)
+      .get(`${API_URL}/products/sort/${col}/${dir}?page=${page}`)
       .then((r) => r.data)
       .then((data) => {
         dispatch(productSlice.actions.getProductsSuccess(data));
