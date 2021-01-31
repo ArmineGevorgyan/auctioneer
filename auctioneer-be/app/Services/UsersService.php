@@ -20,6 +20,6 @@ class UsersService implements IUsersService
      */
     public function getUser($id)
     {
-        return User::all()->find($id);
+        return User::with('bids')->find($id);
     }
 }

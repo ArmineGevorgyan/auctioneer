@@ -5,10 +5,12 @@ namespace App\Services;
 use App\Interfaces\IProductsService;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Bid;
 use Log;
 
 class ProductsService implements IProductsService
 {
+
     /**
      * {@inheritdoc}
      */
@@ -69,5 +71,24 @@ class ProductsService implements IProductsService
 
         //TODO: check user authorization
         return $this->getProduct($id)->delete();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createBid($user, $id, $array){
+        Log::info('Creating bid');
+        $data = array_merge($array, [
+            'product_id' => $id,
+            'user_id' => $user->id
+        ]);
+
+        $product = $this->getProduct($id);
+        $product->update([
+            'current_price' => $array['amount']
+        ]);
+
+        return Bid::create($data);
+
     }
 }

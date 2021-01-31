@@ -24,6 +24,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/products/{id}', [ProductsController::class, 'show']);
     Route::get('/products/sort/{col}/{direction}', [ProductsController::class, 'getSortedAvailableProducts']);
     Route::post('/products', [ProductsController::class, 'create']);
+    Route::post('/products/{id}/bids', [ProductsController::class, 'createBid']);
     Route::put('/products/{id}', [ProductsController::class, 'update']);
     Route::delete('/products/{id}', [ProductsController::class, 'delete']);
     Route::get('/users', [UsersController::class, 'index']);

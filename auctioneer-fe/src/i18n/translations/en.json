@@ -12,9 +12,12 @@
     "next": "Next",
     "priceAsc": "Price: low to high",
     "priceDesc": "Price: high to low",
-    "starting_price": "Starting price",
-    "current_price": "Current price",
+    "startingPrice": "Starting price",
+    "currentPrice": "Current price",
+    "amount": "Bid amount",
+    "remaintingTime": "Remaining time",
     "submitBid": "Submit Bid",
+    "minimum": "Minimum Bid",
     "bidNow": "Bid Now"
   },
   "validator": {
