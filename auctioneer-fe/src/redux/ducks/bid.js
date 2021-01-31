@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API_URL } from "../../config";
-import { useHistory } from "react-router-dom";
 
 const initialState = {
   loading: false,
@@ -43,8 +42,6 @@ export const makeBid = (product_id, data) => {
       .then((r) => r.data)
       .then((data) => {
         dispatch(bidSlice.actions.makeBidSuccess(data));
-        let history = useHistory();
-        history.goBack();
       })
       .catch((error) => {
         dispatch(bidSlice.actions.makeBidFail(error));

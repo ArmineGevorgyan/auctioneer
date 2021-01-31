@@ -72,6 +72,7 @@ class ProductsController extends Controller
                 'image',
                 'starting_price',
                 'current_price',
+                'closing_date',
                 'is_available'
             ]);
 

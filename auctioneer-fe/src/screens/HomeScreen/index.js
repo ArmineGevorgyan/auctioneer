@@ -2,11 +2,11 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import { Button, Item } from "semantic-ui-react";
+import { Button, Item, Icon, Input } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { numberToCashFormatter } from "../../helpers/numberHelper";
-import { getProducts, getSortedProducts } from "../../redux/ducks/product";
+import { getProducts, filterProducts } from "../../redux/ducks/product";
 import styles from "./styles.css";
 import constants from "../../constants";
 
@@ -17,9 +17,20 @@ class HomeScreen extends React.PureComponent {
     getProducts(current_page);
   }
 
+  handleChange = (event) => {
+    const { filterProducts, productList } = this.props;
+    const text = event.target.value;
+
+    const list = productList.data.filter(
+      (item) => item.name.includes(text) || item.desctiption.includes(text)
+    );
+
+    filterProducts(list);
+  };
+
   productList = () => {
-    const { t, productList } = this.props;
-    const list = productList.data;
+    const { t, filteredList } = this.props;
+    const list = filteredList;
 
     return (
       <Item.Group>
@@ -56,7 +67,8 @@ class HomeScreen extends React.PureComponent {
   };
 
   render() {
-    const { t, loading, productList, getProducts } = this.props;
+    const { t, loading, productList, getProducts, isAdmin } = this.props;
+    const isVisitor = !isAdmin || isAdmin == "false";
 
     if (loading || !productList) {
       return <Loader loading={loading} />;
@@ -66,8 +78,23 @@ class HomeScreen extends React.PureComponent {
 
     return (
       <div id="home_screen">
-        <h1>{t("products.products")}</h1>
+        <h1>{t("products.products")} </h1>
+        {!isVisitor && (
+          <Button primary as={Link} to={`/products/create`}>
+            {t("products.new")}
+            <Icon className="plus_icon" name="plus" />
+          </Button>
+        )}
         <div className="sorting">
+          <Input
+            icon
+            placeholder="Search..."
+            className="floatLeft"
+            onChange={(e) => this.handleChange(e)}
+          >
+            <input />
+            <Icon name="search" />
+          </Input>
           <Button
             basic
             color="black"
@@ -116,10 +143,13 @@ const mapStateToProps = (state) => ({
   current_page: state.product.current_page,
   col: state.product.col,
   dir: state.product.dir,
+  filteredList: state.product.filteredList,
   productList: state.product.productList,
+  isAdmin: state.auth.isAdmin,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  filterProducts: (list) => dispatch(filterProducts(list)),
   getProducts: (page, dir, col) => dispatch(getProducts(page, dir, col)),
 });
 

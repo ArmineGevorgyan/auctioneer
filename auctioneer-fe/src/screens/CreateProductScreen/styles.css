@@ -1,0 +1,32 @@
+#product_create {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #dedede;
+  padding: 30px;
+}
+
+#product_create .button {
+  margin: 20px 0;
+  width: 200px;
+}
+
+#product_create input {
+  width: 40vw;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+.label span {
+  color: "gray";
+  line-height: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  font-size: 15px;
+}
+
+.container {
+  margin-top: 20px;
+}
