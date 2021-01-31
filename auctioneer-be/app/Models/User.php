@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,12 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'max_bid_amount',
+    ];
+
+    
+    protected $appends = [
+        'is_admin'
     ];
 
     /**
@@ -29,6 +36,11 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'roles',
         'api_token'
     ];
+
+    public function getIsAdminAttribute(){
+        return $this->hasRole('admin');
+    }
 }

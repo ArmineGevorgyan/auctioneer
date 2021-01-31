@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->float('starting_price');
             $table->float('current_price');
             $table->boolean('is_available')->default(true);
+            $table->dateTime('closing_date');
         });
     }
 

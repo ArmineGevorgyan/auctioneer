@@ -12,6 +12,7 @@
     "next": "Next",
     "starting_price": "Starting price",
     "current_price": "Current price",
+    "submitBid": "Submit Bid",
     "bidNow": "Bid Now"
   },
   "validator": {

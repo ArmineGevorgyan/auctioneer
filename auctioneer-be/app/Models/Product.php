@@ -18,10 +18,14 @@ class Product extends Model
         'image',
         'starting_price',
         'current_price',
+        'closing_date',
         'is_available'
     ];
+ 
+    protected $dates = [
+        'closing_date',
+    ];
 
-    
     protected $casts = [
         'starting_price' => 'float',
         'current_price' => 'float',

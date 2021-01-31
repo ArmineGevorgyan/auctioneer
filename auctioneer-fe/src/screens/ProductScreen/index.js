@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { Button, Item } from "semantic-ui-react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { numberToCashFormatter } from "../../helpers/numberHelper";
 import { getProductById } from "../../redux/ducks/product";

@@ -21,6 +21,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://handluggageonly.co.uk/wp-content/uploads/2018/02/Hand-Luggage-Only-8-5.jpg',
             'starting_price' => '2000',
             'current_price' => '2000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -30,6 +31,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://i.guim.co.uk/img/media/90c361caa6a48d2e45fe2204923c74c17866b835/0_31_3286_4430/master/3286.jpg?width=700&quality=85&auto=format&fit=max&s=9ee8c90d9827d5c17edc15889413f6ce',
             'starting_price' => '200000',
             'current_price' => '200000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -39,6 +41,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/9773c2a/2147483647/strip/true/crop/2000x1499+0+0/resize/1024x767!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F58%2Ff3%2Fe82e4e10457d8cbe4cdcc3381c0b%2F122n10613-9w6qp-01.jpg',
             'starting_price' => '3800',
             'current_price' => '3800',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -50,6 +53,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/dc15498/2147483647/strip/true/crop/2000x1999+0+0/resize/1024x1023!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2Fb6%2Fb7%2F9cb23b9b440a9e14c05a99425dd4%2F080n10612-bkxhx-2.jpg',
             'starting_price' => '4000',
             'current_price' => '4000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -59,6 +63,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/237f7ee/2147483647/strip/true/crop/2000x2000+0+0/resize/1024x1024!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F09%2F3b%2F10ef3cea4d5da6a568c919504fb8%2F056n10612-bj8mb-1-noreserve.jpg',
             'starting_price' => '10000',
             'current_price' => '10000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -69,6 +74,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/93/d2/dc8432464babbe63b206a30b176a/168n10610-bjn66-noreserve.jpg',
             'starting_price' => '3500',
             'current_price' => '3500',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -80,6 +86,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/72/59/1a2bfbd84e19a960e94d0a8b57d0/092n10608-7c4lw.jpg',
             'starting_price' => '150000',
             'current_price' => '150000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -89,6 +96,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/f04d225/2147483647/strip/true/crop/3807x3807+0+0/resize/800x800!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2Fc1%2F01%2F7edebfb74fa18b499e3f1526c9dc%2Fmrkt-rolex-salmondatejust-front.png',
             'starting_price' => '5500',
             'current_price' => '5500',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -99,6 +107,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/cd5d70c/2147483647/strip/true/crop/1152x1152+0+0/resize/800x800!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F0c%2F9e%2Fd2175f074f0dad79d55a2b527b26%2F001n10490-bq5r3-01.jpg',
             'starting_price' => '25000',
             'current_price' => '25000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -114,6 +123,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/af/eb/1163d9f5458f93e88dadc3ee5cab/yt-je0305-op-y.jpg',
             'starting_price' => '7650',
             'current_price' => '7650',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -128,6 +138,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/12b0307/2147483647/strip/true/crop/4537x4537+0+0/resize/800x800!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F8e%2F75%2Fcbb0b54b42a9bf32552435178577%2Fkd-sr2050-front.jpg',
             'starting_price' => '21000',
             'current_price' => '21000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -139,6 +150,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/ea799e4/2147483647/strip/true/crop/792x2000+0+0/resize/1024x2586!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F5b%2F59%2Fcc1102aa4f06b537725ac104ed16%2F066n10613-bp55g-01.jpg',
             'starting_price' => '30000',
             'current_price' => '30000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -151,6 +163,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/b3/d5/e031863b4d9582b61dbec6b4db60/059n10613-97rjf-01.jpg',
             'starting_price' => '38000',
             'current_price' => '38000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -162,6 +175,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/69173f5/2147483647/strip/true/crop/2000x2000+0+0/resize/1024x1024!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F57%2F02%2Ff79ef6344bb4b8e9bd9677a5b727%2Fn10843-bk2bj-36-1.jpg',
             'starting_price' => '17000',
             'current_price' => '17000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -171,6 +185,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/fafdc71/2147483647/strip/true/crop/2000x2000+0+0/resize/1024x1024!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F06%2F11%2F06a4728248d887740195189815f5%2F132n10612-bnkx6-01-noreserve.jpg',
             'starting_price' => '1500',
             'current_price' => '1500',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -182,6 +197,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/3349d37/2147483647/strip/true/crop/2000x2000+0+0/resize/1024x1024!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F7d%2Fc1%2F8d2a066a462a8bc9121024291672%2Fn10843-bk2bh-35-1.jpg',
             'starting_price' => '18000',
             'current_price' => '18000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -193,6 +209,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/25cde28/2147483647/strip/true/crop/3024x4032+0+0/resize/1024x1365!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2Fd4%2Fd0%2F11fb0e464c128ba0a9c2e1b35ef0%2Fmurphy-brendan-image-a.jpg',
             'starting_price' => '170000',
             'current_price' => '170000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -204,6 +221,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/f6615be/2147483647/strip/true/crop/2000x2000+0+0/resize/1024x1024!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F8d%2F50%2Ff6e45cd043caa7d0657e7bf3094a%2Fhk1108-bqnbw-1.jpg',
             'starting_price' => '80000',
             'current_price' => '80000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -214,6 +232,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/db8ed8d/2147483647/strip/true/crop/2000x2000+0+0/resize/1024x1024!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F09%2Fc0%2F9faeb4b040858e14aeddf3352119%2F098n10612-bjn6b-01-noreserve.jpg',
             'starting_price' => '4000',
             'current_price' => '4000',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -225,6 +244,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/ae036df/2147483647/strip/true/crop/1200x1200+0+0/resize/800x800!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F5b%2F72%2F2691d11b49888b54dac9805c3de2%2Fatsltlsi-rwfwzdzjls.png',
             'starting_price' => '6600',
             'current_price' => '6600',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
 
@@ -237,6 +257,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/312a0af/2147483647/strip/true/crop/1200x1200+0+0/resize/800x800!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2Fce%2Ff0%2F71d50ec74f49875fcc44b3fbc44d%2Fbsb3h-front.png',
             'starting_price' => '2700',
             'current_price' => '2700',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
         
@@ -262,6 +283,7 @@ class ProductsTableSeeder extends Seeder
             'image' => 'https://sothebys-md.brightspotcdn.com/dims4/default/71a4fe8/2147483647/strip/true/crop/2000x2000+0+0/resize/1024x1024!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F07%2F93%2F6b9ce43c4a92a1ba6e265024ceba%2F159n10612-bn62s-01-noreserve.jpg',
             'starting_price' => '900',
             'current_price' => '900',
+            'closing_date' => Carbon::now()->addDays(rand(1, 50)),
             'created_at' => Carbon::now()->subDays(rand(0, 365))->subHours(rand(0, 24))->subMinutes(rand(0, 60)),
         ]);
     }
