@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { Button, Item, Input, FormField } from "semantic-ui-react";
 import { Formik, Form } from "formik";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Countdown from "react-countdown";
 import Loader from "../../components/Loader";
-import { getProductById } from "../../redux/ducks/product";
+import { getProductById, deleteProductById } from "../../redux/ducks/product";
 import { makeBid } from "../../redux/ducks/bid";
 import Validation from "../../validation";
 import styles from "./styles.css";
@@ -18,9 +18,11 @@ const ProductScreen = ({
   loading,
   product,
   getProductById,
+  deleteProductById,
   makeBid,
   history,
   bid,
+  isAdmin,
 }) => {
   const { id } = useParams();
 
@@ -41,6 +43,11 @@ const ProductScreen = ({
 
   const onSubmit = (values) => {
     makeBid(id, values);
+  };
+
+  const onDelete = () => {
+    deleteProductById(id);
+    history.goBack();
   };
 
   const getForm = () => {
@@ -91,11 +98,23 @@ const ProductScreen = ({
     return <Loader loading={loading} />;
   }
 
+  const isVisitor = !isAdmin || isAdmin == "false";
+
   return (
     <div id="product_screen">
       <div className="list_container">
         <Item>
           <h1>{product.name}</h1>
+          {!isVisitor && (
+            <div>
+              <Button primary as={Link} to={`/products/${id}/edit`}>
+                {t("products.edit")}
+              </Button>
+              <Button color="red" onClick={() => onDelete()}>
+                {t("products.delete")}
+              </Button>
+            </div>
+          )}
           <Item.Image
             size="large"
             src={product.image || constants.placeholderImageUrl}
@@ -127,10 +146,12 @@ const mapStateToProps = (state) => ({
   loading: state.product.loading,
   product: state.product.product,
   bid: state.bid.bid,
+  isAdmin: state.auth.isAdmin,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getProductById: (id) => dispatch(getProductById(id)),
+  deleteProductById: (id) => dispatch(deleteProductById(id)),
   makeBid: (id, data) => dispatch(makeBid(id, data)),
 });
 

@@ -3,14 +3,17 @@ import axios from "axios";
 import store from "../redux/store";
 import { clearAuthentication } from "../redux/ducks/auth";
 
-export const setToken = (token) => {
+export const setAuth = (token, isAdmin) => {
   localStorage.setItem(constants.token, token);
+  localStorage.setItem(constants.isAdmin, isAdmin);
 };
 
 export const getToken = () => localStorage.getItem(constants.token);
+export const getIsAdmin = () => localStorage.getItem(constants.isAdmin);
 
-export const removeToken = () => {
+export const removeAuth = () => {
   localStorage.removeItem(constants.token);
+  localStorage.removeItem(constants.isAdmin);
 };
 
 export const getAuthHeader = () => {

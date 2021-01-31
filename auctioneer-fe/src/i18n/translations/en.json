@@ -18,10 +18,30 @@
     "remaintingTime": "Remaining time",
     "submitBid": "Submit Bid",
     "minimum": "Minimum Bid",
-    "bidNow": "Bid Now"
+    "bidNow": "Bid Now",
+    "edit": "Edit",
+    "delete": "Delete",
+    "new": "New item"
+  },
+  "productForm": {
+    "createTitle": "Create new product",
+    "editTitle": "Edit product",
+    "name": "Name",
+    "desctiption": "Description",
+    "starting_price": "Starting price",
+    "current_price": "Current price",
+    "image": "Image Url",
+    "closing_date": "Closing date",
+    "update": "Update",
+    "create": "Create"
   },
   "validator": {
     "username_required": "Username is required",
-    "password_required": "Password is required"
+    "password_required": "Password is required",
+    "name_required": "Name is required",
+    "starting_price_required": "Starting price is required",
+    "current_price_required": "Current price is required",
+    "image_url_not_valid": "Please enter a valid url",
+    "closing_date_required": "Closing date is required"
   }
 }

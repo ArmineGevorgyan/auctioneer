@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { API_URL } from "../../config";
-import { getToken, removeToken, setToken } from "../../helpers/auth";
+import { getToken, getIsAdmin, removeAuth, setAuth } from "../../helpers/auth";
 
 const initialState = {
   loading: false,
@@ -35,9 +35,10 @@ const authSlice = createSlice({
       user: null,
       isAdmin: null,
     }),
-    authenticate: (state) => ({
+    authenticate: (state, action) => ({
       ...state,
       isAuthenticated: true,
+      isAdmin: action.payload,
     }),
     clearAuthentication: (state) => ({
       ...state,
@@ -53,15 +54,18 @@ const authReducer = authSlice.reducer;
 export const authenticate = () => {
   return (dispatch) => {
     const token = getToken();
-    if (token) {
-      return dispatch(authSlice.actions.authenticate());
+    const isAdmin = getIsAdmin();
+
+    if (!token) {
+      return clearAuthentication();
     }
-    clearAuthentication();
+
+    dispatch(authSlice.actions.authenticate(isAdmin));
   };
 };
 
 export const clearAuthentication = () => {
-  removeToken();
+  removeAuth();
 
   return (dispatch) => {
     dispatch(authSlice.actions.clearAuthentication());
@@ -79,7 +83,7 @@ export const login = (data) => {
         const token = data.token;
         const user = data.user;
         if (token) {
-          setToken(token);
+          setAuth(token, user.is_admin);
           dispatch(authSlice.actions.loginSuccess(user));
         } else {
           dispatch(authSlice.actions.loginFail());

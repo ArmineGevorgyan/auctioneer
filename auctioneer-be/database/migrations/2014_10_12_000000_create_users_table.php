@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email');
             $table->string('password'); 
-            $table->float('max_bid_amount')->default(0);
+            $table->double('max_bid_amount',12,2)->unsigned()->default(0);
             $table->string('api_token', 80)->unique();
             $table->timestamps();
         });

@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   product: null,
+  filteredList: null,
   productList: null,
   current_page: 1,
   col: "created_at",
@@ -27,6 +28,7 @@ const productSlice = createSlice({
       ...state,
       loading: false,
       error: null,
+      filteredList: action.payload.data,
       productList: action.payload,
     }),
     getProductsFail: (state, action) => ({
@@ -98,6 +100,10 @@ const productSlice = createSlice({
       loading: false,
       error: action.payload,
     }),
+    filterProducts: (state, action) => ({
+      ...state,
+      filteredList: action.payload,
+    }),
   },
 });
 
@@ -166,12 +172,12 @@ export const createProduct = (data) => {
   };
 };
 
-export const updateProduct = (data) => {
+export const updateProduct = (id, data) => {
   return (dispatch) => {
     dispatch(productSlice.actions.updateProduct());
 
     axios
-      .put(`${API_URL}/products`, data)
+      .put(`${API_URL}/products/${id}`, data)
       .then((r) => r.data)
       .then((data) => {
         dispatch(productSlice.actions.updateProductSuccess(data));
@@ -182,4 +188,9 @@ export const updateProduct = (data) => {
   };
 };
 
+export const filterProducts = (products) => {
+  return (dispatch) => {
+    dispatch(productSlice.actions.filterProducts(products));
+  };
+};
 export default productReducer;

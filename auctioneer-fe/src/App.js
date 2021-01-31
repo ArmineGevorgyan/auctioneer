@@ -8,6 +8,8 @@ import { authenticate } from "./redux/ducks/auth";
 import LoginScreen from "./screens/LoginScreen/index.js";
 import HomeScreen from "./screens/HomeScreen/index.js";
 import ProductScreen from "./screens/ProductScreen";
+import CreateProductScreen from "./screens/CreateProductScreen";
+import EditProductScreen from "./screens/EditProductScreen";
 
 class App extends React.Component {
   componentDidMount() {
@@ -18,6 +20,18 @@ class App extends React.Component {
     return (
       <div className="App">
         <Switch>
+          <AuthenticationRoute
+            path="/products/create"
+            withAuth={true}
+            component={CreateProductScreen}
+            redirectOnFailure="/"
+          />
+          <AuthenticationRoute
+            path="/products/:id/edit"
+            withAuth={true}
+            component={EditProductScreen}
+            redirectOnFailure="/"
+          />
           <AuthenticationRoute
             path="/login"
             withAuth={false}

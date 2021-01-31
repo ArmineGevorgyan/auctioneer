@@ -40,8 +40,27 @@
   max-width: 800px;
   margin: 0 auto;
 }
+#home_screen .plus_icon {
+  margin-left: 10px;
+}
 
 #home_screen .sorting .button {
   margin: 20px 0 20px 10px;
   width: auto;
+}
+
+#home_screen .sorting .input {
+  margin: 20px 20px 20px 0;
+  width: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  #home_screen .sorting .input {
+    margin: 0 20px;
+    float: none;
+  }
+  #home_screen .sorting .button {
+    margin: 20px 5px 0 5px;
+    float: none;
+  }
 }
