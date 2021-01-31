@@ -32,7 +32,7 @@ class AuthenticationRoute extends Route {
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: state.login.isAuthenticated,
 });
 
 export default compose(

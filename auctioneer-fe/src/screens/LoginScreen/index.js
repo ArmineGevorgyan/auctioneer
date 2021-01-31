@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import { withTranslation } from "react-i18next";
 import { Input, FormField, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import PasswordInput from "./PasswordInput";
 import schema from "../../validation/loginSchema";
@@ -63,7 +62,12 @@ class LoginScreen extends React.PureComponent {
                       </Validation>
                     </FormField>
                   </div>
-                  <Button type="submit" secondary onSubmit={props.onSubmit}>
+                  <Button
+                    type="submit"
+                    secondary
+                    onSubmit={props.onSubmit}
+                    className="button"
+                  >
                     {t("loginScreen.buttonText")}
                   </Button>
                 </div>
@@ -82,9 +86,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (username, password) => {
-    dispatch(login(username, password));
-  },
+  login: (username, password) => dispatch(login(username, password)),
 });
 
 export default compose(

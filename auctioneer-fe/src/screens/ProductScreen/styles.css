@@ -1,0 +1,23 @@
+#product_screen {
+  flex-direction: column;
+  padding: 30px 20px;
+  min-height: 100vh;
+  align-items: center;
+  background-color: #dedede;
+}
+
+#product_screen .button {
+  margin: 20px 0;
+  width: 200px;
+}
+
+.list_container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#product_screen .description,
+#product_screen .extra {
+  font-size: 16px;
+  padding: 10px;
+}
