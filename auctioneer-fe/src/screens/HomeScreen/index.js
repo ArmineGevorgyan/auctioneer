@@ -6,7 +6,7 @@ import { Button, Item } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { numberToCashFormatter } from "../../helpers/numberHelper";
-import { getProducts } from "../../redux/ducks/product";
+import { getProducts, getSortedProducts } from "../../redux/ducks/product";
 import styles from "./styles.css";
 import constants from "../../constants";
 
@@ -24,7 +24,7 @@ class HomeScreen extends React.PureComponent {
     return (
       <Item.Group>
         {list.map((item) => (
-          <Item key={item.id} as={Link} to={`/products/${item.id}`}>
+          <Item key={item.id}>
             <Item.Image
               size="medium"
               src={item.image || constants.placeholderImageUrl}
@@ -40,6 +40,14 @@ class HomeScreen extends React.PureComponent {
                 {t("products.current_price")}:{" "}
                 {numberToCashFormatter(item.current_price)}
               </Item.Extra>
+              <Button
+                as={Link}
+                to={`/products/${item.id}`}
+                secondary
+                className="button"
+              >
+                {t("products.bidNow")}
+              </Button>
             </Item.Content>
           </Item>
         ))}
@@ -54,18 +62,36 @@ class HomeScreen extends React.PureComponent {
       return <Loader loading={loading} />;
     }
 
-    const { current_page, last_page } = productList;
+    const { current_page, col, dir, last_page } = productList;
 
     return (
       <div id="home_screen">
         <h1>{t("products.products")}</h1>
+        <div className="sorting">
+          <Button
+            basic
+            color="black"
+            className="floatRight"
+            onClick={() => getProducts(current_page, "current_price", "asc")}
+          >
+            {t("products.priceAsc")}
+          </Button>
+          <Button
+            basic
+            color="black"
+            className="floatRight"
+            onClick={() => getProducts(current_page, "current_price", "desc")}
+          >
+            {t("products.priceDesc")}
+          </Button>
+        </div>
         <div className="list_container">{this.productList()}</div>
         <div className="pagination">
           {current_page > 1 && (
             <Button
               secondary
               className="floatLeft"
-              onClick={() => getProducts(current_page - 1)}
+              onClick={() => getProducts(current_page - 1, col, dir)}
             >
               {t("products.prev")}
             </Button>
@@ -74,7 +100,7 @@ class HomeScreen extends React.PureComponent {
             <Button
               secondary
               className="floatRight"
-              onClick={() => getProducts(current_page + 1)}
+              onClick={() => getProducts(current_page + 1, col, dir)}
             >
               {t("products.next")}
             </Button>
@@ -88,11 +114,13 @@ class HomeScreen extends React.PureComponent {
 const mapStateToProps = (state) => ({
   loading: state.product.loading,
   current_page: state.product.current_page,
+  col: state.product.col,
+  dir: state.product.dir,
   productList: state.product.productList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProducts: (page) => dispatch(getProducts(page)),
+  getProducts: (page, dir, col) => dispatch(getProducts(page, dir, col)),
 });
 
 export default compose(

@@ -24,12 +24,18 @@ class App extends React.Component {
             component={LoginScreen}
             redirectOnFailure="/"
           />
-          <Route path="/products/:id">
-            <ProductScreen />
-          </Route>
-          <Route path="/">
-            <HomeScreen />
-          </Route>
+          <AuthenticationRoute
+            path="/products/:id"
+            withAuth={true}
+            component={ProductScreen}
+            redirectOnFailure="/login"
+          />
+          <AuthenticationRoute
+            path="/"
+            withAuth={true}
+            component={HomeScreen}
+            redirectOnFailure="/login"
+          />
         </Switch>
       </div>
     );
@@ -42,4 +48,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default compose(withRouter, connect(null, mapDispatchToProps))(App);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(App);
