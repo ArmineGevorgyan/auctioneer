@@ -1,11 +1,13 @@
 import React from "react";
-import { withRouter, Switch } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import "./App.css";
 import AuthenticationRoute from "./components/AuthenticationRoute";
 import { authenticate } from "./redux/ducks/auth";
 import LoginScreen from "./screens/LoginScreen/index.js";
+import HomeScreen from "./screens/HomeScreen/index.js";
+import ProductScreen from "./screens/ProductScreen";
 
 class App extends React.Component {
   componentDidMount() {
@@ -20,8 +22,14 @@ class App extends React.Component {
             path="/login"
             withAuth={false}
             component={LoginScreen}
-            redirectOnFailure="/home"
+            redirectOnFailure="/"
           />
+          <Route path="/products/:id">
+            <ProductScreen />
+          </Route>
+          <Route path="/">
+            <HomeScreen />
+          </Route>
         </Switch>
       </div>
     );

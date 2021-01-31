@@ -6,6 +6,14 @@
     "password": "Password",
     "buttonText": "Login"
   },
+  "products": {
+    "products": "Products",
+    "prev": "Previous",
+    "next": "Next",
+    "starting_price": "Starting price",
+    "current_price": "Current price",
+    "bidNow": "Bid Now"
+  },
   "validator": {
     "username_required": "Username is required",
     "password_required": "Password is required"

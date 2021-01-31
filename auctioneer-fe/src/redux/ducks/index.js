@@ -7,9 +7,11 @@
  */
 import { combineReducers } from "redux";
 import authSlice from "./auth";
+import productSlice from "./product";
 
 const appReducer = combineReducers({
   auth: authSlice,
+  product: productSlice,
 });
 
 export const rootReducer = (state, action) => {
