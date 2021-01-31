@@ -1,0 +1,13 @@
+{
+  "loginScreen": {
+    "welcome": "Welcome to Auctioneer",
+    "loginPrompt": "Please Login to Continue",
+    "username": "Username",
+    "password": "Password",
+    "buttonText": "Login"
+  },
+  "validator": {
+    "username_required": "Username is required",
+    "password_required": "Password is required"
+  }
+}

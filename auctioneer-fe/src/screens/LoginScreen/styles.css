@@ -1,0 +1,22 @@
+#login_screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: lightgray;
+}
+
+.label span {
+  color: "gray";
+  line-height: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  font-size: 15px;
+}
+
+.login_container {
+  margin: 30px;
+  width: 400px;
+  max-width: 80vw;
+}
