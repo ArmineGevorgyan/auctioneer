@@ -7,8 +7,21 @@
 }
 
 #product_screen .button {
-  margin: 20px 0;
   width: 200px;
+  margin: 10px;
+  margin-bottom: 30px;
+  height: 38px;
+  align-self: center;
+}
+
+#product_screen .container {
+  margin: 20px auto;
+}
+#product_screen .bid_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .list_container {

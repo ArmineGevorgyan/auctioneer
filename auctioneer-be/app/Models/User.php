@@ -43,4 +43,9 @@ class User extends Authenticatable
     public function getIsAdminAttribute(){
         return $this->hasRole('admin');
     }
+    
+    public function bids()
+    {
+        return $this->hasMany('App\Models\Bid', 'user_id');
+    }
 }

@@ -8,9 +8,11 @@
 import { combineReducers } from "redux";
 import authSlice from "./auth";
 import productSlice from "./product";
+import bidSlice from "./bid";
 
 const appReducer = combineReducers({
   auth: authSlice,
+  bid: bidSlice,
   product: productSlice,
 });
 

@@ -121,4 +121,16 @@ class ProductsController extends Controller
         }
     }
 
+    public function createBid(Request $request, $id){
+        try {
+            $payload = $request->only([ "amount" ]);
+
+            return $this->products_service->createBid($request->user(), $id, $payload);
+        } catch (Exception $e) {
+            Log::error('Create bid, Exception', ['error' => $e->getMessage()]);
+
+            throw new InternalErrorException();
+        }
+    }
+
 }

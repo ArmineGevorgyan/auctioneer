@@ -67,4 +67,15 @@ interface IProductsService
      * @return void
      */
     public function deleteProduct($user, $id);
+    
+    /**
+     * Create a new bid
+     *
+     * @param App\Models\User $user
+     * @param int $id
+     * @param array $data
+     * 
+     * @return App\Models\Bid
+     */
+    public function createBid(User $user, $id, $data);
 }

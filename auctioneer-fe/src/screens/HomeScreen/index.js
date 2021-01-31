@@ -33,11 +33,11 @@ class HomeScreen extends React.PureComponent {
               <Item.Header>{item.name}</Item.Header>
               <Item.Description>{item.desctiption}</Item.Description>
               <Item.Extra>
-                {t("products.starting_price")}:{" "}
+                {t("products.startingPrice")}:{" "}
                 {numberToCashFormatter(item.starting_price)}
               </Item.Extra>
               <Item.Extra>
-                {t("products.current_price")}:{" "}
+                {t("products.currentPrice")}:{" "}
                 {numberToCashFormatter(item.current_price)}
               </Item.Extra>
               <Button

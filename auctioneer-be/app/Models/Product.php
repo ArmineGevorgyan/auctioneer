@@ -36,4 +36,9 @@ class Product extends Model
     {
         return $query->where('is_available', true);
     }
+
+    public function bids()
+    {
+        return $this->hasMany('App\Models\Bid', 'product_id');
+    }
 }
