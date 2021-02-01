@@ -78,17 +78,63 @@ class ProductsService implements IProductsService
      */
     public function createBid($user, $id, $array){
         Log::info('Creating bid');
+
+        $product = $this->getProduct($id);
+        $bid = $product->lastBidByUser($user);
+
         $data = array_merge($array, [
             'product_id' => $id,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'auto_bidding' => $bid ? $bid->auto_bidding : false
         ]);
 
         $product = $this->getProduct($id);
         $product->update([
             'current_price' => $array['amount']
         ]);
+        
+        $bid = Bid::create($data);
+        Bid::updateOtherBids($bid);
 
-        return Bid::create($data);
+        return $bid;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function enableAutobidding($user, $id){
+        Log::info('Enable autobidding');
 
+        $product = $this->getProduct($id);
+        $bid = $product->lastBidByUser($user);
+        $highestBid = $product->getHighestBid();
+
+        if(!$bid){
+            $bid = $this->createBid($user, $id, [
+                'amount' => $highestBid ? $highestBid->amount + 1 : $product->current_price + 1,
+            ]);  
+
+            $highestBid = $product->getHighestBid();
+        }
+
+        $bid->update(['auto_bidding' => true]);
+        $bid->updateAmount();
+
+        return $bid;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function disableAutobidding($user, $id){
+        Log::info('Disable autobidding');
+
+        $product = $this->getProduct($id);
+        $bid = $product->lastBidByUser($user);
+
+        if($bid){
+            $bid->update(['auto_bidding' => false]);
+            return $bid;
+        }
     }
 }

@@ -40,4 +40,16 @@ class UsersController extends Controller
         }
     }
 
+    public function getCurrentUser(Request $request)
+    {
+        try {
+            return $this->users_service->getUser($request->user()->id);
+
+        } catch (Exception $e) {
+            Log::error('Get current user, Exception', ['error' => $e->getMessage()]);
+
+            throw new InternalErrorException();
+        }
+    }
+
 }

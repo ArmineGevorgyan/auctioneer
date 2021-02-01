@@ -28,6 +28,38 @@ const bidSlice = createSlice({
       loading: false,
       error: action.payload,
     }),
+    enableAutobidding: (state) => ({
+      ...state,
+      loading: true,
+      bid: null,
+    }),
+    enableAutobiddingSuccess: (state, action) => ({
+      ...state,
+      loading: false,
+      error: null,
+      bid: action.payload,
+    }),
+    enableAutobiddingFail: (state, action) => ({
+      ...state,
+      loading: false,
+      error: action.payload,
+    }),
+    disableAutobidding: (state) => ({
+      ...state,
+      loading: true,
+      bid: null,
+    }),
+    disableAutobiddingSuccess: (state, action) => ({
+      ...state,
+      loading: false,
+      error: null,
+      bid: action.payload,
+    }),
+    disableAutobiddingFail: (state, action) => ({
+      ...state,
+      loading: false,
+      error: action.payload,
+    }),
   },
 });
 
@@ -45,6 +77,38 @@ export const makeBid = (product_id, data) => {
       })
       .catch((error) => {
         dispatch(bidSlice.actions.makeBidFail(error));
+      });
+  };
+};
+
+export const enableAutobidding = (product_id) => {
+  return (dispatch) => {
+    dispatch(bidSlice.actions.enableAutobidding());
+
+    axios
+      .post(`${API_URL}/products/${product_id}/autobid/enable`, {})
+      .then((r) => r.data)
+      .then((data) => {
+        dispatch(bidSlice.actions.enableAutobiddingSuccess(data));
+      })
+      .catch((error) => {
+        dispatch(bidSlice.actions.enableAutobiddingFail(error));
+      });
+  };
+};
+
+export const disableAutobidding = (product_id) => {
+  return (dispatch) => {
+    dispatch(bidSlice.actions.disableAutobidding());
+
+    axios
+      .post(`${API_URL}/products/${product_id}/autobid/disable`, {})
+      .then((r) => r.data)
+      .then((data) => {
+        dispatch(bidSlice.actions.disableAutobiddingSuccess(data));
+      })
+      .catch((error) => {
+        dispatch(bidSlice.actions.disableAutobiddingFail(error));
       });
   };
 };
