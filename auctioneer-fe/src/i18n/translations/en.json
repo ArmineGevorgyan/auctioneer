@@ -10,6 +10,7 @@
     "products": "Products",
     "prev": "Previous",
     "settings": "Settings",
+    "notifications": "Notifications",
     "next": "Next",
     "priceAsc": "Price: low to high",
     "priceDesc": "Price: high to low",
@@ -49,6 +50,8 @@
     "password_required": "Password is required",
     "max_bid_amount_required": "Max amount for autobidding is required",
     "max_bid_amount_min": "Max amount for autobidding must at least 0",
+    "autobid_notify_percent_required": "Notification percentage for autobidding is required",
+    "autobid_notify_percent_min": "Notification percentage for autobidding must at least 0",
     "name_required": "Name is required",
     "starting_price_required": "Starting price is required",
     "current_price_required": "Current price is required",
@@ -59,6 +62,11 @@
     "welcome": "Settings",
     "logout": "Logout",
     "max_bid_amount": "Max amount for autobidding",
+    "autobid_notify_percent": "Notification percentage for autobidding",
     "buttonText": "Save"
+  },
+  "notifiactions": {
+    "welcome": "Notifications",
+    "empty": "There are no Notifications yet"
   }
 }

@@ -52,7 +52,7 @@ class UsersController extends Controller
 
             return $request->user();
         } catch (Exception $e) {
-            Log::error('Get user by id, Exception', ['error' => $e->getMessage()]);
+            Log::error('Update current user, Exception', ['error' => $e->getMessage()]);
 
             throw new InternalErrorException();
         }
@@ -65,6 +65,19 @@ class UsersController extends Controller
 
         } catch (Exception $e) {
             Log::error('Get current user, Exception', ['error' => $e->getMessage()]);
+
+            throw new InternalErrorException();
+        }
+    }
+
+    public function markNotificationsSeen(Request $request)
+    {
+        try {
+            $this->users_service->markNotificationsSeen($request->user());
+            return true;
+
+        } catch (Exception $e) {
+            Log::error('Mark notifications seen, Exception', ['error' => $e->getMessage()]);
 
             throw new InternalErrorException();
         }

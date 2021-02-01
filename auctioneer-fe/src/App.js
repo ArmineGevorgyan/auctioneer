@@ -11,6 +11,7 @@ import ProductScreen from "./screens/ProductScreen";
 import CreateProductScreen from "./screens/CreateProductScreen";
 import EditProductScreen from "./screens/EditProductScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import NotificationsScreen from "./screens/NotificationsScreen";
 
 class App extends React.Component {
   componentDidMount() {
@@ -37,6 +38,12 @@ class App extends React.Component {
             path="/settings"
             withAuth={true}
             component={SettingsScreen}
+            redirectOnFailure="/"
+          />
+          <AuthenticationRoute
+            path="/notifications"
+            withAuth={true}
+            component={NotificationsScreen}
             redirectOnFailure="/"
           />
           <AuthenticationRoute

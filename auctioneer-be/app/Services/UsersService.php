@@ -30,4 +30,16 @@ class UsersService implements IUsersService
     {
         return $user->update(array_merge($data, ['max_bid_left' =>$data['max_bid_amount']]));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function markNotificationsSeen($user)
+    {
+        $notifications =  $user->notifications;
+
+        foreach($notifications as $notification){
+            $notification->update(['is_seen' => true]);
+        }
+    }
 }

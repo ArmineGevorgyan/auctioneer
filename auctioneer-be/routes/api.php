@@ -32,5 +32,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users', [UsersController::class, 'index']);
     Route::get('/users/current', [UsersController::class, 'getCurrentUser']);
     Route::put('/users/current', [UsersController::class, 'updateCurrentUser']);
+    Route::put('/users/current/notifications', [UsersController::class, 'markNotificationsSeen']);
     Route::get('/users/{id}', [UsersController::class, 'show']);
 });

@@ -44,6 +44,21 @@ const userSlice = createSlice({
       loading: false,
       error: action.payload,
     }),
+    markNotificationsSeen: (state) => ({
+      ...state,
+      loading: true,
+      currentUser: null,
+    }),
+    markNotificationsSeenSuccess: (state) => ({
+      ...state,
+      loading: false,
+      error: null,
+    }),
+    markNotificationsSeenFail: (state, action) => ({
+      ...state,
+      loading: false,
+      error: action.payload,
+    }),
   },
 });
 
@@ -77,6 +92,21 @@ export const updateCurrentUser = (data) => {
       })
       .catch((error) => {
         dispatch(userSlice.actions.updateCurrentUserFail(error));
+      });
+  };
+};
+
+export const markNotificationsSeen = () => {
+  return (dispatch) => {
+    dispatch(userSlice.actions.markNotificationsSeen());
+
+    axios
+      .put(`${API_URL}/users/current/notifications`, {})
+      .then(() => {
+        dispatch(userSlice.actions.markNotificationsSeenSuccess());
+      })
+      .catch((error) => {
+        dispatch(userSlice.actions.markNotificationsSeenFail(error));
       });
   };
 };

@@ -6,14 +6,16 @@ import { Button, Item, Icon, Input } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { numberToCashFormatter } from "../../helpers/numberHelper";
+import { getCurrentUser } from "../../redux/ducks/user";
 import { getProducts, filterProducts } from "../../redux/ducks/product";
 import styles from "./styles.css";
 import constants from "../../constants";
 
 class HomeScreen extends React.PureComponent {
   componentDidMount() {
-    const { current_page, getProducts } = this.props;
+    const { current_page, getProducts, getCurrentUser } = this.props;
 
+    getCurrentUser();
     getProducts(current_page);
   }
 
@@ -67,24 +69,32 @@ class HomeScreen extends React.PureComponent {
   };
 
   render() {
-    const { t, loading, productList, getProducts, isAdmin } = this.props;
-    const isVisitor = isAdmin == "false";
+    const { t, loading, productList, getProducts, user } = this.props;
 
-    if (loading || !productList) {
-      return <Loader loading={loading || !productList} />;
+    if (loading || !productList || !user) {
+      return <Loader loading={loading || !productList || !user} />;
     }
 
+    const isVisitor = !user.is_admin;
+    const unreadNotifications = user.notifications.find(
+      (element) => !element.is_seen
+    );
     const { current_page, col, dir, last_page } = productList;
 
     return (
       <div id="home_screen">
         <h1 className="container">
+          <Button className="notifications" as={Link} to={`/notifications`}>
+            <Icon className="icon" name="bell" size="large" />
+            {unreadNotifications && (
+              <Icon className="notifications_dot" name="circle" size="tiny" />
+            )}
+          </Button>
+
           {t("products.products")}
-          {isVisitor && (
-            <Button className="settings" as={Link} to={`/settings`}>
-              {t("products.settings")} <Icon className="icon" name="settings" />
-            </Button>
-          )}
+          <Button className="settings" as={Link} to={`/settings`}>
+            <Icon className="icon" name="settings" size="large" />
+          </Button>
         </h1>
 
         {!isVisitor && (
@@ -153,10 +163,11 @@ const mapStateToProps = (state) => ({
   dir: state.product.dir,
   filteredList: state.product.filteredList,
   productList: state.product.productList,
-  isAdmin: state.auth.isAdmin,
+  user: state.user.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getCurrentUser: () => dispatch(getCurrentUser()),
   filterProducts: (list) => dispatch(filterProducts(list)),
   getProducts: (page, dir, col) => dispatch(getProducts(page, dir, col)),
 });
