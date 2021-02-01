@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('password'); 
             $table->double('max_bid_amount',12,2)->unsigned()->default(0);
+            $table->double('max_bid_left',12,2)->unsigned()->default(0)->nullable();
+            $table->integer('autobid_notify_percent')->unsigned()->default(90);
             $table->string('api_token', 80)->unique();
             $table->timestamps();
         });

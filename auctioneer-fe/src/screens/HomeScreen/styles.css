@@ -38,6 +38,18 @@
   float: right;
 }
 
+#home_screen .container .button.notifications {
+  margin: 0;
+  float: left;
+  position: relative;
+}
+
+#home_screen .container .button .notifications_dot {
+  color: red;
+  position: absolute;
+  left: 40px;
+}
+
 #home_screen .pagination .button {
   margin: 0;
 }
@@ -46,6 +58,7 @@
   max-width: 800px;
   margin: 10px auto;
 }
+
 #home_screen .icon {
   margin-left: 10px;
 }

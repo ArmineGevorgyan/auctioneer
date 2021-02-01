@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'max_bid_amount',
+        'max_bid_left',
+        'autobid_notify_percent',
     ];
 
     
@@ -47,5 +49,10 @@ class User extends Authenticatable
     public function bids()
     {
         return $this->hasMany('App\Models\Bid', 'user_id');
+    }
+    
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notification', 'user_id');
     }
 }

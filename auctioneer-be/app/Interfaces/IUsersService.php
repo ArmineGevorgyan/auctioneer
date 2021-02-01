@@ -29,4 +29,13 @@ interface IUsersService
      * @return App\Models\User $user
      */
     public function update(User $user, $data);
+
+    /**
+     * Update a given user
+     * 
+     * @param App\Models\User $user
+     * 
+     * @return void
+     */
+    public function markNotificationsSeen($user);
 }

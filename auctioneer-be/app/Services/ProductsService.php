@@ -40,7 +40,7 @@ class ProductsService implements IProductsService
      */
     public function getProduct($id)
     {
-        return Product::all()->find($id);
+        return Product::with(['bids', 'bids.user'])->find($id);
     }
 
     /**
@@ -78,9 +78,13 @@ class ProductsService implements IProductsService
      */
     public function createBid($user, $id, $array){
         Log::info('Creating bid');
-
         $product = $this->getProduct($id);
         $bid = $product->lastBidByUser($user);
+        $amount = $array['amount'];
+
+        if($product->current_price >= $amount) {
+            throw new \Exception("Bid amount must be greater than the current price");
+        }
 
         $data = array_merge($array, [
             'product_id' => $id,
@@ -88,9 +92,8 @@ class ProductsService implements IProductsService
             'auto_bidding' => $bid ? $bid->auto_bidding : false
         ]);
 
-        $product = $this->getProduct($id);
-        $product->update([
-            'current_price' => $array['amount']
+        $this->getProduct($id)->update([
+            'current_price' => $amount
         ]);
         
         $bid = Bid::create($data);
@@ -104,7 +107,6 @@ class ProductsService implements IProductsService
      */
     public function enableAutobidding($user, $id){
         Log::info('Enable autobidding');
-
         $product = $this->getProduct($id);
         $bid = $product->lastBidByUser($user);
         $highestBid = $product->getHighestBid();
@@ -119,8 +121,7 @@ class ProductsService implements IProductsService
 
         $bid->update(['auto_bidding' => true]);
         $bid->updateAmount();
-
-        return $bid;
+        return true;
     }
 
     /**

@@ -5,6 +5,9 @@ const settingsSchema = Yup.object().shape({
   max_bid_amount: Yup.number()
     .required(i18n.t("validator.max_bid_amount_required"))
     .min(0, i18n.t("validator.max_bid_amount_min")),
+  autobid_notify_percent: Yup.number()
+    .required(i18n.t("validator.autobid_notify_percent_required"))
+    .min(0, i18n.t("validator.autobid_notify_percent_min")),
 });
 
 export default settingsSchema;

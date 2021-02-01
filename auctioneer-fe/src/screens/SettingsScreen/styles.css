@@ -8,10 +8,13 @@
 
 #settings_screen .button {
   width: 200px;
-  margin: 10px;
   margin-bottom: 20px;
   height: 38px;
   align-self: center;
+}
+
+#settings_screen .logout {
+  margin-top: 50px;
 }
 
 .label span {
@@ -26,5 +29,4 @@
   margin: 30px auto;
   width: 400px;
   max-width: 80vw;
-  display: flex;
 }
