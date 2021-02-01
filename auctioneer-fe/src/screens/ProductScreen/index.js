@@ -11,7 +11,9 @@ import { enableAutobidding, disableAutobidding } from "../../redux/ducks/bid";
 import { getCurrentUser } from "../../redux/ducks/user";
 import styles from "./styles.css";
 import BidForm from "./BidForm";
+import BidList from "./BidList";
 import constants from "../../constants";
+import { cashWithCommas } from "../../helpers/numberHelper";
 
 const ProductScreen = ({
   t,
@@ -43,9 +45,10 @@ const ProductScreen = ({
     return <Loader loading={loading || !product || !user} />;
   }
 
-  const isVisitor = !isAdmin || isAdmin == "false";
+  const isVisitor = isAdmin == "false";
   const currentBid = user.bids
     .filter((bid) => bid.product_id == id)
+    .slice()
     .sort((a, b) => (a.amount > b.amount ? -1 : 1))[0];
   const hasAutobidding = currentBid && currentBid.auto_bidding;
 
@@ -72,21 +75,24 @@ const ProductScreen = ({
             <Item.Description>{product.desctiption}</Item.Description>
             <div className="bidInfo">
               <Item.Extra>
-                {t("products.startingPrice")}: ${product.starting_price}
+                {t("products.startingPrice")}:
+                {cashWithCommas(product.starting_price)}
               </Item.Extra>
               <Item.Extra>
-                {t("products.currentPrice")}: ${product.current_price}
+                {t("products.currentPrice")}:{" "}
+                {cashWithCommas(product.current_price)}
               </Item.Extra>
               <Item.Extra>
                 {t("products.remaintingTime")}:{" "}
                 <Countdown date={new Date(product.closing_date)} />
               </Item.Extra>
               <Item.Extra>
-                {t("products.minimum")}: ${product.current_price + 1}
+                {t("products.minimum")}:{" "}
+                {cashWithCommas(product.current_price + 1)}
               </Item.Extra>
               {currentBid && (
                 <Item.Extra>
-                  {t("products.current")}: ${currentBid.amount}
+                  {t("products.current")}: {cashWithCommas(currentBid.amount)}
                 </Item.Extra>
               )}
             </div>
@@ -102,6 +108,7 @@ const ProductScreen = ({
               {t("products.disableAutoBid")}
             </Button>
           )}
+          {!isVisitor && <BidList bids={product.bids} />}
         </Item>
       </div>
     </div>

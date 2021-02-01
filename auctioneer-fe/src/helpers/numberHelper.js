@@ -13,3 +13,7 @@ export const numberToCashFormatter = (num = 0) => {
 
   return "$" + num;
 };
+
+export const cashWithCommas = (num = 0) => {
+  return "$" + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};

@@ -68,7 +68,7 @@ class HomeScreen extends React.PureComponent {
 
   render() {
     const { t, loading, productList, getProducts, isAdmin } = this.props;
-    const isVisitor = !isAdmin || isAdmin == "false";
+    const isVisitor = isAdmin == "false";
 
     if (loading || !productList) {
       return <Loader loading={loading || !productList} />;
@@ -80,9 +80,11 @@ class HomeScreen extends React.PureComponent {
       <div id="home_screen">
         <h1 className="container">
           {t("products.products")}
-          <Button className="settings" as={Link} to={`/settings`}>
-            {t("products.settings")} <Icon className="icon" name="settings" />
-          </Button>
+          {isVisitor && (
+            <Button className="settings" as={Link} to={`/settings`}>
+              {t("products.settings")} <Icon className="icon" name="settings" />
+            </Button>
+          )}
         </h1>
 
         {!isVisitor && (

@@ -39,6 +39,11 @@
     "update": "Update",
     "create": "Create"
   },
+  "bidList": {
+    "bids": "Bids",
+    "date": "Date",
+    "amount": "Amount"
+  },
   "validator": {
     "username_required": "Username is required",
     "password_required": "Password is required",

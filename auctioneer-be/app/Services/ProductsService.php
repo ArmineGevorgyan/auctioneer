@@ -40,7 +40,7 @@ class ProductsService implements IProductsService
      */
     public function getProduct($id)
     {
-        return Product::all()->find($id);
+        return Product::with(['bids', 'bids.user'])->find($id);
     }
 
     /**
