@@ -9,6 +9,7 @@
   "products": {
     "products": "Products",
     "prev": "Previous",
+    "settings": "Settings",
     "next": "Next",
     "priceAsc": "Price: low to high",
     "priceDesc": "Price: high to low",
@@ -41,10 +42,17 @@
   "validator": {
     "username_required": "Username is required",
     "password_required": "Password is required",
+    "max_bid_amount_required": "Max amount for autobidding is required",
+    "max_bid_amount_min": "Max amount for autobidding must at least 0",
     "name_required": "Name is required",
     "starting_price_required": "Starting price is required",
     "current_price_required": "Current price is required",
     "image_url_not_valid": "Please enter a valid url",
     "closing_date_required": "Closing date is required"
+  },
+  "settings": {
+    "welcome": "Settings",
+    "max_bid_amount": "Max amount for autobidding",
+    "buttonText": "Save"
   }
 }

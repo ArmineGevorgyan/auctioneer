@@ -28,6 +28,22 @@ const userSlice = createSlice({
       loading: false,
       error: action.payload,
     }),
+    updateCurrentUser: (state) => ({
+      ...state,
+      loading: true,
+      currentUser: null,
+    }),
+    updateCurrentUserSuccess: (state, action) => ({
+      ...state,
+      loading: false,
+      error: null,
+      currentUser: action.payload,
+    }),
+    updateCurrentUserFail: (state, action) => ({
+      ...state,
+      loading: false,
+      error: action.payload,
+    }),
   },
 });
 
@@ -45,6 +61,22 @@ export const getCurrentUser = () => {
       })
       .catch((error) => {
         dispatch(userSlice.actions.getCurrentUserFail(error));
+      });
+  };
+};
+
+export const updateCurrentUser = (data) => {
+  return (dispatch) => {
+    dispatch(userSlice.actions.updateCurrentUser());
+
+    axios
+      .put(`${API_URL}/users/current`, data)
+      .then((r) => r.data)
+      .then((data) => {
+        dispatch(userSlice.actions.updateCurrentUserSuccess(data));
+      })
+      .catch((error) => {
+        dispatch(userSlice.actions.updateCurrentUserFail(error));
       });
   };
 };

@@ -3,7 +3,7 @@
   padding: 30px 20px;
   min-height: 100vh;
   align-items: center;
-  background-color: #dedede;
+  background-color: #e0e1e2;
 }
 
 #product_screen .button {
@@ -12,10 +12,6 @@
   margin-bottom: 30px;
   height: 38px;
   align-self: center;
-}
-
-#product_screen .container {
-  margin: 0px auto;
 }
 
 #product_screen .bidInfo {

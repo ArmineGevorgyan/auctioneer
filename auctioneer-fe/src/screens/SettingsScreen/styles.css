@@ -1,13 +1,12 @@
-#login_screen {
-  display: flex;
+#settings_screen {
   flex-direction: column;
-  height: 100vh;
+  padding: 30px 20px;
+  min-height: 100vh;
   align-items: center;
-  justify-content: center;
   background-color: #e0e1e2;
 }
 
-#login_screen .button {
+#settings_screen .button {
   margin: 20px 0;
   width: 200px;
 }
@@ -20,8 +19,8 @@
   font-size: 15px;
 }
 
-.login_container {
-  margin: 30px;
+.settings_container {
+  margin: 30px auto;
   width: 400px;
   max-width: 80vw;
 }

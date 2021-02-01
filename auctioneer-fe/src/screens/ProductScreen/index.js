@@ -40,7 +40,7 @@ const ProductScreen = ({
   };
 
   if (loading || !product || !user) {
-    return <Loader loading={loading} />;
+    return <Loader loading={loading || !product || !user} />;
   }
 
   const isVisitor = !isAdmin || isAdmin == "false";

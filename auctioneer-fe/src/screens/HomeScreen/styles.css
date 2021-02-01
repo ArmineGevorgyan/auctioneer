@@ -3,7 +3,7 @@
   padding: 30px 20px;
   min-height: 100vh;
   align-items: center;
-  background-color: #dedede;
+  background-color: #e0e1e2;
 }
 
 #home_screen .pagination {
@@ -33,34 +33,39 @@
   width: 150px;
 }
 
+#home_screen .container .button.settings {
+  margin: 0;
+  float: right;
+}
+
 #home_screen .pagination .button {
   margin: 0;
 }
 
-#home_screen .sorting {
+#home_screen .container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 10px auto;
 }
-#home_screen .plus_icon {
+#home_screen .icon {
   margin-left: 10px;
 }
 
-#home_screen .sorting .button {
+#home_screen .container .button {
   margin: 20px 0 20px 10px;
   width: auto;
 }
 
-#home_screen .sorting .input {
+#home_screen .container .input {
   margin: 20px 20px 20px 0;
   width: auto;
 }
 
 @media only screen and (max-width: 600px) {
-  #home_screen .sorting .input {
+  #home_screen .container .input {
     margin: 0 20px;
     float: none;
   }
-  #home_screen .sorting .button {
+  #home_screen .container .button {
     margin: 20px 5px 0 5px;
     float: none;
   }
