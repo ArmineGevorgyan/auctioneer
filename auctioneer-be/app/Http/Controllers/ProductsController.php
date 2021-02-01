@@ -126,9 +126,7 @@ class ProductsController extends Controller
         try {
             $payload = $request->only([ "amount" ]);
 
-            $this->products_service->createBid($request->user(), $id, $payload);
-
-            return $request->user();
+            return $this->products_service->createBid($request->user(), $id, $payload);
         } catch (Exception $e) {
             Log::error('Create bid, Exception', ['error' => $e->getMessage()]);
 

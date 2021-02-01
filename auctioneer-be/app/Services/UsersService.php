@@ -20,7 +20,7 @@ class UsersService implements IUsersService
      */
     public function getUser($id)
     {
-        return User::with('bids')->find($id);
+        return User::with(['bids', 'notifications'])->find($id);
     }
 
     /**
@@ -28,6 +28,6 @@ class UsersService implements IUsersService
      */
     public function update($user, $data)
     {
-        return $user->update($data);
+        return $user->update(array_merge($data, ['max_bid_left' =>$data['max_bid_amount']]));
     }
 }

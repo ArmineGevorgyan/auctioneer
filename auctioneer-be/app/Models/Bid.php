@@ -41,12 +41,16 @@ class Bid extends Model
         $user = $this->user;
         $diff = $highestBid->amount + 1 - $this->amount;
 
-        if(($this->amount < $highestBid->amount) && $user->max_bid_amount >= $diff) {
-            $this->product->update(['current_price' => $highestBid->amount + 1]);
-            $this->update(['amount' => $highestBid->amount + 1]);
-            $user->update(['max_bid_amount' => $user->max_bid_amount - $diff]);
-            Bid::updateOtherBids($this);
+        if(($this->amount >= $highestBid->amount) || $user->max_bid_left < $diff) {
+            return;
         }
+
+        $this->product->update(['current_price' => $highestBid->amount + 1]);
+        $this->update(['amount' => $highestBid->amount + 1]);
+        $user->update(['max_bid_left' => $user->max_bid_left - $diff]);
+        Bid::updateOtherBids($this);
+
+        $this->notifyUser($user);
     }
 
     public static function updateOtherBids($model){
@@ -54,5 +58,16 @@ class Bid extends Model
         foreach($bids as $bid) {
             $bid->updateAmount();
         }
+    }
+
+    private function notifyUser($user) {
+        $percent_used = ($user->max_bid_amount - $user->max_bid_left)/$user->max_bid_amount * 100;
+        if($percent_used > $user->autobid_notify_percent){
+            $user->notifications()
+                ->create([
+                    'content'=> "Auto-bidding: more than ".$user->autobid_notify_percent."% of your autobidding amount has been used."
+                ]);
+        }
+
     }
 }

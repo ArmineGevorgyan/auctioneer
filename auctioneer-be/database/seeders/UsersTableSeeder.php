@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('user1'),
             'api_token' => Str::random(60),
             'max_bid_amount' => 200,
+            'max_bid_left' => 200,
         ]);
         $user->assignRole('visitor');
 
@@ -31,6 +32,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('user2'),
             'api_token' => Str::random(60),
             'max_bid_amount' => 100,
+            'max_bid_left' => 100,
         ]);
         $user->assignRole('visitor');
 
