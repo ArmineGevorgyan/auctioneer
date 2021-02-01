@@ -30,23 +30,12 @@ class ProductsController extends Controller
         }
     }
 
-    public function getAvailableProducts(Request $request)
+    public function getProducts(Request $request)
     {
         try {
-            return $this->products_service->getAvailableProducts();
+            return $this->products_service->getProducts($request->filter, $request->col, $request->dir);
         } catch (Exception $e) {
             Log::error('Get available products, Exception', ['error' => $e->getMessage()]);
-
-            throw new InternalErrorException();
-        }
-    }
-
-    public function getSortedAvailableProducts(Request $request, $col, $direction)
-    {
-        try {
-            return $this->products_service->getSortedAvailableProducts($col, $direction);
-        } catch (Exception $e) {
-            Log::error('Get sorted available products, Exception', ['error' => $e->getMessage()]);
 
             throw new InternalErrorException();
         }
@@ -68,7 +57,7 @@ class ProductsController extends Controller
         try {   
             $payload = $request->only([
                 'name',
-                'desctiption',
+                'description',
                 'image',
                 'starting_price',
                 'current_price',
@@ -93,7 +82,7 @@ class ProductsController extends Controller
         try {   
             $payload = $request->only([
                 'name',
-                'desctiption',
+                'description',
                 'image',
                 'starting_price',
                 'current_price',

@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->longText('image')->nullable();
             $table->string('name');
-            $table->longText('desctiption')->nullable();
+            $table->longText('description')->nullable();
             $table->double('starting_price',12,2)->unsigned();
             $table->double('current_price',12,2)->unsigned();
             $table->boolean('is_available')->default(true);

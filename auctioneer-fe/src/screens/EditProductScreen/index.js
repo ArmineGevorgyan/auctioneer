@@ -29,7 +29,7 @@ class EditProductScreen extends React.PureComponent {
       <Formik
         initialValues={{
           name: product.name,
-          desctiption: product.desctiption || "",
+          description: product.description || "",
           starting_price: product.starting_price,
           current_price: product.current_price,
           closing_date: product.closing_date,
@@ -57,14 +57,14 @@ class EditProductScreen extends React.PureComponent {
                     </Validation>
                   </FormField>
                   <FormField>
-                    <label htmlFor="desctiption" className="label">
-                      <span>{t("productForm.desctiption")}</span>
+                    <label htmlFor="description" className="label">
+                      <span>{t("productForm.description")}</span>
                     </label>
-                    <Validation name="desctiption" showMessage={true}>
+                    <Validation name="description" showMessage={true}>
                       <TextArea
                         autoCapitalize="off"
-                        value={values.desctiption}
-                        name="desctiption"
+                        value={values.description}
+                        name="description"
                       />
                     </Validation>
                   </FormField>

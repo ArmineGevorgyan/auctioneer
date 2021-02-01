@@ -23,7 +23,6 @@ const ProductScreen = ({
   deleteProductById,
   getCurrentUser,
   history,
-  isAdmin,
   user,
   bid,
   enableAutobidding,
@@ -45,7 +44,7 @@ const ProductScreen = ({
     return <Loader loading={loading || !product || !user} />;
   }
 
-  const isVisitor = isAdmin == "false";
+  const isVisitor = !user.is_admin;
   const currentBid = user.bids
     .filter((bid) => bid.product_id == id)
     .slice()
@@ -72,7 +71,7 @@ const ProductScreen = ({
             src={product.image || constants.placeholderImageUrl}
           />
           <Item.Content>
-            <Item.Description>{product.desctiption}</Item.Description>
+            <Item.Description>{product.description}</Item.Description>
             <div className="bidInfo">
               <Item.Extra>
                 {t("products.startingPrice")}:

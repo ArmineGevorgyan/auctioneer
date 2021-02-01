@@ -32,7 +32,7 @@
     "createTitle": "Create new product",
     "editTitle": "Edit product",
     "name": "Name",
-    "desctiption": "Description",
+    "description": "Description",
     "starting_price": "Starting price",
     "current_price": "Current price",
     "image": "Image Url",

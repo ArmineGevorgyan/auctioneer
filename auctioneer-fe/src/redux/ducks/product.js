@@ -6,7 +6,6 @@ const initialState = {
   loading: false,
   error: null,
   product: null,
-  filteredList: null,
   productList: null,
   current_page: 1,
   col: "created_at",
@@ -28,7 +27,6 @@ const productSlice = createSlice({
       ...state,
       loading: false,
       error: null,
-      filteredList: action.payload.data,
       productList: action.payload,
     }),
     getProductsFail: (state, action) => ({
@@ -100,21 +98,24 @@ const productSlice = createSlice({
       loading: false,
       error: action.payload,
     }),
-    filterProducts: (state, action) => ({
-      ...state,
-      filteredList: action.payload,
-    }),
   },
 });
 
 const productReducer = productSlice.reducer;
 
-export const getProducts = (page = 1, col = "created_at", dir = "desc") => {
+export const getProducts = (
+  page = 1,
+  col = "created_at",
+  dir = "desc",
+  filter = ""
+) => {
   return (dispatch) => {
-    dispatch(productSlice.actions.getProducts(page));
+    dispatch(productSlice.actions.getProducts({ page, col, dir }));
 
     axios
-      .get(`${API_URL}/products/sort/${col}/${dir}?page=${page}`)
+      .get(
+        `${API_URL}/products?col=${col}&dir=${dir}&page=${page}&filter=${filter}`
+      )
       .then((r) => r.data)
       .then((data) => {
         dispatch(productSlice.actions.getProductsSuccess(data));
@@ -188,9 +189,4 @@ export const updateProduct = (id, data) => {
   };
 };
 
-export const filterProducts = (products) => {
-  return (dispatch) => {
-    dispatch(productSlice.actions.filterProducts(products));
-  };
-};
 export default productReducer;
