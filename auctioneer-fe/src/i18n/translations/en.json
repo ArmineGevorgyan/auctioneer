@@ -18,7 +18,10 @@
     "remaintingTime": "Remaining time",
     "submitBid": "Submit Bid",
     "minimum": "Minimum Bid",
+    "current": "My current Bid",
     "bidNow": "Bid Now",
+    "autoBid": "Activate auto-bidding",
+    "disableAutoBid": "Disable auto-bidding",
     "edit": "Edit",
     "delete": "Delete",
     "new": "New item"

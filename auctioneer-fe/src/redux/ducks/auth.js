@@ -7,7 +7,6 @@ const initialState = {
   loading: false,
   isAuthenticated: false,
   error: null,
-  user: null,
   isAdmin: null,
 };
 
@@ -24,7 +23,6 @@ const authSlice = createSlice({
       loading: false,
       error: null,
       isAuthenticated: true,
-      user: action.payload,
       isAdmin: action.payload.is_admin,
     }),
     loginFail: (state, action) => ({
@@ -32,7 +30,6 @@ const authSlice = createSlice({
       loading: false,
       error: action.payload,
       isAuthenticated: false,
-      user: null,
       isAdmin: null,
     }),
     authenticate: (state, action) => ({
@@ -43,7 +40,6 @@ const authSlice = createSlice({
     clearAuthentication: (state) => ({
       ...state,
       isAuthenticated: false,
-      user: null,
       isAdmin: null,
     }),
   },

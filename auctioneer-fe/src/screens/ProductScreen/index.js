@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import { Button, Item, Input, FormField } from "semantic-ui-react";
-import { Formik, Form } from "formik";
+import { Button, Item } from "semantic-ui-react";
 import { useParams, Link } from "react-router-dom";
 import Countdown from "react-countdown";
 import Loader from "../../components/Loader";
 import { getProductById, deleteProductById } from "../../redux/ducks/product";
-import { makeBid } from "../../redux/ducks/bid";
-import Validation from "../../validation";
+import { enableAutobidding, disableAutobidding } from "../../redux/ducks/bid";
+import { getCurrentUser } from "../../redux/ducks/user";
 import styles from "./styles.css";
+import BidForm from "./BidForm";
 import constants from "../../constants";
 
 const ProductScreen = ({
@@ -19,86 +19,35 @@ const ProductScreen = ({
   product,
   getProductById,
   deleteProductById,
-  makeBid,
+  getCurrentUser,
   history,
-  bid,
   isAdmin,
+  user,
+  bid,
+  enableAutobidding,
+  disableAutobidding,
 }) => {
   const { id } = useParams();
 
   useEffect(() => {
     getProductById(id);
-  }, []);
-
-  const firstUpdate = useRef(true);
-
-  useEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-
-    history.goBack();
+    getCurrentUser();
   }, [bid]);
-
-  const onSubmit = (values) => {
-    makeBid(id, values);
-  };
 
   const onDelete = () => {
     deleteProductById(id);
     history.goBack();
   };
 
-  const getForm = () => {
-    return (
-      <Formik
-        initialValues={{
-          amount: "",
-        }}
-        onSubmit={onSubmit}
-        render={(props) => {
-          const { values } = props;
-
-          return (
-            <Form className="ui form">
-              <div className="container">
-                <div className="bid_container">
-                  <FormField>
-                    <label htmlFor="amount" className="label">
-                      <span>{t("products.amount")}</span>
-                    </label>
-                    <Validation name="amount" showMessage={true}>
-                      <Input
-                        autoCapitalize="off"
-                        value={values.amount}
-                        name="amount"
-                      />
-                    </Validation>
-                  </FormField>
-                  <Button
-                    secondary
-                    className="button"
-                    type="submit"
-                    onSubmit={props.onSubmit}
-                    disabled={values.amount <= product.current_price}
-                  >
-                    {t("products.submitBid")}
-                  </Button>
-                </div>
-              </div>
-            </Form>
-          );
-        }}
-      />
-    );
-  };
-
-  if (loading || !product) {
+  if (loading || !product || !user) {
     return <Loader loading={loading} />;
   }
 
   const isVisitor = !isAdmin || isAdmin == "false";
+  const currentBid = user.bids
+    .filter((bid) => bid.product_id == id)
+    .sort((a, b) => (a.amount > b.amount ? -1 : 1))[0];
+  const hasAutobidding = currentBid && currentBid.auto_bidding;
 
   return (
     <div id="product_screen">
@@ -121,21 +70,38 @@ const ProductScreen = ({
           />
           <Item.Content>
             <Item.Description>{product.desctiption}</Item.Description>
-            <Item.Extra>
-              {t("products.startingPrice")}: ${product.starting_price}
-            </Item.Extra>
-            <Item.Extra>
-              {t("products.currentPrice")}: ${product.current_price}
-            </Item.Extra>
-            <Item.Extra>
-              {t("products.remaintingTime")}:{" "}
-              <Countdown date={new Date(product.closing_date)} />,
-            </Item.Extra>
-            <Item.Extra>
-              {t("products.minimum")}: ${product.current_price + 1}
-            </Item.Extra>
+            <div className="bidInfo">
+              <Item.Extra>
+                {t("products.startingPrice")}: ${product.starting_price}
+              </Item.Extra>
+              <Item.Extra>
+                {t("products.currentPrice")}: ${product.current_price}
+              </Item.Extra>
+              <Item.Extra>
+                {t("products.remaintingTime")}:{" "}
+                <Countdown date={new Date(product.closing_date)} />
+              </Item.Extra>
+              <Item.Extra>
+                {t("products.minimum")}: ${product.current_price + 1}
+              </Item.Extra>
+              {currentBid && (
+                <Item.Extra>
+                  {t("products.current")}: ${currentBid.amount}
+                </Item.Extra>
+              )}
+            </div>
           </Item.Content>
-          {getForm()}
+          {isVisitor && <BidForm history={history} />}
+          {isVisitor && !hasAutobidding && (
+            <Button basic color="black" onClick={() => enableAutobidding(id)}>
+              {t("products.autoBid")}
+            </Button>
+          )}
+          {isVisitor && !!hasAutobidding && (
+            <Button basic color="black" onClick={() => disableAutobidding(id)}>
+              {t("products.disableAutoBid")}
+            </Button>
+          )}
         </Item>
       </div>
     </div>
@@ -145,14 +111,16 @@ const ProductScreen = ({
 const mapStateToProps = (state) => ({
   loading: state.product.loading,
   product: state.product.product,
+  user: state.user.currentUser,
   bid: state.bid.bid,
-  isAdmin: state.auth.isAdmin,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getProductById: (id) => dispatch(getProductById(id)),
   deleteProductById: (id) => dispatch(deleteProductById(id)),
-  makeBid: (id, data) => dispatch(makeBid(id, data)),
+  getCurrentUser: () => dispatch(getCurrentUser()),
+  enableAutobidding: (id) => dispatch(enableAutobidding(id)),
+  disableAutobidding: (id) => dispatch(disableAutobidding(id)),
 });
 
 export default compose(

@@ -40,5 +40,17 @@ class Product extends Model
     public function bids()
     {
         return $this->hasMany('App\Models\Bid', 'product_id');
+    } 
+
+    public function lastBidByUser($user){
+        return $this->bids()->where('user_id', $user->id)->orderBy('amount', 'desc')->first();
+    }
+    
+    public function getHighestBid(){
+        return $this->bids()->orderBy('amount', 'desc')->first();
+    }
+    
+    public function bidsWithAutobidding(){
+        return $this->bids()->where('auto_bidding', true)->get();
     }
 }

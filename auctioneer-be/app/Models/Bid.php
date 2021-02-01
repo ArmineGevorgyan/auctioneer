@@ -35,4 +35,24 @@ class Bid extends Model
     public function scopeAutobidding($query){
         return $query->where('auto_bidding', true);
     }
+
+    public function updateAmount(){
+        $highestBid = $this->product->getHighestBid();
+        $user = $this->user;
+        $diff = $highestBid->amount + 1 - $this->amount;
+
+        if(($this->amount < $highestBid->amount) && $user->max_bid_amount >= $diff) {
+            $this->product->update(['current_price' => $highestBid->amount + 1]);
+            $this->update(['amount' => $highestBid->amount + 1]);
+            $user->update(['max_bid_amount' => $user->max_bid_amount - $diff]);
+            Bid::updateOtherBids($this);
+        }
+    }
+
+    public static function updateOtherBids($model){
+        $bids = $model->product->bidsWithAutobidding();
+        foreach($bids as $bid) {
+            $bid->updateAmount();
+        }
+    }
 }

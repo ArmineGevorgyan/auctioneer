@@ -78,4 +78,24 @@ interface IProductsService
      * @return App\Models\Bid
      */
     public function createBid(User $user, $id, $data);
+
+    /**
+     * Enable autobidding on product
+     * 
+     * @param App\Models\User $user
+     * @param int $id
+     * 
+     * @return App\Models\Bid
+     */
+    public function enableAutobidding(User $user, $id);
+
+    /**
+     * Enable autobidding on product
+     * 
+     * @param App\Models\User $user
+     * @param int $id
+     * 
+     * @return mixed
+     */
+    public function disableAutobidding(User $user, $id);
 }

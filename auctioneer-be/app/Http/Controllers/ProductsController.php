@@ -126,12 +126,33 @@ class ProductsController extends Controller
         try {
             $payload = $request->only([ "amount" ]);
 
-            return $this->products_service->createBid($request->user(), $id, $payload);
+            $this->products_service->createBid($request->user(), $id, $payload);
+
+            return $request->user();
         } catch (Exception $e) {
             Log::error('Create bid, Exception', ['error' => $e->getMessage()]);
 
             throw new InternalErrorException();
         }
-    }
+    }  
+    
+    public function enableAutobidding(Request $request, $id){
+        try {
+            return $this->products_service->enableAutobidding($request->user(), $id);
+        } catch (Exception $e) {
+            Log::error('Enable autobidding, Exception', ['error' => $e->getMessage()]);
 
+            throw new InternalErrorException();
+        }
+    }
+    
+    public function disableAutobidding(Request $request, $id){
+        try {
+            return $this->products_service->disableAutobidding($request->user(), $id);
+        } catch (Exception $e) {
+            Log::error('Disable autobidding, Exception', ['error' => $e->getMessage()]);
+
+            throw new InternalErrorException();
+        }
+    }
 }

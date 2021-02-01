@@ -27,6 +27,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/products/{id}/bids', [ProductsController::class, 'createBid']);
     Route::put('/products/{id}', [ProductsController::class, 'update']);
     Route::delete('/products/{id}', [ProductsController::class, 'delete']);
+    Route::post('/products/{id}/autobid/enable', [ProductsController::class, 'enableAutobidding']);
+    Route::post('/products/{id}/autobid/disable', [ProductsController::class, 'disableAutobidding']);
     Route::get('/users', [UsersController::class, 'index']);
+    Route::get('/users/current', [UsersController::class, 'getCurrentUser']);
     Route::get('/users/{id}', [UsersController::class, 'show']);
 });
