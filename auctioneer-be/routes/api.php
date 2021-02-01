@@ -20,9 +20,8 @@ use App\Http\Controllers\UsersController;
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/products', [ProductsController::class, 'getAvailableProducts']);
+    Route::get('/products', [ProductsController::class, 'getProducts']);
     Route::get('/products/{id}', [ProductsController::class, 'show']);
-    Route::get('/products/sort/{col}/{direction}', [ProductsController::class, 'getSortedAvailableProducts']);
     Route::post('/products', [ProductsController::class, 'create']);
     Route::post('/products/{id}/bids', [ProductsController::class, 'createBid']);
     Route::put('/products/{id}', [ProductsController::class, 'update']);

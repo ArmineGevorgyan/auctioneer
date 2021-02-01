@@ -72,7 +72,7 @@ const ProductScreen = ({
             src={product.image || constants.placeholderImageUrl}
           />
           <Item.Content>
-            <Item.Description>{product.desctiption}</Item.Description>
+            <Item.Description>{product.description}</Item.Description>
             <div className="bidInfo">
               <Item.Extra>
                 {t("products.startingPrice")}:

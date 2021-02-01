@@ -19,14 +19,15 @@ interface IProductsService
     public function getAvailableProducts();
 
     /**
-     * Get all available products sorted by the given column.
+     * Get available products filtered and sorted by the given column.
      * 
+     * @param string $filter
      * @param string $col
      * @param string $direction
      *
      * @return Collection $products
      */
-    public function getSortedAvailableProducts($col, $direction);
+    public function getProducts($filter, $col, $direction);
 
     /**
      * Get product by the id.

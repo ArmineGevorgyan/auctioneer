@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { numberToCashFormatter } from "../../helpers/numberHelper";
 import { getCurrentUser } from "../../redux/ducks/user";
-import { getProducts, filterProducts } from "../../redux/ducks/product";
+import { getProducts } from "../../redux/ducks/product";
 import styles from "./styles.css";
 import constants from "../../constants";
 
@@ -20,23 +20,21 @@ class HomeScreen extends React.PureComponent {
   }
 
   handleChange = (event) => {
-    const { filterProducts, productList } = this.props;
-    const text = event.target.value;
+    const { current_page, col, dir, getProducts } = this.props;
+    const filter = event.target.value;
 
-    const list = productList.data.filter(
-      (item) => item.name.includes(text) || item.desctiption.includes(text)
-    );
-
-    filterProducts(list);
+    getProducts(current_page, col, dir, filter);
   };
 
   productList = () => {
-    const { t, filteredList } = this.props;
-    const list = filteredList;
+    const {
+      t,
+      productList: { data },
+    } = this.props;
 
     return (
       <Item.Group>
-        {list.map((item) => (
+        {data.map((item) => (
           <Item key={item.id}>
             <Item.Image
               size="medium"
@@ -44,7 +42,7 @@ class HomeScreen extends React.PureComponent {
             />
             <Item.Content>
               <Item.Header>{item.name}</Item.Header>
-              <Item.Description>{item.desctiption}</Item.Description>
+              <Item.Description>{item.description}</Item.Description>
               <Item.Extra>
                 {t("products.startingPrice")}:{" "}
                 {numberToCashFormatter(item.starting_price)}
@@ -69,10 +67,10 @@ class HomeScreen extends React.PureComponent {
   };
 
   render() {
-    const { t, loading, productList, getProducts, user } = this.props;
+    const { t, productList, getProducts, user } = this.props;
 
-    if (loading || !productList || !user) {
-      return <Loader loading={loading || !productList || !user} />;
+    if (!productList || !user) {
+      return <Loader loading={!productList || !user} />;
     }
 
     const isVisitor = !user.is_admin;
@@ -157,19 +155,17 @@ class HomeScreen extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.product.loading,
   current_page: state.product.current_page,
   col: state.product.col,
   dir: state.product.dir,
-  filteredList: state.product.filteredList,
   productList: state.product.productList,
   user: state.user.currentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrentUser: () => dispatch(getCurrentUser()),
-  filterProducts: (list) => dispatch(filterProducts(list)),
-  getProducts: (page, dir, col) => dispatch(getProducts(page, dir, col)),
+  getProducts: (page, dir, col, filter) =>
+    dispatch(getProducts(page, dir, col, filter)),
 });
 
 export default compose(

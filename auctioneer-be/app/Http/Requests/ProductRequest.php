@@ -27,7 +27,7 @@ class ProductRequest extends FormRequest
 
         $rules = [
             'name' => 'required|string',
-            'desctiption' => 'nullable|string',
+            'description' => 'nullable|string',
             'image' => 'nullable|string',
             'starting_price' => 'required|numeric|gt:0',
             'current_price' => 'required|numeric|gt:0',

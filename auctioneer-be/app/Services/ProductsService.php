@@ -30,9 +30,11 @@ class ProductsService implements IProductsService
     /**
      * {@inheritdoc}
      */
-    public function getSortedAvailableProducts($col, $direction)
-    {
-        return Product::available()->orderBy($col, $direction)->paginate(constants('PAGINATION_SIZE'));
+    public function getProducts($filter, $col, $direction){
+        return Product::available()
+                ->where('name', 'LIKE', '%'.$filter.'%')
+                ->orWhere('description', 'LIKE', '%'.$filter.'%')
+                ->orderBy($col, $direction)->paginate(constants('PAGINATION_SIZE'));
     }
 
     /**
