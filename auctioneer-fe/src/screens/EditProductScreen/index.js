@@ -141,7 +141,7 @@ class EditProductScreen extends React.PureComponent {
     }
 
     if (!product || loading) {
-      return <Loader />;
+      return <Loader loading={!product || loading} />;
     }
 
     return (

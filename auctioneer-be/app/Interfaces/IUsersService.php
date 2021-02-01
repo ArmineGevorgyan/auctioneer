@@ -19,4 +19,14 @@ interface IUsersService
      * @return App\Models\User $user
      */
     public function getUser($id);
+
+    /**
+     * Update a given user
+     * 
+     * @param App\Models\User $user
+     * @param array $data
+     * 
+     * @return App\Models\User $user
+     */
+    public function update(User $user, $data);
 }

@@ -40,6 +40,25 @@ class UsersController extends Controller
         }
     }
 
+    public function updateCurrentUser(Request $request)
+    {
+        try {
+            $payload = $request->only([
+                'username',
+                'email',
+                'max_bid_amount'
+            ]);
+
+            $this->users_service->update($request->user(), $payload);
+
+            return $request->user();
+        } catch (Exception $e) {
+            Log::error('Get user by id, Exception', ['error' => $e->getMessage()]);
+
+            throw new InternalErrorException();
+        }
+    }
+
     public function getCurrentUser(Request $request)
     {
         try {

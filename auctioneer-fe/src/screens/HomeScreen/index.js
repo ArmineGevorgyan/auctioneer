@@ -71,21 +71,27 @@ class HomeScreen extends React.PureComponent {
     const isVisitor = !isAdmin || isAdmin == "false";
 
     if (loading || !productList) {
-      return <Loader loading={loading} />;
+      return <Loader loading={loading || !productList} />;
     }
 
     const { current_page, col, dir, last_page } = productList;
 
     return (
       <div id="home_screen">
-        <h1>{t("products.products")} </h1>
+        <h1 className="container">
+          {t("products.products")}
+          <Button className="settings" as={Link} to={`/settings`}>
+            {t("products.settings")} <Icon className="icon" name="settings" />
+          </Button>
+        </h1>
+
         {!isVisitor && (
           <Button primary as={Link} to={`/products/create`}>
             {t("products.new")}
-            <Icon className="plus_icon" name="plus" />
+            <Icon className="icon" name="plus" />
           </Button>
         )}
-        <div className="sorting">
+        <div className="container">
           <Input
             icon
             placeholder="Search..."

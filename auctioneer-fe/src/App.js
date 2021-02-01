@@ -10,6 +10,7 @@ import HomeScreen from "./screens/HomeScreen/index.js";
 import ProductScreen from "./screens/ProductScreen";
 import CreateProductScreen from "./screens/CreateProductScreen";
 import EditProductScreen from "./screens/EditProductScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 class App extends React.Component {
   componentDidMount() {
@@ -33,6 +34,12 @@ class App extends React.Component {
             redirectOnFailure="/"
           />
           <AuthenticationRoute
+            path="/settings"
+            withAuth={true}
+            component={SettingsScreen}
+            redirectOnFailure="/"
+          />
+          <AuthenticationRoute
             path="/login"
             withAuth={false}
             component={LoginScreen}
@@ -42,7 +49,7 @@ class App extends React.Component {
             path="/products/:id"
             withAuth={true}
             component={ProductScreen}
-            redirectOnFailure="/login"
+            redirectOnFailure="/"
           />
           <AuthenticationRoute
             path="/"

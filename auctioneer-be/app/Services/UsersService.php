@@ -22,4 +22,12 @@ class UsersService implements IUsersService
     {
         return User::with('bids')->find($id);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update($user, $data)
+    {
+        return $user->update($data);
+    }
 }
