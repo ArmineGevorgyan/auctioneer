@@ -52,6 +52,7 @@
   },
   "settings": {
     "welcome": "Settings",
+    "logout": "Logout",
     "max_bid_amount": "Max amount for autobidding",
     "buttonText": "Save"
   }

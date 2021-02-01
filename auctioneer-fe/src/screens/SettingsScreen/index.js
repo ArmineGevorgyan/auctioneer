@@ -8,6 +8,7 @@ import Loader from "../../components/Loader";
 import schema from "../../validation/settingsSchema";
 import Validation from "../../validation";
 import { getCurrentUser, updateCurrentUser } from "../../redux/ducks/user";
+import { clearAuthentication } from "../../redux/ducks/auth";
 import styles from "./styles.css";
 
 class SettingsScreen extends React.PureComponent {
@@ -40,20 +41,18 @@ class SettingsScreen extends React.PureComponent {
             return (
               <Form className="ui form">
                 <div className="settings_container">
-                  <div>
-                    <FormField>
-                      <label htmlFor="max_bid_amount" className="label">
-                        <span>{t("settings.max_bid_amount")}</span>
-                      </label>
-                      <Validation name="max_bid_amount" showMessage={true}>
-                        <Input
-                          autoCapitalize="off"
-                          value={values.max_bid_amount}
-                          name="max_bid_amount"
-                        />
-                      </Validation>
-                    </FormField>
-                  </div>
+                  <FormField>
+                    <label htmlFor="max_bid_amount" className="label">
+                      <span>{t("settings.max_bid_amount")}</span>
+                    </label>
+                    <Validation name="max_bid_amount" showMessage={true}>
+                      <Input
+                        autoCapitalize="off"
+                        value={values.max_bid_amount}
+                        name="max_bid_amount"
+                      />
+                    </Validation>
+                  </FormField>
                   <Button
                     type="submit"
                     secondary
@@ -67,6 +66,9 @@ class SettingsScreen extends React.PureComponent {
             );
           }}
         />
+        <Button primary onClick={this.props.clearAuthentication}>
+          {t("settings.logout")}
+        </Button>
       </div>
     );
   }
@@ -80,6 +82,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrentUser: () => dispatch(getCurrentUser()),
   updateCurrentUser: (data) => dispatch(updateCurrentUser(data)),
+  clearAuthentication: () => dispatch(clearAuthentication()),
 });
 
 export default compose(
