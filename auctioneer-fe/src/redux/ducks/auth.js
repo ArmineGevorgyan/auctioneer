@@ -5,7 +5,7 @@ import { getToken, getIsAdmin, removeAuth, setAuth } from "../../helpers/auth";
 
 const initialState = {
   loading: false,
-  isAuthenticated: false,
+  isAuthenticated: undefined,
   error: null,
   isAdmin: null,
 };

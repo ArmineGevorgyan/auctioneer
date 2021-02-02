@@ -26,25 +26,25 @@ class App extends React.Component {
             path="/products/create"
             withAuth={true}
             component={CreateProductScreen}
-            redirectOnFailure="/"
+            redirectOnFailure="/login"
           />
           <AuthenticationRoute
             path="/products/:id/edit"
             withAuth={true}
             component={EditProductScreen}
-            redirectOnFailure="/"
+            redirectOnFailure="/login"
           />
           <AuthenticationRoute
             path="/settings"
             withAuth={true}
             component={SettingsScreen}
-            redirectOnFailure="/"
+            redirectOnFailure="/login"
           />
           <AuthenticationRoute
             path="/notifications"
             withAuth={true}
             component={NotificationsScreen}
-            redirectOnFailure="/"
+            redirectOnFailure="/login"
           />
           <AuthenticationRoute
             path="/login"
@@ -56,7 +56,7 @@ class App extends React.Component {
             path="/products/:id"
             withAuth={true}
             component={ProductScreen}
-            redirectOnFailure="/"
+            redirectOnFailure="/login"
           />
           <AuthenticationRoute
             path="/"

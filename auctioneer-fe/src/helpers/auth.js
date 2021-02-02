@@ -39,12 +39,12 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
-    let token = await getToken();
+    const token = getToken();
     if (
       error.config &&
       error.response &&
       error.response.status === 401 &&
-      token
+      !token
     ) {
       store.dispatch(clearAuthentication());
     }

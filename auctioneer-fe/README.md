@@ -15,3 +15,9 @@ Prerequisites: NodeJS
 ```
 npm start
 ```
+
+3. You can login by using one of the following credentials:
+
+- user1 / user1
+- user2 / user2
+- admin1 / admin1
