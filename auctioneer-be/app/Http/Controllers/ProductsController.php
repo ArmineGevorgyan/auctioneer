@@ -93,7 +93,7 @@ class ProductsController extends Controller
             $product = $this->products_service->updateProduct($request->user(), $id, $payload);
             Log::info('Product updated.', ['response' => $product]);
 
-            return $product;
+            return $this->products_service->getProduct($id);
         } catch (Exception $e) {
             Log::error('Update product by id, Exception', ['error' => $e->getMessage()]);
 

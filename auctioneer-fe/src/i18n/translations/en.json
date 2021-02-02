@@ -38,6 +38,7 @@
     "image": "Image Url",
     "closing_date": "Closing date",
     "update": "Update",
+    "cancel": "Cancel",
     "create": "Create"
   },
   "bidList": {

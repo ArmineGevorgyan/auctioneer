@@ -4,23 +4,28 @@ import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { Button, Input, FormField, TextArea } from "semantic-ui-react";
 import { Formik, Form } from "formik";
-import { updateProduct } from "../../redux/ducks/product";
+import { updateProduct, getProductById } from "../../redux/ducks/product";
 import Validation from "../../validation";
 import schema from "../../validation/productSchema";
 import styles from "./styles.css";
 import Loader from "../../components/Loader";
 
 class EditProductScreen extends React.PureComponent {
+  componentDidMount() {
+    const {product, getProductById, match: { params: { id }}} = this.props;
+    if(!product)  {
+      getProductById(id);
+    }
+  }
+
   onSubmit = (values) => {
     values.closing_date = new Date(values.closing_date).toISOString();
     this.props.updateProduct(this.props.product.id, values);
   };
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.product && this.props.product) {
-      this.props.history.goBack();
-    }
-  }
+  onCancel = () => {
+    this.props.history.goBack();
+  };
 
   getForm = () => {
     const { t, product } = this.props;
@@ -124,6 +129,14 @@ class EditProductScreen extends React.PureComponent {
                   >
                     {t("productForm.update")}
                   </Button>
+                  <Button
+                    basic
+                    color="black"
+                    className="button"
+                    onClick={this.onCancel}
+                  >
+                    {t("productForm.cancel")}
+                  </Button>
                 </div>
               </div>
             </Form>
@@ -136,7 +149,7 @@ class EditProductScreen extends React.PureComponent {
   render() {
     const { t, isAdmin, product, loading } = this.props;
 
-    if (!isAdmin || isAdmin == "false") {
+    if (isAdmin === "false") {
       this.props.history.goBack();
     }
 
@@ -160,6 +173,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getProductById: (id) => dispatch(getProductById(id)),
   updateProduct: (id, values) => dispatch(updateProduct(id, values)),
 });
 

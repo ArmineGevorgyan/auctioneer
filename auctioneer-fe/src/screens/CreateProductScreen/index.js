@@ -15,9 +15,15 @@ class CreateProductScreen extends React.PureComponent {
     this.props.createProduct(values);
   };
 
+  onCancel = () => {
+    this.props.history.goBack();
+  };
+
   componentDidUpdate(prevProps) {
-    if (!prevProps.product && this.props.product) {
-      this.props.history.goBack();
+    const { product, history } = this.props;
+
+    if (!prevProps.product && product) {
+      history.push(`/products/${product.id}`);
     }
   }
 
@@ -121,6 +127,14 @@ class CreateProductScreen extends React.PureComponent {
                     onSubmit={props.onSubmit}
                   >
                     {t("productForm.create")}
+                  </Button>
+                  <Button
+                    basic
+                    color="black"
+                    className="button"
+                    onClick={this.onCancel}
+                  >
+                    {t("productForm.cancel")}
                   </Button>
                 </div>
               </div>

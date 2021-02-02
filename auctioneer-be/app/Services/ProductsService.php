@@ -50,8 +50,8 @@ class ProductsService implements IProductsService
      */
     public function createProduct($user, $data){
         Log::info('Creating product');
+        $this->validateUser($user);
 
-        //TODO: check user authorization
         return Product::create($data);
     }
 
@@ -61,7 +61,7 @@ class ProductsService implements IProductsService
     public function updateProduct($user, $id, $data){
         Log::info('Updating product');
 
-        //TODO: check user authorization
+        $this->validateUser($user);
         return $this->getProduct($id)->update($data);
     }
 
@@ -71,7 +71,7 @@ class ProductsService implements IProductsService
     public function deleteProduct($user, $id){
         Log::info('Deleting product');
 
-        //TODO: check user authorization
+        $this->validateUser($user);
         return $this->getProduct($id)->delete();
     }
 
@@ -138,6 +138,13 @@ class ProductsService implements IProductsService
         if($bid){
             $bid->update(['auto_bidding' => false]);
             return $bid;
+        }
+    }
+
+    private function validateUser($user)
+    {
+        if(!$user->is_admin) {
+            throw new \Exception("Invalid User");
         }
     }
 }

@@ -7,20 +7,12 @@ class AuthenticationRoute extends Route {
   isValidRouting = () => {
     const { withAuth, isAuthenticated } = this.props;
 
-    if (withAuth === undefined) {
+    if (withAuth === undefined || isAuthenticated === undefined) {
       return true;
     }
 
     return withAuth ? isAuthenticated : !isAuthenticated;
   };
-
-  componentDidUpdate(prevProps) {
-    const { history, isAuthenticated, redirectOnFailure } = this.props;
-
-    if (!prevProps.isAuthenticated && isAuthenticated) {
-      history.push(redirectOnFailure);
-    }
-  }
 
   render() {
     return this.isValidRouting() ? (
