@@ -8,6 +8,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Jobs\GenerateMail;
+use App\Mail\ItemLostMail;
+use App\Mail\ItemWonMail;
 use App\Models\Product;
 use App\Models\Bill;
 use App\Models\Bid;
@@ -56,6 +59,7 @@ class CreateBillsJob implements ShouldQueue
             'product_id' => $product->id,
         ]);
         $this->updateStatuses($product, $highestBid);
+        $this->sendEmails($product, $highestBid);
     }
 
     private function updateStatuses($product, $highestBid) {
@@ -69,5 +73,18 @@ class CreateBillsJob implements ShouldQueue
         return $product->bids()
                     ->where('id', '!=', $highestBid->id)
                     ->update(['status' => Bid::LOST]);
+    }
+
+    private function sendEmails($product, $highestBid)
+    {
+        \Log::info("Sending emails with bid results");
+        $mailable = new ItemWonMail($highestBid);
+        GenerateMail::dispatch($mailable, [$highestBid->user->email]);
+        
+        $bids = $product->bids->where('user_id', '!=', $highestBid->user->id)->sortByDesc("amount")->unique("user_id")->all();
+        foreach($bids as $bid) {
+            $mailable = new ItemLostMail($highestBid, $bid);
+            GenerateMail::dispatch($mailable, [$bid->user->email]);
+        }
     }
 }

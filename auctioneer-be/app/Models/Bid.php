@@ -97,6 +97,7 @@ class Bid extends Model
     }
 
     private static function sendMailToOtherBidders($model) { 
+        \Log::info("Sending email notifications to other bidders");
         $other_bids = $model->product->bids;
         $emails = [];
         foreach($other_bids as $bid) {
@@ -111,6 +112,7 @@ class Bid extends Model
     }
 
     private function sendMailToAutoBidder($model, $user) { 
+        \Log::info("Sending email notifications to other auto bidders");
         $mailable = new AutobidFailedMail($model);
 
         GenerateMail::dispatch($mailable, [$user->email]);

@@ -37,6 +37,8 @@ class GenerateMail implements ShouldQueue
      */
     public function handle()
     {
+        \Log::info("Sending email to: ", ['emails' => $this->emails]);
+
         $mail_builder = Mail::to($this->emails);
         if ($this->cc_emails) {
             $mail_builder->cc($this->cc_emails);
