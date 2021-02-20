@@ -98,7 +98,12 @@ const ProductScreen = ({
           </Item.Content>
           {isVisitor && <BidForm history={history} />}
           {isVisitor && !hasAutobidding && (
-            <Button basic color="black" onClick={() => enableAutobidding(id)}>
+            <Button
+              basic
+              color="black"
+              disabled={user.max_bid_left > 1}
+              onClick={() => enableAutobidding(id)}
+            >
               {t("products.autoBid")}
             </Button>
           )}
