@@ -9,6 +9,10 @@ use App\Mail\AutobidFailedMail;
 
 class Bid extends Model
 {
+    const IN_PROGRESS = 'IN_PROGRESS';
+    const WON = 'WON';
+    const LOST = 'LOST';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,6 +23,7 @@ class Bid extends Model
         'product_id',
         'user_id',
         'auto_bidding',
+        'status',
     ];
 
     protected $casts = [
@@ -43,6 +48,11 @@ class Bid extends Model
     {
         return $this->belongsTo('App\Models\Product');
     }
+
+    public function bill()
+    {
+        return $this->belongsTo('App\Models\Bill');
+    } 
 
     public function scopeAutobidding($query){
         return $query->where('auto_bidding', true);
