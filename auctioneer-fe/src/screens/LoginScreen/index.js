@@ -9,7 +9,6 @@ import PasswordInput from "./PasswordInput";
 import schema from "../../validation/loginSchema";
 import Validation from "../../validation";
 import { login } from "../../redux/ducks/auth";
-import styles from "./styles.css";
 
 class LoginScreen extends React.PureComponent {
   onSubmit = (data) => {

@@ -3,10 +3,9 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import moment from "moment";
 import { withTranslation } from "react-i18next";
-import { Input, Item, Button } from "semantic-ui-react";
+import { Item } from "semantic-ui-react";
 import Loader from "../../components/Loader";
 import { getCurrentUser, markNotificationsSeen } from "../../redux/ducks/user";
-import styles from "./styles.css";
 
 class NotificationsScreen extends React.PureComponent {
   componentDidMount() {

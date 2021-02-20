@@ -9,7 +9,6 @@ import schema from "../../validation/settingsSchema";
 import Validation from "../../validation";
 import { getCurrentUser, updateCurrentUser } from "../../redux/ducks/user";
 import { clearAuthentication } from "../../redux/ducks/auth";
-import styles from "./styles.css";
 
 class SettingsScreen extends React.PureComponent {
   componentDidMount() {
@@ -35,6 +34,7 @@ class SettingsScreen extends React.PureComponent {
         {isVisitor && (
           <Formik
             initialValues={{
+              email: user.email,
               max_bid_amount: user.max_bid_amount,
               autobid_notify_percent: user.autobid_notify_percent,
             }}
@@ -70,6 +70,18 @@ class SettingsScreen extends React.PureComponent {
                           autoCapitalize="off"
                           value={values.autobid_notify_percent}
                           name="autobid_notify_percent"
+                        />
+                      </Validation>
+                    </FormField>
+                    <FormField>
+                      <label htmlFor="email" className="label">
+                        <span>{t("settings.email")}</span>
+                      </label>
+                      <Validation name="email" showMessage={true}>
+                        <Input
+                          autoCapitalize="off"
+                          value={values.email}
+                          name="email"
                         />
                       </Validation>
                     </FormField>

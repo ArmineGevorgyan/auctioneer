@@ -8,6 +8,9 @@ const settingsSchema = Yup.object().shape({
   autobid_notify_percent: Yup.number()
     .required(i18n.t("validator.autobid_notify_percent_required"))
     .min(0, i18n.t("validator.autobid_notify_percent_min")),
+  email: Yup.string()
+    .email(i18n.t("validator.email_invalid"))
+    .required(i18n.t("validator.email_required")),
 });
 
 export default settingsSchema;

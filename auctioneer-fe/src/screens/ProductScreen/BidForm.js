@@ -6,7 +6,6 @@ import { Button, Input, FormField } from "semantic-ui-react";
 import { Formik, Form } from "formik";
 import { makeBid } from "../../redux/ducks/bid";
 import Validation from "../../validation";
-import styles from "./styles.css";
 
 const BidForm = ({ t, product, makeBid, history, bid }) => {
   const id = product.id;

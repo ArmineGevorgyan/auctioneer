@@ -9,7 +9,6 @@ import Loader from "../../components/Loader";
 import { getProductById, deleteProductById } from "../../redux/ducks/product";
 import { enableAutobidding, disableAutobidding } from "../../redux/ducks/bid";
 import { getCurrentUser } from "../../redux/ducks/user";
-import styles from "./styles.css";
 import BidForm from "./BidForm";
 import BidList from "./BidList";
 import constants from "../../constants";
@@ -45,8 +44,8 @@ const ProductScreen = ({
   }
 
   const isVisitor = !user.is_admin;
-  const currentBid = user.bids
-    .filter((bid) => bid.product_id == id)
+  const usersBids = user.bids.filter((bid) => bid.product_id == id);
+  const currentBid = usersBids
     .slice()
     .sort((a, b) => (a.amount > b.amount ? -1 : 1))[0];
   const hasAutobidding = currentBid && currentBid.auto_bidding;
@@ -101,7 +100,7 @@ const ProductScreen = ({
             <Button
               basic
               color="black"
-              disabled={user.max_bid_left > 1}
+              disabled={user.max_bid_left < 1}
               onClick={() => enableAutobidding(id)}
             >
               {t("products.autoBid")}
@@ -113,6 +112,7 @@ const ProductScreen = ({
             </Button>
           )}
           {!isVisitor && <BidList bids={product.bids} />}
+          {isVisitor && <BidList bids={usersBids} isVisitor={isVisitor} />}
         </Item>
       </div>
     </div>

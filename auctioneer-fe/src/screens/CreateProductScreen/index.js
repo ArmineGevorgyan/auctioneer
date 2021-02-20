@@ -7,7 +7,6 @@ import { Formik, Form } from "formik";
 import { createProduct } from "../../redux/ducks/product";
 import Validation from "../../validation";
 import schema from "../../validation/productSchema";
-import styles from "./styles.css";
 
 class CreateProductScreen extends React.PureComponent {
   onSubmit = (values) => {

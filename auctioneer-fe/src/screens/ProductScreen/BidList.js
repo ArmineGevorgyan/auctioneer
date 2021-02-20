@@ -2,9 +2,8 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import { Grid, Image, Icon, Input } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import moment from "moment";
-import styles from "./styles.css";
 import { cashWithCommas } from "../../helpers/numberHelper";
 
 class BidList extends React.PureComponent {
@@ -28,7 +27,7 @@ class BidList extends React.PureComponent {
   }
 
   render() {
-    const { t, bids } = this.props;
+    const { t, bids, isVisitor } = this.props;
     const width = this.state.width;
 
     if (!bids || bids.length < 1) {
@@ -41,12 +40,14 @@ class BidList extends React.PureComponent {
 
     return (
       <div id="bid_list">
-        <h1 className="container">{t("bidList.bids")}</h1>
+        <h1 className="container">
+          {isVisitor ? t("bidList.myBids") : t("bidList.bids")}
+        </h1>
         <Grid container columns={width > 700 ? 3 : 1}>
           {sortedBids.map((bid) => (
             <Grid.Column key={bid.id}>
               <div className="bidItem">
-                <h2>{bid.user.username}</h2>
+                <h2>{bid.user?.username}</h2>
                 <p>
                   <strong>
                     {t("bidList.amount")}: {cashWithCommas(bid.amount)}

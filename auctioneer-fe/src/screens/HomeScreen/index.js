@@ -8,7 +8,6 @@ import Loader from "../../components/Loader";
 import { numberToCashFormatter } from "../../helpers/numberHelper";
 import { getCurrentUser } from "../../redux/ducks/user";
 import { getProducts } from "../../redux/ducks/product";
-import styles from "./styles.css";
 import constants from "../../constants";
 
 class HomeScreen extends React.PureComponent {

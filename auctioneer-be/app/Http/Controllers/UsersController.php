@@ -45,7 +45,8 @@ class UsersController extends Controller
         try {
             $payload = $request->only([
                 'max_bid_amount',
-                'autobid_notify_percent'
+                'autobid_notify_percent',
+                'email'
             ]);
 
             $this->users_service->update($request->user(), $payload);

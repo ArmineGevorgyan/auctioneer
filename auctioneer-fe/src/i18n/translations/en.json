@@ -43,12 +43,15 @@
   },
   "bidList": {
     "bids": "Bids",
+    "myBids": "My Bids",
     "date": "Date",
     "amount": "Amount"
   },
   "validator": {
     "username_required": "Username is required",
     "password_required": "Password is required",
+    "email_invalid": "Invalid email",
+    "email_required": "Email is required",
     "max_bid_amount_required": "Max amount for autobidding is required",
     "max_bid_amount_min": "Max amount for autobidding must at least 0",
     "autobid_notify_percent_required": "Notification percentage for autobidding is required",
@@ -64,6 +67,7 @@
     "logout": "Logout",
     "max_bid_amount": "Max amount for autobidding",
     "autobid_notify_percent": "Notification percentage for autobidding",
+    "email": "Email",
     "buttonText": "Save"
   },
   "notifiactions": {
