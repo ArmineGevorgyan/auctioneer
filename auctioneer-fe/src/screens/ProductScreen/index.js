@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import { Button, Item } from "semantic-ui-react";
+import { Button, Icon, Item } from "semantic-ui-react";
 import { useParams, Link } from "react-router-dom";
 import Countdown from "react-countdown";
 import moment from "moment";
@@ -13,10 +13,7 @@ import { getCurrentUser } from "../../redux/ducks/user";
 import BidForm from "./BidForm";
 import BidList from "./BidList";
 import constants from "../../constants";
-import {
-  cashWithCommas,
-  numberToCashFormatter,
-} from "../../helpers/numberHelper";
+import { cashWithCommas } from "../../helpers/numberHelper";
 
 const ProductScreen = ({
   t,
@@ -105,8 +102,14 @@ const ProductScreen = ({
   return (
     <div id="product_screen">
       <div className="container">
+        <Icon
+          name="arrow left"
+          size="large"
+          className="floatLeft goBack"
+          onClick={() => history.goBack()}
+        />
         <Item>
-          <h1>{product.name}</h1>
+          <h1 className="clear">{product.name}</h1>
           {!isVisitor && (
             <div>
               <Button primary as={Link} to={`/products/${id}/edit`}>

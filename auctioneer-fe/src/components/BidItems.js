@@ -5,14 +5,20 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { cashWithCommas } from "../helpers/numberHelper";
 import constants from "../constants";
-import { Button } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 
-const BidItems = ({ t, bids, title, children }) => {
+const BidItems = ({ t, bids, title, children, history }) => {
   const hasBids = bids && bids.length > 1;
 
   return (
     <div id="bid_screen">
-      <h1>{title || t("bidList.myBids")}</h1>
+      <Icon
+        name="arrow left"
+        size="large"
+        className="floatLeft goBack"
+        onClick={() => history.goBack()}
+      />
+      <h1 className="clear">{title || t("bidList.myBids")}</h1>
 
       {hasBids && (
         <div className="container">

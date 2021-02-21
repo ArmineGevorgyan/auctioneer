@@ -11,7 +11,7 @@ class BidsListScreen extends React.PureComponent {
 
   render() {
     const bids = this.props.user?.bids;
-    return <BidItems bids={bids} />;
+    return <BidItems bids={bids} history={this.props.history} />;
   }
 }
 

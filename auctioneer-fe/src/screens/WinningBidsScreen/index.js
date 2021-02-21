@@ -18,7 +18,13 @@ class WinningBidsScreen extends React.PureComponent {
     const winningBids =
       bids && bids.filter((bid) => bid.status == constants.bidStatus.WON);
 
-    return <BidItems bids={winningBids} title={t("bidList.wonItems")} />;
+    return (
+      <BidItems
+        bids={winningBids}
+        history={this.props.history}
+        title={t("bidList.wonItems")}
+      />
+    );
   }
 }
 

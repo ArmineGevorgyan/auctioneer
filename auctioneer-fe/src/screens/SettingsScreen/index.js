@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import { withTranslation } from "react-i18next";
-import { Input, FormField, Button } from "semantic-ui-react";
+import { Input, FormField, Button, Icon } from "semantic-ui-react";
 import Loader from "../../components/Loader";
 import schema from "../../validation/settingsSchema";
 import Validation from "../../validation";
@@ -29,7 +29,13 @@ class SettingsScreen extends React.PureComponent {
 
     return (
       <div id="settings_screen">
-        <h1>{t("settings.welcome")}</h1>
+        <Icon
+          name="arrow left"
+          size="large"
+          className="floatLeft goBack"
+          onClick={() => this.props.history.goBack()}
+        />
+        <h1 className="clear">{t("settings.welcome")}</h1>
         {isVisitor && (
           <Formik
             initialValues={{

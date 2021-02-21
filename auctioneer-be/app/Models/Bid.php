@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Jobs\GenerateMail;
 use App\Mail\NewBidMail;
 use App\Mail\AutobidFailedMail;
+use App\Mail\AutobidAmountRunOutMail;
 
 class Bid extends Model
 {
@@ -63,23 +64,19 @@ class Bid extends Model
         $user = $this->user;
         $diff = $highestBid->amount + 1 - $this->amount;
 
-        if($this->amount >= $highestBid->amount) return;
-        
-        if($user->max_bid_left < $diff) { // autobidding cannot outbid the new bid
-            $this->update(['auto_bidding' => false]);
-            return $this->sendMailToAutoBidder($this, $user);
-        }
+        if($this->amount >= $highestBid->amount || $user->max_bid_left < $diff) return;
 
         $this->product->update(['current_price' => $highestBid->amount + 1]);
         $this->update(['amount' => $highestBid->amount + 1]);
         $user->update(['max_bid_left' => $user->max_bid_left - $diff]);
-        Bid::updateOtherBids($this);
+        $this->checkAutobiddingAmount($this, $user);
+        $this->updateOtherBids();
 
         $this->notifyUser($user);
     }
 
-    public static function updateOtherBids($model){
-        $bids = $model->product->bidsWithAutobidding();
+    public function updateOtherBids(){
+        $bids = $this->product->bidsWithAutobidding();
         foreach($bids as $bid) {
             $bid->updateAmount();
         }
@@ -96,12 +93,33 @@ class Bid extends Model
 
     }
 
+    public function sendMailToAutoBidders() {
+        $highestBid = $this->product->getHighestBid();
+        $bids = $this->product->bidsWithAutobidding();
+        
+        foreach($bids as $bid) {
+            $diff = $highestBid->amount + 1 - $bid->amount; 
+            $user = $bid->user;
+            
+            if($user->max_bid_left >= $diff) {
+                return;
+            }
+
+            $this->update(['auto_bidding' => false]);
+    
+            \Log::info("Sending email notifications to other auto bidders about their unsuccessful autobid");
+            $mailable = new AutobidFailedMail($model);
+            GenerateMail::dispatch($mailable, [$user->email]);
+        }
+    }
+
     private static function sendMailToOtherBidders($model) { 
-        \Log::info("Sending email notifications to other bidders");
+        \Log::info("Sending email notifications to other bidders about their bid being outbid");
         $other_bids = $model->product->bids;
         $emails = [];
         foreach($other_bids as $bid) {
             if($model->user->id == $bid->user->id)  continue;
+            if($bid->auto_bidding)  continue; // autobidding is still continuing
 
             $emails[] = $bid->user->email;
         }
@@ -111,10 +129,15 @@ class Bid extends Model
         GenerateMail::dispatch($mailable, $emails);
     }
 
-    private function sendMailToAutoBidder($model, $user) { 
-        \Log::info("Sending email notifications to other auto bidders");
-        $mailable = new AutobidFailedMail($model);
+    private function checkAutobiddingAmount($model, $user) { 
+        if($user->max_bid_left > 0) {
+            return;
+        }
 
+        $this->update(['auto_bidding' => false]);
+
+        \Log::info("User max bid amount run out, sending email notification.");      
+        $mailable = new AutobidAmountRunOutMail($model);
         GenerateMail::dispatch($mailable, [$user->email]);
     }
 }
