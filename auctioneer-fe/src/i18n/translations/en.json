@@ -17,6 +17,7 @@
     "startingPrice": "Starting price",
     "currentPrice": "Current price",
     "amount": "Bid amount",
+    "closedDate": "Closed date",
     "remaintingTime": "Remaining time",
     "submitBid": "Submit Bid",
     "minimum": "Minimum Bid",
@@ -26,7 +27,13 @@
     "disableAutoBid": "Disable auto-bidding",
     "edit": "Edit",
     "delete": "Delete",
-    "new": "New item"
+    "new": "New item",
+    "awardedTo": "Awarded To",
+    "price": "Sold at",
+    "status": "Status",
+    "CLOSED": "Closed",
+    "IN_PROGRESS": "In Progress",
+    "SOLD": "Sold"
   },
   "productForm": {
     "createTitle": "Create new product",
@@ -43,12 +50,24 @@
   },
   "bidList": {
     "bids": "Bids",
+    "myBids": "My Bids",
+    "wonItems": "Won Items",
+    "myBid": "My Bid",
     "date": "Date",
+    "closingDate": "Closing Date",
+    "status": "Status",
+    "productButton": "View Product",
+    "LOST": "Lost",
+    "IN_PROGRESS": "In Progress",
+    "WON": "Won",
+    "bill": "Bill",
     "amount": "Amount"
   },
   "validator": {
     "username_required": "Username is required",
     "password_required": "Password is required",
+    "email_invalid": "Invalid email",
+    "email_required": "Email is required",
     "max_bid_amount_required": "Max amount for autobidding is required",
     "max_bid_amount_min": "Max amount for autobidding must at least 0",
     "autobid_notify_percent_required": "Notification percentage for autobidding is required",
@@ -64,7 +83,15 @@
     "logout": "Logout",
     "max_bid_amount": "Max amount for autobidding",
     "autobid_notify_percent": "Notification percentage for autobidding",
+    "email": "Email",
     "buttonText": "Save"
+  },
+  "profile": {
+    "welcome": "My Profile",
+    "logout": "Logout",
+    "settings": "Settings",
+    "bids": "All Bids",
+    "won": "Won Items"
   },
   "notifiactions": {
     "welcome": "Notifications",

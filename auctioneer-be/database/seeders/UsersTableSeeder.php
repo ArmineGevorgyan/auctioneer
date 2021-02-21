@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
 
         $user = User::create([
             'username' => 'user2',
-            'email' => 'user3@gmail.com',
+            'email' => 'user2@gmail.com',
             'password' => Hash::make('user2'),
             'api_token' => Str::random(60),
             'max_bid_amount' => 100,

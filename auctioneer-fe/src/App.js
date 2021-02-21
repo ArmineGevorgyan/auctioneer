@@ -12,6 +12,9 @@ import CreateProductScreen from "./screens/CreateProductScreen";
 import EditProductScreen from "./screens/EditProductScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import BidsListScreen from "./screens/BidsListScreen";
+import WinningBidsScreen from "./screens/WinningBidsScreen";
 
 class App extends React.Component {
   componentDidMount() {
@@ -32,6 +35,24 @@ class App extends React.Component {
             path="/products/:id/edit"
             withAuth={true}
             component={EditProductScreen}
+            redirectOnFailure="/login"
+          />
+          <AuthenticationRoute
+            path="/profile"
+            withAuth={true}
+            component={ProfileScreen}
+            redirectOnFailure="/login"
+          />
+          <AuthenticationRoute
+            path="/bids"
+            withAuth={true}
+            component={BidsListScreen}
+            redirectOnFailure="/login"
+          />
+          <AuthenticationRoute
+            path="/won-bids"
+            withAuth={true}
+            component={WinningBidsScreen}
             redirectOnFailure="/login"
           />
           <AuthenticationRoute

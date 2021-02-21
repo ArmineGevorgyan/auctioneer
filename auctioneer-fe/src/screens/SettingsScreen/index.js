@@ -8,8 +8,6 @@ import Loader from "../../components/Loader";
 import schema from "../../validation/settingsSchema";
 import Validation from "../../validation";
 import { getCurrentUser, updateCurrentUser } from "../../redux/ducks/user";
-import { clearAuthentication } from "../../redux/ducks/auth";
-import styles from "./styles.css";
 
 class SettingsScreen extends React.PureComponent {
   componentDidMount() {
@@ -35,6 +33,7 @@ class SettingsScreen extends React.PureComponent {
         {isVisitor && (
           <Formik
             initialValues={{
+              email: user.email,
               max_bid_amount: user.max_bid_amount,
               autobid_notify_percent: user.autobid_notify_percent,
             }}
@@ -73,6 +72,18 @@ class SettingsScreen extends React.PureComponent {
                         />
                       </Validation>
                     </FormField>
+                    <FormField>
+                      <label htmlFor="email" className="label">
+                        <span>{t("settings.email")}</span>
+                      </label>
+                      <Validation name="email" showMessage={true}>
+                        <Input
+                          autoCapitalize="off"
+                          value={values.email}
+                          name="email"
+                        />
+                      </Validation>
+                    </FormField>
                     <Button
                       type="submit"
                       secondary
@@ -87,13 +98,6 @@ class SettingsScreen extends React.PureComponent {
             }}
           />
         )}
-        <Button
-          className="logout"
-          primary
-          onClick={this.props.clearAuthentication}
-        >
-          {t("settings.logout")}
-        </Button>
       </div>
     );
   }
@@ -107,7 +111,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrentUser: () => dispatch(getCurrentUser()),
   updateCurrentUser: (data) => dispatch(updateCurrentUser(data)),
-  clearAuthentication: () => dispatch(clearAuthentication()),
 });
 
 export default compose(

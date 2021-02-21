@@ -9,6 +9,10 @@ use App\Mail\AutobidFailedMail;
 
 class Bid extends Model
 {
+    const IN_PROGRESS = 'IN_PROGRESS';
+    const WON = 'WON';
+    const LOST = 'LOST';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,6 +23,7 @@ class Bid extends Model
         'product_id',
         'user_id',
         'auto_bidding',
+        'status',
     ];
 
     protected $casts = [
@@ -43,6 +48,11 @@ class Bid extends Model
     {
         return $this->belongsTo('App\Models\Product');
     }
+
+    public function bill()
+    {
+        return $this->belongsTo('App\Models\Bill');
+    } 
 
     public function scopeAutobidding($query){
         return $query->where('auto_bidding', true);
@@ -87,6 +97,7 @@ class Bid extends Model
     }
 
     private static function sendMailToOtherBidders($model) { 
+        \Log::info("Sending email notifications to other bidders");
         $other_bids = $model->product->bids;
         $emails = [];
         foreach($other_bids as $bid) {
@@ -101,6 +112,7 @@ class Bid extends Model
     }
 
     private function sendMailToAutoBidder($model, $user) { 
+        \Log::info("Sending email notifications to other auto bidders");
         $mailable = new AutobidFailedMail($model);
 
         GenerateMail::dispatch($mailable, [$user->email]);

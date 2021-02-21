@@ -7,7 +7,6 @@ import { Formik, Form } from "formik";
 import { updateProduct, getProductById } from "../../redux/ducks/product";
 import Validation from "../../validation";
 import schema from "../../validation/productSchema";
-import styles from "./styles.css";
 import Loader from "../../components/Loader";
 
 class EditProductScreen extends React.PureComponent {

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    const IN_PROGRESS = 'IN_PROGRESS';
+    const SOLD = 'SOLD';
+    const CLOSED = 'CLOSED';
+
      /**
      * The attributes that are mass assignable.
      *
@@ -18,7 +22,8 @@ class Product extends Model
         'starting_price',
         'current_price',
         'closing_date',
-        'is_available'
+        'is_available',
+        'status',
     ];
  
     protected $dates = [
@@ -29,7 +34,11 @@ class Product extends Model
         'starting_price' => 'float',
         'current_price' => 'float',
     ];
-
+  
+    protected $appends = [
+        'winning_user',
+        'sold_price'
+    ];
     
     public function scopeAvailable($query)
     {
@@ -39,6 +48,11 @@ class Product extends Model
     public function bids()
     {
         return $this->hasMany('App\Models\Bid', 'product_id');
+    } 
+
+    public function bill()
+    {
+        return $this->hasOne('App\Models\Bill');
     } 
 
     public function lastBidByUser($user){
@@ -51,5 +65,27 @@ class Product extends Model
     
     public function bidsWithAutobidding(){
         return $this->bids()->where('auto_bidding', true)->get();
+    }
+    
+    public static function getProductsByClosingDate($date){
+        return Product::whereDate('closing_date', '<=', $date)->where('status', self::IN_PROGRESS)->get();
+    }
+
+    public function getWinningUserAttribute()
+    {
+        if(!$this->bill){
+            return "";
+        }
+
+        return $this->bill->bid->user->username;
+    }
+
+    public function getSoldPriceAttribute()
+    {
+        if(!$this->bill){
+            return "";
+        }
+
+        return $this->bill->amount;
     }
 }
