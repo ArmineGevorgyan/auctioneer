@@ -24,7 +24,13 @@ class ProfileScreen extends React.PureComponent {
 
     return (
       <div id="profile_screen">
-        <h1>{t("profile.welcome")}</h1>
+        <Icon
+          name="arrow left"
+          size="large"
+          className="floatLeft goBack"
+          onClick={() => this.props.history.goBack()}
+        />
+        <h1 className="clear">{t("profile.welcome")}</h1>
         <div className="container">
           {isVisitor && (
             <div className="ui divided list">

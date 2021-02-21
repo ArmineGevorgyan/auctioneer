@@ -2,7 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import { Button, Input, FormField, TextArea } from "semantic-ui-react";
+import { Button, Input, FormField, TextArea, Icon } from "semantic-ui-react";
 import { Formik, Form } from "formik";
 import { createProduct } from "../../redux/ducks/product";
 import Validation from "../../validation";
@@ -153,7 +153,13 @@ class CreateProductScreen extends React.PureComponent {
 
     return (
       <div id="product_create">
-        <h1>{t("productForm.createTitle")} </h1>
+        <Icon
+          name="arrow left"
+          size="large"
+          className="floatLeft goBack"
+          onClick={() => this.props.history.goBack()}
+        />
+        <h1 className="clear">{t("productForm.createTitle")} </h1>
         <div className="container">{this.getForm()}</div>
       </div>
     );

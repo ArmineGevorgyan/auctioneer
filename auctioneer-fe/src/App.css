@@ -32,6 +32,18 @@
   margin: 10px auto;
 }
 
+.clear {
+  clear: both;
+}
+
+.arrow.left.goBack {
+  color: #767779;
+}
+
+.arrow.left.goBack:hover {
+  color: black;
+}
+
 #home_screen {
   flex-direction: column;
 }

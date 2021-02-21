@@ -28,6 +28,7 @@ class HomeScreen extends React.PureComponent {
   productList = () => {
     const {
       t,
+      user,
       productList: { data },
     } = this.props;
 
@@ -56,7 +57,7 @@ class HomeScreen extends React.PureComponent {
                 secondary
                 className="button"
               >
-                {t("products.bidNow")}
+                {user.is_admin ? t("products.details") : t("products.bidNow")}
               </Button>
             </Item.Content>
           </Item>

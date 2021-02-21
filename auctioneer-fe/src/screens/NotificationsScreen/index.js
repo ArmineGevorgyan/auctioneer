@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import moment from "moment";
 import { withTranslation } from "react-i18next";
-import { Item } from "semantic-ui-react";
+import { Item, Icon } from "semantic-ui-react";
 import Loader from "../../components/Loader";
 import { getCurrentUser, markNotificationsSeen } from "../../redux/ducks/user";
 
@@ -25,30 +25,31 @@ class NotificationsScreen extends React.PureComponent {
 
     const list = user.notifications;
 
-    if (list.length < 1) {
-      return (
-        <div id="notifiactions_screen">
-          <h1>{t("notifiactions.welcome")}</h1>
-          <h4>{t("notifiactions.empty")}</h4>
-        </div>
-      );
-    }
-
     return (
       <div id="notifiactions_screen">
-        <h1>{t("notifiactions.welcome")}</h1>
-        <Item.Group>
-          {list.map((item) => (
-            <Item key={item.id} className={item.is_seen ? "" : "unseen"}>
-              <Item.Content>
-                <Item.Description>{item.content}</Item.Description>
-                <Item.Extra>
-                  {moment(item.created_at).format("MMMM Do YYYY, h:mm:ss a")}
-                </Item.Extra>
-              </Item.Content>
-            </Item>
-          ))}
-        </Item.Group>
+        <Icon
+          name="arrow left"
+          size="large"
+          className="floatLeft goBack"
+          onClick={() => this.props.history.goBack()}
+        />
+        <h1 className="clear">{t("notifiactions.welcome")}</h1>
+        {list.length < 1 ? (
+          <h4>{t("notifiactions.empty")}</h4>
+        ) : (
+          <Item.Group>
+            {list.map((item) => (
+              <Item key={item.id} className={item.is_seen ? "" : "unseen"}>
+                <Item.Content>
+                  <Item.Description>{item.content}</Item.Description>
+                  <Item.Extra>
+                    {moment(item.created_at).format("MMMM Do YYYY, h:mm:ss a")}
+                  </Item.Extra>
+                </Item.Content>
+              </Item>
+            ))}
+          </Item.Group>
+        )}
       </div>
     );
   }
