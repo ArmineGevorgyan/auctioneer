@@ -97,7 +97,8 @@ class ProductsService implements IProductsService
         ]);
         
         $bid = Bid::create($data);
-        Bid::updateOtherBids($bid);
+        $bid->updateOtherBids();
+        $bid->sendMailToAutoBidders();
 
         return $bid;
     }
@@ -121,6 +122,7 @@ class ProductsService implements IProductsService
 
         $bid->update(['auto_bidding' => true]);
         $bid->updateAmount();
+        $bid->sendMailToAutoBidders();
         return true;
     }
 
