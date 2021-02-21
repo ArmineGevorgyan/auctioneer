@@ -23,57 +23,59 @@ class LoginScreen extends React.PureComponent {
         <Loader loading={loading} />
         <h1>{t("loginScreen.welcome")}</h1>
         <h2>{t("loginScreen.loginPrompt")}</h2>
-        <Formik
-          initialValues={{
-            username: "",
-            password: "",
-          }}
-          validationSchema={schema}
-          onSubmit={this.onSubmit}
-          render={(props) => {
-            const { values } = props;
+        <div className="container">
+          <Formik
+            initialValues={{
+              username: "",
+              password: "",
+            }}
+            validationSchema={schema}
+            onSubmit={this.onSubmit}
+            render={(props) => {
+              const { values } = props;
 
-            return (
-              <Form className="ui form">
-                <div className="login_container">
-                  <div>
-                    <FormField>
-                      <label htmlFor="username" className="label">
-                        <span>{t("loginScreen.username")}</span>
-                      </label>
-                      <Validation name="username" showMessage={true}>
-                        <Input
-                          autoCapitalize="off"
-                          value={values.username}
-                          name="username"
-                        />
-                      </Validation>
-                    </FormField>
-                    <FormField>
-                      <label htmlFor="password" className="label">
-                        <span>{t("loginScreen.password")}</span>
-                      </label>
-                      <Validation name="password" showMessage={true}>
-                        <PasswordInput
-                          value={values.password}
-                          name="password"
-                        />
-                      </Validation>
-                    </FormField>
+              return (
+                <Form className="ui form">
+                  <div className="login_container">
+                    <div>
+                      <FormField>
+                        <label htmlFor="username" className="label">
+                          <span>{t("loginScreen.username")}</span>
+                        </label>
+                        <Validation name="username" showMessage={true}>
+                          <Input
+                            autoCapitalize="off"
+                            value={values.username}
+                            name="username"
+                          />
+                        </Validation>
+                      </FormField>
+                      <FormField>
+                        <label htmlFor="password" className="label">
+                          <span>{t("loginScreen.password")}</span>
+                        </label>
+                        <Validation name="password" showMessage={true}>
+                          <PasswordInput
+                            value={values.password}
+                            name="password"
+                          />
+                        </Validation>
+                      </FormField>
+                    </div>
+                    <Button
+                      type="submit"
+                      secondary
+                      onSubmit={props.onSubmit}
+                      className="button"
+                    >
+                      {t("loginScreen.buttonText")}
+                    </Button>
                   </div>
-                  <Button
-                    type="submit"
-                    secondary
-                    onSubmit={props.onSubmit}
-                    className="button"
-                  >
-                    {t("loginScreen.buttonText")}
-                  </Button>
-                </div>
-              </Form>
-            );
-          }}
-        />
+                </Form>
+              );
+            }}
+          />
+        </div>
       </div>
     );
   }

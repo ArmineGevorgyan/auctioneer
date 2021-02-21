@@ -1,10 +1,10 @@
 import React from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { Grid } from "semantic-ui-react";
 import moment from "moment";
 import { cashWithCommas } from "../../helpers/numberHelper";
+import constants from "../../constants";
 
 class BidList extends React.PureComponent {
   constructor(props) {
@@ -57,6 +57,11 @@ class BidList extends React.PureComponent {
                   {t("bidList.date")}:{" "}
                   {moment(bid.created_at).format("MMMM Do YYYY, h:mm:ss a")}
                 </p>
+                <p>
+                  <strong>
+                    {t("bidList.status")}: {constants.bidStatus[bid.status]}
+                  </strong>
+                </p>
               </div>
             </Grid.Column>
           ))}
@@ -66,9 +71,4 @@ class BidList extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({});
-
-export default compose(
-  withTranslation("translations"),
-  connect(mapStateToProps, null)
-)(BidList);
+export default compose(withTranslation("translations"))(BidList);

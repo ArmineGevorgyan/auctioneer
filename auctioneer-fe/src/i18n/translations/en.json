@@ -44,7 +44,11 @@
   "bidList": {
     "bids": "Bids",
     "myBids": "My Bids",
+    "myBid": "My Bid",
     "date": "Date",
+    "closingDate": "Closing Date",
+    "status": "Status",
+    "productButton": "View Product",
     "amount": "Amount"
   },
   "validator": {
@@ -69,6 +73,13 @@
     "autobid_notify_percent": "Notification percentage for autobidding",
     "email": "Email",
     "buttonText": "Save"
+  },
+  "profile": {
+    "welcome": "My Profile",
+    "logout": "Logout",
+    "settings": "Settings",
+    "bids": "All Bids",
+    "won": "Won Items"
   },
   "notifiactions": {
     "welcome": "Notifications",

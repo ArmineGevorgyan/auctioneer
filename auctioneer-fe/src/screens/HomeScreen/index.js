@@ -89,8 +89,8 @@ class HomeScreen extends React.PureComponent {
           </Button>
 
           {t("products.products")}
-          <Button className="settings" as={Link} to={`/settings`}>
-            <Icon className="icon" name="settings" size="large" />
+          <Button className="profile" as={Link} to={`/profile`}>
+            <Icon className="icon" name="user" size="large" />
           </Button>
         </h1>
 
@@ -127,7 +127,7 @@ class HomeScreen extends React.PureComponent {
             {t("products.priceDesc")}
           </Button>
         </div>
-        <div className="list_container">{this.productList()}</div>
+        <div className="container">{this.productList()}</div>
         <div className="pagination">
           {current_page > 1 && (
             <Button

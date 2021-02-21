@@ -52,7 +52,7 @@ const ProductScreen = ({
 
   return (
     <div id="product_screen">
-      <div className="list_container">
+      <div className="container">
         <Item>
           <h1>{product.name}</h1>
           {!isVisitor && (

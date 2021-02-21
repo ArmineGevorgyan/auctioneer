@@ -20,7 +20,7 @@ class UsersService implements IUsersService
      */
     public function getUser($id)
     {
-        return User::with(['bids', 'notifications'])->find($id);
+        return User::with(['bids', 'bids.product', 'notifications'])->find($id);
     }
 
     /**

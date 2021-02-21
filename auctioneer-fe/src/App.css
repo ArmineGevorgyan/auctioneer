@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  background-color: #e0e1e2;
+  min-height: 100vh;
+  align-items: center;
+  padding: 30px 20px;
 }
 
 .App-logo {
@@ -24,14 +28,12 @@
 
 .container {
   margin-top: 20px;
+  max-width: 800px;
+  margin: 10px auto;
 }
 
 #home_screen {
   flex-direction: column;
-  padding: 30px 20px;
-  min-height: 100vh;
-  align-items: center;
-  background-color: #e0e1e2;
 }
 
 #home_screen .pagination {
@@ -61,7 +63,7 @@
   width: 150px;
 }
 
-#home_screen .container .button.settings {
+#home_screen .container .button.profile {
   margin: 0;
   float: right;
 }
@@ -82,11 +84,6 @@
   margin: 0;
 }
 
-#home_screen .container {
-  max-width: 800px;
-  margin: 10px auto;
-}
-
 #home_screen .icon {
   margin-left: 10px;
 }
@@ -101,12 +98,32 @@
   width: auto;
 }
 
+#profile_screen {
+  align-items: center;
+}
+
+#profile_screen .button {
+  padding: 20px;
+  height: 58px;
+  width: 100%;
+}
+
+#profile_screen .logout {
+  margin-top: 50px;
+  width: 200px;
+  height: 50px;
+}
+
+#bid_screen .cards {
+  justify-content: center;
+}
+
+#bid_screen .button {
+  margin-top: 20px;
+}
+
 #settings_screen {
   flex-direction: column;
-  padding: 30px 20px;
-  min-height: 100vh;
-  align-items: center;
-  background-color: #e0e1e2;
 }
 
 #settings_screen .button {
@@ -114,10 +131,6 @@
   margin-bottom: 20px;
   height: 38px;
   align-self: center;
-}
-
-#settings_screen .logout {
-  margin-top: 50px;
 }
 
 .label span {
@@ -136,10 +149,6 @@
 
 #product_screen {
   flex-direction: column;
-  padding: 30px 20px;
-  min-height: 100vh;
-  align-items: center;
-  background-color: #e0e1e2;
 }
 
 #product_screen .button {
@@ -166,11 +175,6 @@
   align-items: center;
 }
 
-.list_container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 #product_screen .description,
 #product_screen .extra {
   font-size: 16px;
@@ -194,10 +198,6 @@
 
 #notifiactions_screen {
   flex-direction: column;
-  padding: 30px 20px;
-  min-height: 100vh;
-  align-items: center;
-  background-color: #e0e1e2;
 }
 
 #notifiactions_screen .item {
@@ -222,10 +222,7 @@
 #product_update {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  align-items: center;
   justify-content: center;
-  background-color: #e0e1e2;
   padding: 30px;
 }
 
@@ -251,10 +248,7 @@
 #product_create {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  align-items: center;
   justify-content: center;
-  background-color: #e0e1e2;
   padding: 30px;
 }
 
@@ -276,13 +270,11 @@
   display: flex;
   font-size: 15px;
 }
+
 #login_screen {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  align-items: center;
   justify-content: center;
-  background-color: #e0e1e2;
 }
 
 #login_screen .button {

@@ -8,7 +8,6 @@ import Loader from "../../components/Loader";
 import schema from "../../validation/settingsSchema";
 import Validation from "../../validation";
 import { getCurrentUser, updateCurrentUser } from "../../redux/ducks/user";
-import { clearAuthentication } from "../../redux/ducks/auth";
 
 class SettingsScreen extends React.PureComponent {
   componentDidMount() {
@@ -99,13 +98,6 @@ class SettingsScreen extends React.PureComponent {
             }}
           />
         )}
-        <Button
-          className="logout"
-          primary
-          onClick={this.props.clearAuthentication}
-        >
-          {t("settings.logout")}
-        </Button>
       </div>
     );
   }
@@ -119,7 +111,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrentUser: () => dispatch(getCurrentUser()),
   updateCurrentUser: (data) => dispatch(updateCurrentUser(data)),
-  clearAuthentication: () => dispatch(clearAuthentication()),
 });
 
 export default compose(
