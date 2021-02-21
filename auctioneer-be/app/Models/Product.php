@@ -34,7 +34,11 @@ class Product extends Model
         'starting_price' => 'float',
         'current_price' => 'float',
     ];
-
+  
+    protected $appends = [
+        'winning_user',
+        'sold_price'
+    ];
     
     public function scopeAvailable($query)
     {
@@ -65,5 +69,23 @@ class Product extends Model
     
     public static function getProductsByClosingDate($date){
         return Product::whereDate('closing_date', '<=', $date)->where('status', self::IN_PROGRESS)->get();
+    }
+
+    public function getWinningUserAttribute()
+    {
+        if($this->status !== self::SOLD){
+            return "";
+        }
+
+        return $this->getHighestBid()->user->username;
+    }
+
+    public function getSoldPriceAttribute()
+    {
+        if($this->status !== self::SOLD){
+            return "";
+        }
+
+        return $this->getHighestBid()->amount;
     }
 }

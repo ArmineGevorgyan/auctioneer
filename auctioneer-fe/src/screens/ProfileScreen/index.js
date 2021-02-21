@@ -45,7 +45,7 @@ class ProfileScreen extends React.PureComponent {
                 </Button>
               </div>
               <div className="item">
-                <Button as={Link} to={`/settings`}>
+                <Button as={Link} to={`/won-bids`}>
                   <div className="floatRight">
                     <Icon className="icon" name="angle right" size="large" />
                   </div>

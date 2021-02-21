@@ -14,6 +14,7 @@ import SettingsScreen from "./screens/SettingsScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import BidsListScreen from "./screens/BidsListScreen";
+import WinningBidsScreen from "./screens/WinningBidsScreen";
 
 class App extends React.Component {
   componentDidMount() {
@@ -46,6 +47,12 @@ class App extends React.Component {
             path="/bids"
             withAuth={true}
             component={BidsListScreen}
+            redirectOnFailure="/login"
+          />
+          <AuthenticationRoute
+            path="/won-bids"
+            withAuth={true}
+            component={WinningBidsScreen}
             redirectOnFailure="/login"
           />
           <AuthenticationRoute

@@ -17,6 +17,7 @@
     "startingPrice": "Starting price",
     "currentPrice": "Current price",
     "amount": "Bid amount",
+    "closedDate": "Closed date",
     "remaintingTime": "Remaining time",
     "submitBid": "Submit Bid",
     "minimum": "Minimum Bid",
@@ -26,7 +27,13 @@
     "disableAutoBid": "Disable auto-bidding",
     "edit": "Edit",
     "delete": "Delete",
-    "new": "New item"
+    "new": "New item",
+    "awardedTo": "Awarded To",
+    "price": "Sold at",
+    "status": "Status",
+    "CLOSED": "Closed",
+    "IN_PROGRESS": "In Porgress",
+    "SOLD": "Sold"
   },
   "productForm": {
     "createTitle": "Create new product",
@@ -44,11 +51,16 @@
   "bidList": {
     "bids": "Bids",
     "myBids": "My Bids",
+    "wonItems": "Won Items",
     "myBid": "My Bid",
     "date": "Date",
     "closingDate": "Closing Date",
     "status": "Status",
     "productButton": "View Product",
+    "LOST": "Lost",
+    "IN_PROGRESS": "In Porgress",
+    "WON": "Won",
+    "bill": "Bill",
     "amount": "Amount"
   },
   "validator": {

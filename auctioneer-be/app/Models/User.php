@@ -25,8 +25,7 @@ class User extends Authenticatable
         'max_bid_left',
         'autobid_notify_percent',
     ];
-
-    
+  
     protected $appends = [
         'is_admin'
     ];
