@@ -11,7 +11,16 @@ class BidsListScreen extends React.PureComponent {
 
   render() {
     const bids = this.props.user?.bids;
-    return <BidItems bids={bids} history={this.props.history} />;
+    const uniqueBids = bids && [
+      ...new Map(
+        bids
+          .slice()
+          .sort((a, b) => (a.amount < b.amount ? -1 : 1))
+          .map((el) => [el["product_id"], el])
+      ).values(),
+    ];
+
+    return <BidItems bids={uniqueBids} history={this.props.history} />;
   }
 }
 
