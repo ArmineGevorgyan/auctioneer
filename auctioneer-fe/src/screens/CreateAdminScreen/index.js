@@ -1,15 +1,15 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
 import { Icon } from "semantic-ui-react";
+import { withTranslation } from "react-i18next";
 import Loader from "../../components/Loader";
-import { register } from "../../redux/ducks/auth";
+import { registerAdmin } from "../../redux/ducks/auth";
 import RegistrationForm from "../../components/RegistrationForm";
 
-class RegistrationScreen extends React.PureComponent {
+class CreateAdminScreen extends React.PureComponent {
   onSubmit = (data) => {
-    this.props.register(data);
+    this.props.register(data, this.props.history);
   };
 
   render() {
@@ -24,8 +24,7 @@ class RegistrationScreen extends React.PureComponent {
           onClick={() => history.goBack()}
         />
         <Loader loading={loading} />
-        <h1>{t("authScreen.welcome")}</h1>
-        <h2>{t("authScreen.registrationPrompt")}</h2>
+        <h2>{t("authScreen.registerAdmin")}</h2>
         <RegistrationForm onSubmit={this.onSubmit} />
       </div>
     );
@@ -37,10 +36,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  register: (data) => dispatch(register(data)),
+  register: (data, history) => dispatch(registerAdmin(data, history)),
 });
 
 export default compose(
   withTranslation("translations"),
   connect(mapStateToProps, mapDispatchToProps)
-)(RegistrationScreen);
+)(CreateAdminScreen);

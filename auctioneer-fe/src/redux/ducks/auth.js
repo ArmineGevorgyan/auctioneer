@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { API_URL } from "../../config";
+import i18n from "../../i18n";
 import { getToken, getIsAdmin, removeAuth, setAuth } from "../../helpers/auth";
 
 const initialState = {
@@ -51,6 +52,20 @@ const authSlice = createSlice({
       error: action.payload,
       isAuthenticated: false,
       isAdmin: null,
+    }),
+    registerAdmin: (state) => ({
+      ...state,
+      loading: true,
+    }),
+    registerAdminSuccess: (state) => ({
+      ...state,
+      loading: false,
+      error: null,
+    }),
+    registerAdminFail: (state, action) => ({
+      ...state,
+      loading: false,
+      error: action.payload,
     }),
     showError: (state, action) => ({
       ...state,
@@ -139,6 +154,23 @@ export const register = (data) => {
       })
       .catch((error) => {
         dispatch(authSlice.actions.registerFail(error));
+      });
+  };
+};
+
+export const registerAdmin = (data, history) => {
+  return (dispatch) => {
+    dispatch(authSlice.actions.registerAdmin());
+
+    axios
+      .post(`${API_URL}/register-admin`, data)
+      .then(() => {
+        dispatch(authSlice.actions.registerAdminSuccess());
+        toast.success(i18n.t("authScreen.registerSuccess"));
+        history.goBack();
+      })
+      .catch((error) => {
+        dispatch(authSlice.actions.registerAdminFail(error));
       });
   };
 };

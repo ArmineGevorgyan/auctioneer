@@ -7,6 +7,7 @@ import AuthenticationRoute from "./components/AuthenticationRoute";
 import { authenticate } from "./redux/ducks/auth";
 import LoginScreen from "./screens/LoginScreen/index.js";
 import RegistrationScreen from "./screens/RegistrationScreen/index.js";
+import CreateAdminScreen from "./screens/CreateAdminScreen/index.js";
 import HomeScreen from "./screens/HomeScreen/index.js";
 import ProductScreen from "./screens/ProductScreen";
 import CreateProductScreen from "./screens/CreateProductScreen";
@@ -78,6 +79,12 @@ class App extends React.Component {
             path="/register"
             withAuth={false}
             component={RegistrationScreen}
+            redirectOnFailure="/"
+          />
+          <AuthenticationRoute
+            path="/register-admin"
+            withAuth={true}
+            component={CreateAdminScreen}
             redirectOnFailure="/"
           />
           <AuthenticationRoute

@@ -32,34 +32,46 @@ class ProfileScreen extends React.PureComponent {
         />
         <h1 className="clear">{t("profile.welcome")}</h1>
         <div className="container">
-          {isVisitor && (
-            <div className="ui divided list">
+          <div className="ui divided list">
+            {isVisitor && (
+              <>
+                <div className="item">
+                  <Button as={Link} to={`/settings`}>
+                    <div className="floatRight">
+                      <Icon className="icon" name="angle right" size="large" />
+                    </div>
+                    <div className="floatLeft">{t("profile.settings")}</div>
+                  </Button>
+                </div>
+                <div className="item">
+                  <Button as={Link} to={`/bids`}>
+                    <div className="floatRight">
+                      <Icon className="icon" name="angle right" size="large" />
+                    </div>
+                    <div className="floatLeft">{t("profile.bids")}</div>
+                  </Button>
+                </div>
+                <div className="item">
+                  <Button as={Link} to={`/won-bids`}>
+                    <div className="floatRight">
+                      <Icon className="icon" name="angle right" size="large" />
+                    </div>
+                    <div className="floatLeft">{t("profile.won")}</div>
+                  </Button>
+                </div>
+              </>
+            )}
+            {!isVisitor && (
               <div className="item">
-                <Button as={Link} to={`/settings`}>
+                <Button as={Link} to={`/register-admin`}>
                   <div className="floatRight">
                     <Icon className="icon" name="angle right" size="large" />
                   </div>
-                  <div className="floatLeft">{t("profile.settings")}</div>
+                  <div className="floatLeft">{t("profile.register")}</div>
                 </Button>
               </div>
-              <div className="item">
-                <Button as={Link} to={`/bids`}>
-                  <div className="floatRight">
-                    <Icon className="icon" name="angle right" size="large" />
-                  </div>
-                  <div className="floatLeft">{t("profile.bids")}</div>
-                </Button>
-              </div>
-              <div className="item">
-                <Button as={Link} to={`/won-bids`}>
-                  <div className="floatRight">
-                    <Icon className="icon" name="angle right" size="large" />
-                  </div>
-                  <div className="floatLeft">{t("profile.won")}</div>
-                </Button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
 
           <Button
             className="logout"

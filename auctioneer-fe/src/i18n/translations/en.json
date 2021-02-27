@@ -6,6 +6,8 @@
     "username": "Username",
     "password": "Password",
     "register": "Register",
+    "registerSuccess": "Successfully registered user",
+    "registerAdmin": "Register a new Administrator user",
     "email": "Email",
     "login": "Login"
   },
@@ -93,6 +95,7 @@
   "profile": {
     "welcome": "My Profile",
     "logout": "Logout",
+    "register": "Register new Administrator",
     "settings": "Settings",
     "bids": "All Bids",
     "won": "Won Items"

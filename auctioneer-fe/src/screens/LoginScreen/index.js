@@ -87,7 +87,6 @@ class LoginScreen extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   loading: state.auth.loading,
-  isAuthenticated: state.auth.isAuthenticated,
 });
 
 const mapDispatchToProps = (dispatch) => ({
