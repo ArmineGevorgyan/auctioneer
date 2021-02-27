@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 import { Grid } from "semantic-ui-react";
 import moment from "moment";
 import { cashWithCommas } from "../../helpers/numberHelper";
-import constants from "../../constants";
 
 class BidList extends React.PureComponent {
   constructor(props) {

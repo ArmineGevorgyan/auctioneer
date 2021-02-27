@@ -14,6 +14,7 @@ import BidForm from "./BidForm";
 import BidList from "./BidList";
 import constants from "../../constants";
 import { cashWithCommas } from "../../helpers/numberHelper";
+import { substribeProductCallback,  unsubstribeProductCallback } from "../../helpers/pusherHelper";
 
 const ProductScreen = ({
   t,
@@ -31,6 +32,11 @@ const ProductScreen = ({
   const { id } = useParams();
 
   useEffect(() => {
+    substribeProductCallback(id);
+    return () => unsubstribeProductCallback(id);
+  }, []);
+
+  useEffect(() => {
     getProductById(id);
     getCurrentUser();
   }, [bid]);
@@ -46,9 +52,7 @@ const ProductScreen = ({
 
   const isVisitor = !user.is_admin;
   const usersBids = user.bids.filter((bid) => bid.product_id == id);
-  const currentBid = usersBids
-    .slice()
-    .sort((a, b) => (a.amount > b.amount ? -1 : 1))[0];
+  const currentBid = usersBids.slice().sort((a, b) => (a.amount > b.amount ? -1 : 1))[0];
   const hasAutobidding = currentBid && currentBid.auto_bidding;
   const inProgress = product.status == constants.productStatus.IN_PROGRESS;
 
