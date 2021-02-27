@@ -8,7 +8,7 @@ import constants from "../constants";
 import { Button, Icon } from "semantic-ui-react";
 
 const BidItems = ({ t, bids, title, children, history }) => {
-  const hasBids = bids && bids.length > 1;
+  const hasBids = bids && bids.length >= 1;
 
   return (
     <div id="bid_screen">
@@ -33,7 +33,7 @@ const BidItems = ({ t, bids, title, children, history }) => {
                   <div className="extra content">
                     <p>
                       <strong>{t("bidList.status")}</strong>:{" "}
-                      {constants.bidStatus[bid.status]}
+                      {t(`bidList.${bid.status}`)}
                     </p>
                     <p>
                       <strong>

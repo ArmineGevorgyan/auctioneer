@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use App\Events\ProductUpdateEvent;
 use App\Jobs\GenerateMail;
 use App\Mail\ItemLostMail;
 use App\Mail\ItemWonMail;
@@ -68,6 +69,9 @@ class CreateBillsJob implements ShouldQueue
 
         \Log::info("Updating product status");
         $product->update(['status' => Product::SOLD]);
+
+        \Log::info("Dispatching product update event");
+        ProductUpdateEvent::dispatch($product);
         
         \Log::info("Updating other bids");
         return $product->bids()
