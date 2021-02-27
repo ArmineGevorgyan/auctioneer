@@ -4,31 +4,31 @@ import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import { withTranslation } from "react-i18next";
 import { Input, FormField, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import PasswordInput from "../../components/PasswordInput";
-import schema from "../../validation/loginSchema";
+import schema from "../../validation/registrationSchema";
 import Validation from "../../validation";
-import { login } from "../../redux/ducks/auth";
+import { register } from "../../redux/ducks/auth";
 
-class LoginScreen extends React.PureComponent {
+class RegistrationScreen extends React.PureComponent {
   onSubmit = (data) => {
-    this.props.login(data);
+    this.props.register(data);
   };
 
   render() {
     const { t, loading } = this.props;
 
     return (
-      <div id="login_screen">
+      <div id="auth_screen">
         <Loader loading={loading} />
         <h1>{t("authScreen.welcome")}</h1>
-        <h2>{t("authScreen.loginPrompt")}</h2>
+        <h2>{t("authScreen.registrationPrompt")}</h2>
         <div className="container">
           <Formik
             initialValues={{
               username: "",
               password: "",
+              email: "",
             }}
             validationSchema={schema}
             onSubmit={this.onSubmit}
@@ -37,7 +37,7 @@ class LoginScreen extends React.PureComponent {
 
               return (
                 <Form className="ui form">
-                  <div className="login_container">
+                  <div className="auth_container">
                     <div>
                       <FormField>
                         <label htmlFor="username" className="label">
@@ -62,23 +62,32 @@ class LoginScreen extends React.PureComponent {
                           />
                         </Validation>
                       </FormField>
+                      <FormField>
+                        <label htmlFor="email" className="label">
+                          <span>{t("authScreen.email")}</span>
+                        </label>
+                        <Validation name="email" showMessage={true}>
+                          <Input
+                            autoCapitalize="off"
+                            value={values.email}
+                            name="email"
+                          />
+                        </Validation>
+                      </FormField>
                     </div>
                     <Button
                       type="submit"
                       secondary
                       onSubmit={props.onSubmit}
-                      className="login"
+                      className="register"
                     >
-                      {t("authScreen.login")}
+                      {t("authScreen.register")}
                     </Button>
                   </div>
                 </Form>
               );
             }}
           />
-          <Button secondary basic className="register" as={Link} to="/register">
-            {t("authScreen.register")}
-          </Button>
         </div>
       </div>
     );
@@ -91,10 +100,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (username, password) => dispatch(login(username, password)),
+  register: (data) => dispatch(register(data)),
 });
 
 export default compose(
   withTranslation("translations"),
   connect(mapStateToProps, mapDispatchToProps)
-)(LoginScreen);
+)(RegistrationScreen);

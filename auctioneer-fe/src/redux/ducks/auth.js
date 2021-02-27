@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { API_URL } from "../../config";
 import { getToken, getIsAdmin, removeAuth, setAuth } from "../../helpers/auth";
 
@@ -7,6 +8,7 @@ const initialState = {
   loading: false,
   isAuthenticated: undefined,
   error: null,
+  showError: null,
   isAdmin: null,
 };
 
@@ -29,6 +31,31 @@ const authSlice = createSlice({
       ...state,
       loading: false,
       error: action.payload,
+      isAuthenticated: false,
+      isAdmin: null,
+    }),
+    register: (state) => ({
+      ...state,
+      loading: true,
+    }),
+    registerSuccess: (state, action) => ({
+      ...state,
+      loading: false,
+      error: null,
+      isAuthenticated: true,
+      isAdmin: action.payload.is_admin,
+    }),
+    registerFail: (state, action) => ({
+      ...state,
+      loading: false,
+      error: action.payload,
+      isAuthenticated: false,
+      isAdmin: null,
+    }),
+    showError: (state, action) => ({
+      ...state,
+      loading: false,
+      showError: action.payload,
       isAuthenticated: false,
       isAdmin: null,
     }),
@@ -76,17 +103,42 @@ export const login = (data) => {
       .post(`${API_URL}/login`, data)
       .then((r) => r.data)
       .then((data) => {
-        const token = data.token;
-        const user = data.user;
+        const { token, user, error } = data;
+
         if (token) {
           setAuth(token, user.is_admin);
           dispatch(authSlice.actions.loginSuccess(user));
-        } else {
-          dispatch(authSlice.actions.loginFail());
+        } else if (error) {
+          toast.error(error);
+          dispatch(authSlice.actions.loginFail(error));
         }
       })
       .catch((error) => {
         dispatch(authSlice.actions.loginFail(error));
+      });
+  };
+};
+
+export const register = (data) => {
+  return (dispatch) => {
+    dispatch(authSlice.actions.register());
+
+    axios
+      .post(`${API_URL}/register`, data)
+      .then((r) => r.data)
+      .then((data) => {
+        const { token, user, error } = data;
+
+        if (token) {
+          setAuth(token, user.is_admin);
+          dispatch(authSlice.actions.registerSuccess(user));
+        } else if (error) {
+          toast.error(error);
+          dispatch(authSlice.actions.registerFail(error));
+        }
+      })
+      .catch((error) => {
+        dispatch(authSlice.actions.registerFail(error));
       });
   };
 };

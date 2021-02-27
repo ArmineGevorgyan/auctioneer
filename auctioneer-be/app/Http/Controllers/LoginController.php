@@ -33,6 +33,8 @@ class LoginController extends Controller
                         'token' => $user->api_token,
                     ]);
             }
+
+            return response()->json([ 'status' => 'invalid', 'error' => 'Invalid credentials']);         
         }
         catch (Exception $e) {
             Log::warning('User login failed. Cannot provide token.', ['username' => $credentials['username'], ' error' => $e->getMessage()]);

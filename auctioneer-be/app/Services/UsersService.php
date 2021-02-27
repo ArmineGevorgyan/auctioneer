@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use App\Interfaces\IUsersService;
 use App\Models\User;
 use Log;
@@ -31,11 +33,55 @@ class UsersService implements IUsersService
     /**
      * {@inheritdoc}
      */
+    public function getUserByUsername($username)
+    {
+        Log::info('Getting user by username', ['username' => $username]);
+
+        return User::where('username', $username)->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function update($user, $data)
     {
         Log::info('Updating user');
         
         return $user->update(array_merge($data, ['max_bid_left' =>$data['max_bid_amount']]));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create($data)
+    {
+        Log::info('Creating user');
+        
+        $user = User::create([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'api_token' => Str::random(60),
+        ]);
+        $user->assignRole('visitor');
+
+        return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createAdmin($user, $data)
+    {
+        if(!$user->is_admin) {
+            Log::warning("Invalid User");
+            throw new \Exception("Invalid User");
+        }
+        
+        $user = $this->create($data);
+        $user->assignRole('admin');
+
+        return $user;
     }
 
     /**

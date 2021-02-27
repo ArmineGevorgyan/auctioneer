@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use App\Http\Controllers\UsersController;
 */
 
 Route::post('/login', [LoginController::class, 'login']);
+Route::post('/register', [RegistrationController::class, 'register']);
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/products', [ProductsController::class, 'getProducts']);
@@ -33,4 +35,5 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/users/current', [UsersController::class, 'updateCurrentUser']);
     Route::put('/users/current/notifications', [UsersController::class, 'markNotificationsSeen']);
     Route::get('/users/{id}', [UsersController::class, 'show']);
+    Route::post('/register-admin', [RegistrationController::class, 'registerAdmin']);
 });

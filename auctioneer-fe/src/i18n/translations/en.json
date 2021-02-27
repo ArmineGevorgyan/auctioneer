@@ -1,10 +1,13 @@
 {
-  "loginScreen": {
+  "authScreen": {
     "welcome": "Welcome to Auctioneer",
     "loginPrompt": "Please Login to Continue",
+    "registrationPrompt": "Please Register to Continue",
     "username": "Username",
     "password": "Password",
-    "buttonText": "Login"
+    "register": "Register",
+    "email": "Email",
+    "login": "Login"
   },
   "products": {
     "details": "Details",
