@@ -283,14 +283,25 @@
   font-size: 15px;
 }
 
-#login_screen {
+#login_screen,
+#auth_screen {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-#login_screen .button {
-  margin: 20px 0;
+#login_screen .login {
+  margin-top: 20px;
+  width: 200px;
+}
+
+#login_screen .register {
+  margin-bottom: 20px;
+  width: 200px;
+}
+
+#auth_screen .register {
+  margin-top: 20px;
   width: 200px;
 }
 
@@ -302,7 +313,8 @@
   font-size: 15px;
 }
 
-.login_container {
+.login_container,
+.auth_container {
   margin: 30px;
   width: 400px;
   max-width: 80vw;

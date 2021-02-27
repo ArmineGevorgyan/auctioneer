@@ -1,10 +1,15 @@
 {
-  "loginScreen": {
+  "authScreen": {
     "welcome": "Welcome to Auctioneer",
     "loginPrompt": "Please Login to Continue",
+    "registrationPrompt": "Please Register to Continue",
     "username": "Username",
     "password": "Password",
-    "buttonText": "Login"
+    "register": "Register",
+    "registerSuccess": "Successfully registered user",
+    "registerAdmin": "Register a new Administrator user",
+    "email": "Email",
+    "login": "Login"
   },
   "products": {
     "details": "Details",
@@ -90,6 +95,7 @@
   "profile": {
     "welcome": "My Profile",
     "logout": "Logout",
+    "register": "Register new Administrator",
     "settings": "Settings",
     "bids": "All Bids",
     "won": "Won Items"

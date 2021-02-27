@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import { withTranslation } from "react-i18next";
 import { Input, FormField, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
-import PasswordInput from "./PasswordInput";
+import PasswordInput from "../../components/PasswordInput";
 import schema from "../../validation/loginSchema";
 import Validation from "../../validation";
 import { login } from "../../redux/ducks/auth";
@@ -21,8 +22,8 @@ class LoginScreen extends React.PureComponent {
     return (
       <div id="login_screen">
         <Loader loading={loading} />
-        <h1>{t("loginScreen.welcome")}</h1>
-        <h2>{t("loginScreen.loginPrompt")}</h2>
+        <h1>{t("authScreen.welcome")}</h1>
+        <h2>{t("authScreen.loginPrompt")}</h2>
         <div className="container">
           <Formik
             initialValues={{
@@ -40,7 +41,7 @@ class LoginScreen extends React.PureComponent {
                     <div>
                       <FormField>
                         <label htmlFor="username" className="label">
-                          <span>{t("loginScreen.username")}</span>
+                          <span>{t("authScreen.username")}</span>
                         </label>
                         <Validation name="username" showMessage={true}>
                           <Input
@@ -52,7 +53,7 @@ class LoginScreen extends React.PureComponent {
                       </FormField>
                       <FormField>
                         <label htmlFor="password" className="label">
-                          <span>{t("loginScreen.password")}</span>
+                          <span>{t("authScreen.password")}</span>
                         </label>
                         <Validation name="password" showMessage={true}>
                           <PasswordInput
@@ -66,15 +67,18 @@ class LoginScreen extends React.PureComponent {
                       type="submit"
                       secondary
                       onSubmit={props.onSubmit}
-                      className="button"
+                      className="login"
                     >
-                      {t("loginScreen.buttonText")}
+                      {t("authScreen.login")}
                     </Button>
                   </div>
                 </Form>
               );
             }}
           />
+          <Button secondary basic className="register" as={Link} to="/register">
+            {t("authScreen.register")}
+          </Button>
         </div>
       </div>
     );
@@ -83,7 +87,6 @@ class LoginScreen extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   loading: state.auth.loading,
-  isAuthenticated: state.auth.isAuthenticated,
 });
 
 const mapDispatchToProps = (dispatch) => ({

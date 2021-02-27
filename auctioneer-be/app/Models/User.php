@@ -24,6 +24,7 @@ class User extends Authenticatable
         'max_bid_amount',
         'max_bid_left',
         'autobid_notify_percent',
+        'api_token'
     ];
   
     protected $appends = [
