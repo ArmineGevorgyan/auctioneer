@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Interfaces\IUsersService;
 use App\Models\User;
+use Log;
 
 class UsersService implements IUsersService
 {
@@ -12,6 +13,8 @@ class UsersService implements IUsersService
      */
     public function getAllUsers()
     {
+        Log::info('Getting all users');
+
         return User::all();
     }
 
@@ -20,6 +23,8 @@ class UsersService implements IUsersService
      */
     public function getUser($id)
     {
+        Log::info('Getting user by id', ['id' => $id]);
+
         return User::with(['bids', 'bids.product', 'notifications'])->find($id);
     }
 
@@ -28,6 +33,8 @@ class UsersService implements IUsersService
      */
     public function update($user, $data)
     {
+        Log::info('Updating user');
+        
         return $user->update(array_merge($data, ['max_bid_left' =>$data['max_bid_amount']]));
     }
 

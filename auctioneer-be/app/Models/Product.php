@@ -33,6 +33,7 @@ class Product extends Model
     protected $casts = [
         'starting_price' => 'float',
         'current_price' => 'float',
+        'sold_price' => 'float',
     ];
   
     protected $appends = [

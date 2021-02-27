@@ -108,7 +108,7 @@ class Bid extends Model
             $this->update(['auto_bidding' => false]);
     
             \Log::info("Sending email notifications to other auto bidders about their unsuccessful autobid");
-            $mailable = new AutobidFailedMail($model);
+            $mailable = new AutobidFailedMail($bid);
             GenerateMail::dispatch($mailable, [$user->email]);
         }
     }

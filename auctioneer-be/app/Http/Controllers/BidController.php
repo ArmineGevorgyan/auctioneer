@@ -21,6 +21,8 @@ class BidController extends Controller
     public function index(Request $request)
     {
         try {
+            Log::error('Get all bids');
+
             return $this->bids_service->getBids();
         } catch (Exception $e) {
             Log::error('Get bids, Exception', ['error' => $e->getMessage()]);
@@ -32,6 +34,8 @@ class BidController extends Controller
     public function show(Request $request, $id)
     {
         try {
+            Log::error('Get bid by id', ['id' => $id]);
+
             return $this->bids_service->getBid($id);
         } catch (Exception $e) {
             Log::error('Get bid by id, Exception', ['error' => $e->getMessage()]);
@@ -45,9 +49,8 @@ class BidController extends Controller
         try {   
             $payload = $request->only(['amount']);
 
-            Log::info('Create bid', ['payload' => $payload]);
+            Log::info('Update bid', ['id'=> $id, 'payload' => $payload]);
             $bid = $this->bids_service->updateBid($request->user(), $id, $payload);
-            Log::info('Bid updated.', ['response' => $bid]);
 
             return $bid;
         } catch (Exception $e) {
@@ -59,6 +62,8 @@ class BidController extends Controller
     
     public function delete(Request $request, $id){
         try {
+            Log::error('Delete bid by id', ['id' => $id]);
+
             return $this->bids_service->deleteBid($request->user(), $id);
         } catch (Exception $e) {
             Log::error('Delete bid, Exception', ['error' => $e->getMessage()]);

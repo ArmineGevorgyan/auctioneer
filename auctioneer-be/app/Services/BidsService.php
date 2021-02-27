@@ -14,6 +14,8 @@ class BidsService implements IBidsService
      */
     public function getAllBids()
     {
+        Log::info('Getting all bids');
+
         return Bid::all();
     }
 
@@ -22,6 +24,8 @@ class BidsService implements IBidsService
      */
     public function getBid($id)
     {
+        Log::info('Getting bid by id', ['id' => $id]);
+
         return Bid::all()->find($id);
     }
 
@@ -29,7 +33,7 @@ class BidsService implements IBidsService
      * {@inheritdoc}
      */
     public function updateBid($user, $id, $data){
-        Log::info('Updating product');
+        Log::info('Updating bid');
 
         return $this->getBid($id)->update($data);
     }
@@ -38,7 +42,7 @@ class BidsService implements IBidsService
      * {@inheritdoc}
      */
     public function deleteBid($user, $id){
-        Log::info('Deleting product');
+        Log::info('Deleting bid');
 
         return $this->getBid($id)->delete();
     }

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Interfaces\IProductsService;
+use App\Events\ProductUpdateEvent;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Bid;
@@ -16,6 +17,7 @@ class ProductsService implements IProductsService
      */
     public function getAllProducts()
     {
+        Log::info('Getting all products');
         return Product::all();
     }
 
@@ -24,6 +26,7 @@ class ProductsService implements IProductsService
      */
     public function getAvailableProducts()
     {
+        Log::info('Getting all available products');
         return Product::available()->paginate(constants('PAGINATION_SIZE'));
     }
 
@@ -31,6 +34,7 @@ class ProductsService implements IProductsService
      * {@inheritdoc}
      */
     public function getProducts($filter, $col, $direction){
+        Log::info('Getting filtered and sorted products');
         return Product::available()
                 ->where('name', 'LIKE', '%'.$filter.'%')
                 ->orWhere('description', 'LIKE', '%'.$filter.'%')
@@ -42,6 +46,7 @@ class ProductsService implements IProductsService
      */
     public function getProduct($id)
     {
+        Log::info('Getting product by id', ['id' => $id]);
         return Product::with(['bids', 'bids.user'])->find($id);
     }
 
@@ -98,7 +103,7 @@ class ProductsService implements IProductsService
         
         $bid = Bid::create($data);
         $bid->updateOtherBids();
-        $bid->sendMailToAutoBidders();
+        $this->dispatchUpdateJobs($bid);
 
         return $bid;
     }
@@ -122,7 +127,8 @@ class ProductsService implements IProductsService
 
         $bid->update(['auto_bidding' => true]);
         $bid->updateAmount();
-        $bid->sendMailToAutoBidders();
+        $this->dispatchUpdateJobs($bid);
+
         return true;
     }
 
@@ -144,6 +150,7 @@ class ProductsService implements IProductsService
     private function validateUser($user)
     {
         if(!$user->is_admin) {
+            \Log::warning("Invalid User");
             throw new \Exception("Invalid User");
         }
     }
@@ -151,11 +158,21 @@ class ProductsService implements IProductsService
     private function validateBid($product, $amount)
     {
         if($product->status !== Product::IN_PROGRESS){
+            \Log::warning("Product bidding is already closed");
             throw new \Exception("Product bidding is already closed");
         }
         
         if($product->current_price >= $amount) {
+            \Log::warning("Bid amount must be greater than the current price");
             throw new \Exception("Bid amount must be greater than the current price");
         }
+    }
+
+    private function dispatchUpdateJobs($bid)
+    {
+        $bid->sendMailToAutoBidders();
+
+        \Log::info("Dispatching product update event");
+        ProductUpdateEvent::dispatch($bid->product);
     }
 }

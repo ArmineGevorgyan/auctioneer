@@ -30,6 +30,14 @@ Make sure you have PHP version >=7.2.5 and composer installed.
  php artisan serve
 ```
 
+## Running jobs
+
+In order to run jobs and broadcast events, you need to start the database queue by running the following command:
+
+```bash
+php artisan queue:work database
+```
+
 ## Running the scheduler
 
 In a production server you can start the scheduler by adding a cron command that runs the schedule:run command every minute. You can do so by adding the following to your crontab configuration:
@@ -64,7 +72,9 @@ php artisan migrate
 php artisan migrate:fresh --seed
 ```
 
-3. If you wish to clear the application cache, run the following commands:
+3. In order to update the .env, run `cp .env.example .env`
+
+4. If you wish to clear the application cache, run the following commands:
 
 ```bash
 php artisan cache:clear

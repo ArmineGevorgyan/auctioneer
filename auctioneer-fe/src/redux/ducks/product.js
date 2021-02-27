@@ -98,6 +98,13 @@ const productSlice = createSlice({
       loading: false,
       error: action.payload,
     }),
+    productLiveUpdate: (state, action) => ({
+      ...state,
+      product: {
+        ...state.product,
+        ...action.payload,
+      },
+    }),
   },
 });
 
@@ -186,6 +193,12 @@ export const updateProduct = (id, data) => {
       .catch((error) => {
         dispatch(productSlice.actions.updateProductFail(error));
       });
+  };
+};
+
+export const productLiveUpdate = (data) => {
+  return (dispatch) => {
+    dispatch(productSlice.actions.productLiveUpdate(data));
   };
 };
 

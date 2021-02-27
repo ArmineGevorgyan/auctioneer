@@ -6,5 +6,7 @@ const constants = {
     "https://aatralcreations.com/wp-content/uploads/2020/05/placeholder-1-2.png",
   bidStatus: { LOST: "LOST", IN_PROGRESS: "IN_PROGRESS", WON: "WON" },
   productStatus: { CLOSED: "CLOSED", IN_PROGRESS: "IN_PROGRESS", SOLD: "SOLD" },
+  broadcastChannels: { PRODUCT: "private-product" },
+  broadcastEvents: { PRODUCT_UPDATED: "product.updated" },
 };
 export default constants;

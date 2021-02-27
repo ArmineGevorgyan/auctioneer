@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Switch, Route } from "react-router-dom";
+import { withRouter, Switch } from "react-router-dom";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import "./App.css";
