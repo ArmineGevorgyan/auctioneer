@@ -32,6 +32,10 @@ class HomeScreen extends React.PureComponent {
       productList: { data },
     } = this.props;
 
+    String.prototype.trunc = function (n = 500) {
+      return this.substr(0, n - 1) + (this.length > n ? "..." : "");
+    };
+
     return (
       <Item.Group>
         {data.map((item) => (
@@ -42,7 +46,7 @@ class HomeScreen extends React.PureComponent {
             />
             <Item.Content>
               <Item.Header>{item.name}</Item.Header>
-              <Item.Description>{item.description}</Item.Description>
+              <Item.Description>{item.description.trunc()}</Item.Description>
               {item.status == constants.productStatus.IN_PROGRESS ? (
                 <Item.Extra>
                   {t("products.currentPrice")}:{" "}
