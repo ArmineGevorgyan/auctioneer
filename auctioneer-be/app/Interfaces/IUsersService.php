@@ -12,22 +12,22 @@ interface IUsersService
     public function getAllUsers();
 
     /**
-     * Get user by the username.
-     *
-     * @param int $username
-     *
-     * @return App\Models\User $user
-     */
-    public function getUser($username);
-
-    /**
-     * Get user by .
+     * Get user by the id.
      *
      * @param int $id
      *
      * @return App\Models\User $user
      */
-    public function getUserByUsername($id);
+    public function getUser($id);
+
+    /**
+     * Get user by username.
+     *
+     * @param string $username
+     *
+     * @return App\Models\User $user
+     */
+    public function getUserByUsername($username);
 
     /**
      * Update a given user

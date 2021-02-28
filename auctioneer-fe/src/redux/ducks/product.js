@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
+import i18n from "../../i18n";
 import { API_URL } from "../../config";
 
 const initialState = {
@@ -157,8 +159,10 @@ export const deleteProductById = (id) => {
       .delete(`${API_URL}/products/${id}`)
       .then(() => {
         dispatch(productSlice.actions.deleteProductByIdSuccess());
+        toast.success(i18n.t("toast.deleteProductSuccess"));
       })
       .catch((error) => {
+        toast.error(i18n.t("toast.deleteProductFail"));
         dispatch(productSlice.actions.deleteProductByIdFail(error));
       });
   };
@@ -173,8 +177,10 @@ export const createProduct = (data) => {
       .then((r) => r.data)
       .then((data) => {
         dispatch(productSlice.actions.createProductSuccess(data));
+        toast.success(i18n.t("toast.createProductSuccess"));
       })
       .catch((error) => {
+        toast.error(i18n.t("toast.createProductFail"));
         dispatch(productSlice.actions.createProductFail(error));
       });
   };
@@ -189,8 +195,10 @@ export const updateProduct = (id, data) => {
       .then((r) => r.data)
       .then((data) => {
         dispatch(productSlice.actions.updateProductSuccess(data));
+        toast.success(i18n.t("toast.updateProductSuccess"));
       })
       .catch((error) => {
+        toast.error(i18n.t("toast.updateProductFail"));
         dispatch(productSlice.actions.updateProductFail(error));
       });
   };

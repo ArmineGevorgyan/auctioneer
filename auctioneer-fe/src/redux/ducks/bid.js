@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
+import i18n from "../../i18n";
 import { API_URL } from "../../config";
 
 const initialState = {
@@ -74,8 +76,10 @@ export const makeBid = (product_id, data) => {
       .then((r) => r.data)
       .then((data) => {
         dispatch(bidSlice.actions.makeBidSuccess(data));
+        toast.success(i18n.t("toast.makeBidSuccess"));
       })
       .catch((error) => {
+        toast.error(i18n.t("toast.makeBidFail"));
         dispatch(bidSlice.actions.makeBidFail(error));
       });
   };
@@ -90,8 +94,10 @@ export const enableAutobidding = (product_id) => {
       .then((r) => r.data)
       .then((data) => {
         dispatch(bidSlice.actions.enableAutobiddingSuccess(data));
+        toast.success(i18n.t("toast.enableAutobiddingSuccess"));
       })
       .catch((error) => {
+        toast.error(i18n.t("toast.enableAutobiddingFail"));
         dispatch(bidSlice.actions.enableAutobiddingFail(error));
       });
   };
@@ -106,8 +112,10 @@ export const disableAutobidding = (product_id) => {
       .then((r) => r.data)
       .then((data) => {
         dispatch(bidSlice.actions.disableAutobiddingSuccess(data));
+        toast.success(i18n.t("toast.disableAutobiddingSuccess"));
       })
       .catch((error) => {
+        toast.error(i18n.t("toast.disableAutobiddingFail"));
         dispatch(bidSlice.actions.disableAutobiddingFail(error));
       });
   };

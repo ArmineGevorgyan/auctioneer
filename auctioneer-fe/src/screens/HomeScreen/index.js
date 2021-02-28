@@ -43,13 +43,21 @@ class HomeScreen extends React.PureComponent {
             <Item.Content>
               <Item.Header>{item.name}</Item.Header>
               <Item.Description>{item.description}</Item.Description>
+              {item.status == constants.productStatus.IN_PROGRESS ? (
+                <Item.Extra>
+                  {t("products.currentPrice")}:{" "}
+                  {numberToCashFormatter(item.current_price)}
+                </Item.Extra>
+              ) : (
+                item.sold_price && (
+                  <Item.Extra>
+                    {t("products.price")}:{" "}
+                    {numberToCashFormatter(item.sold_price)}
+                  </Item.Extra>
+                )
+              )}
               <Item.Extra>
-                {t("products.startingPrice")}:{" "}
-                {numberToCashFormatter(item.starting_price)}
-              </Item.Extra>
-              <Item.Extra>
-                {t("products.currentPrice")}:{" "}
-                {numberToCashFormatter(item.current_price)}
+                {t("products.status")}: {t(`products.${item.status}`)}
               </Item.Extra>
               <Button
                 as={Link}

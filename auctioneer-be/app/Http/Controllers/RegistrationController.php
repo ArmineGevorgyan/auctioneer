@@ -23,6 +23,7 @@ class RegistrationController extends Controller
      *
      * @param RegistrationRequest $request
      *
+     * @throws InternalErrorException
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(RegistrationRequest $request){
@@ -48,6 +49,7 @@ class RegistrationController extends Controller
      *
      * @param RegistrationRequest $request
      *
+     * @throws InternalErrorException
      * @return \Illuminate\Http\JsonResponse
      */
     public function registerAdmin(RegistrationRequest $request){

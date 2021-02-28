@@ -18,6 +18,14 @@ class UsersController extends Controller
         $this->users_service = $users_service;
     }
 
+    /**
+     * Get all users.
+     *
+     * @param Illuminate\Http\Request
+     * 
+     * @throws InternalErrorException
+     * @return Collection $users
+     */
     public function index(Request $request)
     {
         try {
@@ -29,6 +37,15 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Get user by the id.
+     *
+     * @param int $id
+     * @param Illuminate\Http\Request
+     * 
+     * @throws InternalErrorException
+     * @return App\Models\User $user
+     */
     public function show(Request $request, $id)
     {
         try {
@@ -40,6 +57,14 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Update the current user
+     * 
+     * @param Illuminate\Http\Request
+     * 
+     * @throws InternalErrorException 
+     * @return App\Models\User $user
+     */
     public function updateCurrentUser(Request $request)
     {
         try {
@@ -59,6 +84,14 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Get the current user.
+     *
+     * @param Illuminate\Http\Request
+     * 
+     * @throws InternalErrorException
+     * @return App\Models\User $user
+     */
     public function getCurrentUser(Request $request)
     {
         try {
@@ -71,6 +104,14 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Mark notifications as seen.
+     *
+     * @param Illuminate\Http\Request
+     * 
+     * @throws InternalErrorException 
+     * @return true
+     */
     public function markNotificationsSeen(Request $request)
     {
         try {
