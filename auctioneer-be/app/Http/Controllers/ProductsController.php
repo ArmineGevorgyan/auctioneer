@@ -131,7 +131,7 @@ class ProductsController extends Controller
                 'is_available'
             ]);
 
-            Log::info('Create product', ['payload' => $payload]);
+            Log::info('Update product', ['payload' => $payload]);
             $product = $this->products_service->updateProduct($request->user(), $id, $payload);
             Log::info('Product updated.', ['response' => $product]);
 

@@ -56,7 +56,12 @@ class ProductUpdateEvent implements ShouldBroadcast
     {
         return [
             'id' => $this->product->id,
+            'name' => $this->product->name,
+            'description' => $this->product->description,
+            'image' => $this->product->image,
+            'starting_price' => $this->product->starting_price,
             'current_price' => $this->product->current_price,
+            'closing_date' => $this->product->closing_date,
             'status' => $this->product->status,
             'winning_user' => $this->product->winning_user,
             'sold_price' => $this->product->sold_price,
