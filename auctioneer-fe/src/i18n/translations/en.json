@@ -6,7 +6,6 @@
     "username": "Username",
     "password": "Password",
     "register": "Register",
-    "registerSuccess": "Successfully registered user",
     "registerAdmin": "Register a new Administrator user",
     "email": "Email",
     "login": "Login"
@@ -103,5 +102,21 @@
   "notifiactions": {
     "welcome": "Notifications",
     "empty": "There are no Notifications yet"
+  },
+  "toast": {
+    "createProductSuccess": "Successfully created product",
+    "createProductFail": "Product creation unsuccessful",
+    "updateProductSuccess": "Successfully updated product",
+    "updateProductFail": "Product update unsuccessful",
+    "deleteProductSuccess": "Successfully deleted product",
+    "deleteProductFail": "Product delete unsuccessful",
+    "makeBidSuccess": "Successfully created bid",
+    "makeBidFail": "Bid creation unsuccessful",
+    "disableAutobiddingSuccess": "Successfully disabled autobidding",
+    "disableAutobiddingFail": "Could not enable autobidding",
+    "enableAutobiddingSuccess": "Successfully disabled autobidding",
+    "enableAutobiddingFail": "Could not disable autobidding",
+    "registerSuccess": "Successfully registered user",
+    "registerFail": "User registration unsuccessful"
   }
 }

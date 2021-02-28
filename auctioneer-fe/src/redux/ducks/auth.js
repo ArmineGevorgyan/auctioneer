@@ -166,10 +166,11 @@ export const registerAdmin = (data, history) => {
       .post(`${API_URL}/register-admin`, data)
       .then(() => {
         dispatch(authSlice.actions.registerAdminSuccess());
-        toast.success(i18n.t("authScreen.registerSuccess"));
+        toast.success(i18n.t("toast.registerSuccess"));
         history.goBack();
       })
       .catch((error) => {
+        toast.error(i18n.t("toast.registerFail"));
         dispatch(authSlice.actions.registerAdminFail(error));
       });
   };
