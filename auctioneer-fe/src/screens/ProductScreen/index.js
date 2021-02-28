@@ -3,9 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { Button, Icon, Item } from "semantic-ui-react";
-import { useParams, Link } from "react-router-dom";
-import Countdown from "react-countdown";
-import moment from "moment";
+import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { getProductById, deleteProductById } from "../../redux/ducks/product";
 import { enableAutobidding, disableAutobidding } from "../../redux/ducks/bid";
@@ -13,8 +11,11 @@ import { getCurrentUser } from "../../redux/ducks/user";
 import BidForm from "./BidForm";
 import BidList from "./BidList";
 import constants from "../../constants";
-import { cashWithCommas } from "../../helpers/numberHelper";
-import { substribeProductCallback,  unsubstribeProductCallback } from "../../helpers/pusherHelper";
+import {
+  substribeProductCallback,
+  unsubstribeProductCallback,
+} from "../../helpers/pusherHelper";
+import BidInfo from "./BidInfo";
 
 const ProductScreen = ({
   t,
@@ -52,56 +53,11 @@ const ProductScreen = ({
 
   const isVisitor = !user.is_admin;
   const usersBids = user.bids.filter((bid) => bid.product_id == id);
-  const currentBid = usersBids.slice().sort((a, b) => (a.amount > b.amount ? -1 : 1))[0];
+  const currentBid = usersBids
+    .slice()
+    .sort((a, b) => (a.amount > b.amount ? -1 : 1))[0];
   const hasAutobidding = currentBid && currentBid.auto_bidding;
   const inProgress = product.status == constants.productStatus.IN_PROGRESS;
-
-  const getBiddingInfo = () =>
-    inProgress ? (
-      <>
-        <Item.Extra>
-          {t("products.startingPrice")}:{cashWithCommas(product.starting_price)}
-        </Item.Extra>
-        <Item.Extra>
-          {t("products.currentPrice")}: {cashWithCommas(product.current_price)}
-        </Item.Extra>
-        <Item.Extra>
-          {t("products.status")}: {t(`products.${product.status}`)}
-        </Item.Extra>
-        <Item.Extra>
-          {t("products.remaintingTime")}:{" "}
-          <Countdown date={new Date(product.closing_date)} />
-        </Item.Extra>
-        <Item.Extra>
-          {t("products.minimum")}: {cashWithCommas(product.current_price + 1)}
-        </Item.Extra>
-        {currentBid && (
-          <Item.Extra>
-            {t("products.current")}: {cashWithCommas(currentBid.amount)}
-          </Item.Extra>
-        )}
-      </>
-    ) : (
-      <>
-        <Item.Extra>
-          {t("products.status")}: {t(`products.${product.status}`)}
-        </Item.Extra>
-        {product.sold_price && (
-          <Item.Extra>
-            {t("products.price")}: {cashWithCommas(product.sold_price)}
-          </Item.Extra>
-        )}
-        {product.winning_user && (
-          <Item.Extra>
-            {t("products.awardedTo")}: {product.winning_user}
-          </Item.Extra>
-        )}
-        <Item.Extra>
-          {t("products.closedDate")}:{" "}
-          {moment(product.closing_date).format("MMMM Do YYYY, h:mm:ss a")}
-        </Item.Extra>
-      </>
-    );
 
   return (
     <div id="product_screen">
@@ -113,25 +69,7 @@ const ProductScreen = ({
           onClick={() => history.goBack()}
         />
         <Item>
-          <h1 className="clear">{product.name}</h1>
-          {!isVisitor && (
-            <div>
-              <Button primary as={Link} to={`/products/${id}/edit`}>
-                {t("products.edit")}
-              </Button>
-              <Button color="red" onClick={() => onDelete()}>
-                {t("products.delete")}
-              </Button>
-            </div>
-          )}
-          <Item.Image
-            size="large"
-            src={product.image || constants.placeholderImageUrl}
-          />
-          <Item.Content>
-            <Item.Description>{product.description}</Item.Description>
-            <div className="bidInfo">{getBiddingInfo()}</div>
-          </Item.Content>
+          <BidInfo product={product} user={user} onDelete={onDelete} />
           {inProgress && isVisitor && <BidForm history={history} />}
           {inProgress && isVisitor && !hasAutobidding && (
             <Button
