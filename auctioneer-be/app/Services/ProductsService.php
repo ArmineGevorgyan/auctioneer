@@ -58,7 +58,13 @@ class ProductsService implements IProductsService
         Log::info('Updating product');
 
         $this->validateUser($user);
-        return $this->getProduct($id)->update($data);
+        $this->getProduct($id)->update($data);
+        $product = $this->getProduct($id);
+        
+        \Log::info("Dispatching product update event");
+        ProductUpdateEvent::dispatch($product);
+
+        return $product;
     }
 
     /**
