@@ -4,12 +4,18 @@ import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import { withTranslation } from "react-i18next";
 import { Input, FormField, Button, Icon } from "semantic-ui-react";
+import CurrencyInput from "react-currency-input";
 import Loader from "../../components/Loader";
 import schema from "../../validation/settingsSchema";
 import Validation from "../../validation";
 import { getCurrentUser, updateCurrentUser } from "../../redux/ducks/user";
 
 class SettingsScreen extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.formik = React.createRef();
+  }
+
   componentDidMount() {
     this.props.getCurrentUser();
   }
@@ -38,6 +44,7 @@ class SettingsScreen extends React.PureComponent {
         <h1 className="clear">{t("settings.welcome")}</h1>
         {isVisitor && (
           <Formik
+            innerRef={(p) => (this.formik = p)}
             initialValues={{
               email: user.email,
               max_bid_amount: user.max_bid_amount,
@@ -56,10 +63,17 @@ class SettingsScreen extends React.PureComponent {
                         <span>{t("settings.max_bid_amount")}</span>
                       </label>
                       <Validation name="max_bid_amount" showMessage={true}>
-                        <Input
-                          autoCapitalize="off"
+                        <CurrencyInput
+                          prefix="$"
+                          precision="0"
                           value={values.max_bid_amount}
                           name="max_bid_amount"
+                          onChangeEvent={(event, maskedvalue, floatvalue) =>
+                            this.formik.setValues({
+                              ...this.formik.values,
+                              max_bid_amount: floatvalue,
+                            })
+                          }
                         />
                       </Validation>
                     </FormField>
@@ -71,10 +85,17 @@ class SettingsScreen extends React.PureComponent {
                         name="autobid_notify_percent"
                         showMessage={true}
                       >
-                        <Input
-                          autoCapitalize="off"
+                        <CurrencyInput
+                          precision="0"
+                          prefix="$"
                           value={values.autobid_notify_percent}
                           name="autobid_notify_percent"
+                          onChangeEvent={(event, maskedvalue, floatvalue) =>
+                            this.formik.setValues({
+                              ...this.formik.values,
+                              autobid_notify_percent: floatvalue,
+                            })
+                          }
                         />
                       </Validation>
                     </FormField>

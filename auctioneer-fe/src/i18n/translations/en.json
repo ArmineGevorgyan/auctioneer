@@ -53,9 +53,8 @@
     "current_price": "Current price",
     "image": "Image Url",
     "closing_date": "Closing date",
-    "update": "Update",
-    "cancel": "Cancel",
-    "create": "Create"
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "bidList": {
     "bids": "Bids",
@@ -108,6 +107,8 @@
     "empty": "There are no Notifications yet"
   },
   "toast": {
+    "userUpdateSuccess": "Successfully updated settings",
+    "userUpdateFail": "Could not update settings",
     "createProductSuccess": "Successfully created product",
     "createProductFail": "Product creation unsuccessful",
     "updateProductSuccess": "Successfully updated product",

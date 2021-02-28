@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
+import i18n from "../../i18n";
 import { API_URL } from "../../config";
 
 const initialState = {
@@ -89,9 +91,11 @@ export const updateCurrentUser = (data) => {
       .then((r) => r.data)
       .then((data) => {
         dispatch(userSlice.actions.updateCurrentUserSuccess(data));
+        toast.success(i18n.t("toast.userUpdateSuccess"));
       })
       .catch((error) => {
         dispatch(userSlice.actions.updateCurrentUserFail(error));
+        toast.error(i18n.t("toast.userUpdateFail"));
       });
   };
 };

@@ -16,7 +16,7 @@ ReactDOM.render(
   <Provider store={store}>
     <I18nextProvider i18n={i18n}>
       <Router>
-        <ToastContainer autoClose={6000} position="top-center" closeOnClick />
+        <ToastContainer autoClose={5000} position="top-center" closeOnClick />
         <App />
       </Router>
     </I18nextProvider>

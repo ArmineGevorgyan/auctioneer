@@ -46,7 +46,7 @@ class HomeScreen extends React.PureComponent {
             />
             <Item.Content>
               <Item.Header>{item.name}</Item.Header>
-              <Item.Description>{item.description.trunc()}</Item.Description>
+              <Item.Description>{item.description?.trunc()}</Item.Description>
               {item.status == constants.productStatus.IN_PROGRESS ? (
                 <Item.Extra>
                   {t("products.currentPrice")}:{" "}
