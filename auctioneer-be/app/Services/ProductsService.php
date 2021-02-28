@@ -20,16 +20,7 @@ class ProductsService implements IProductsService
         Log::info('Getting all products');
         return Product::all();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableProducts()
-    {
-        Log::info('Getting all available products');
-        return Product::available()->paginate(constants('PAGINATION_SIZE'));
-    }
-
+    
     /**
      * {@inheritdoc}
      */

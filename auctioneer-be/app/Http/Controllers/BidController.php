@@ -18,12 +18,20 @@ class BidController extends Controller
         $this->bids_service = $bids_service;
     }
 
+    /**
+     * Get all bids.
+     * 
+     * @param Illuminate\Http\Request
+     * 
+     * @throws InternalErrorException
+     * @return Collection $bids
+     */
     public function index(Request $request)
     {
         try {
             Log::error('Get all bids');
 
-            return $this->bids_service->getBids();
+            return $this->bids_service->getAllBids();
         } catch (Exception $e) {
             Log::error('Get bids, Exception', ['error' => $e->getMessage()]);
 
@@ -31,6 +39,15 @@ class BidController extends Controller
         }
     }
 
+    /**
+     * Get bid by the id.
+     *
+     * @param Illuminate\Http\Request
+     * @param int $id
+     *
+     * @throws InternalErrorException
+     * @return App\Models\Bid $bid
+     */
     public function show(Request $request, $id)
     {
         try {
@@ -44,6 +61,15 @@ class BidController extends Controller
         }
     }
 
+    /**
+     * Update an existing bid
+     *
+     * @param Illuminate\Http\Request
+     * @param int $id
+     * 
+     * @throws InternalErrorException
+     * @return App\Models\Bid
+     */
     public function update(Request $request, $id)
     {
         try {   
@@ -60,6 +86,15 @@ class BidController extends Controller
         }
     }
     
+    /**
+     * Delete an existing bid
+     *
+     * @param Illuminate\Http\Request
+     * @param int $id
+     * 
+     * @throws InternalErrorException
+     * @return void
+     */
     public function delete(Request $request, $id){
         try {
             Log::error('Delete bid by id', ['id' => $id]);

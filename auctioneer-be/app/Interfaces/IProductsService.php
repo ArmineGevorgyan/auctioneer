@@ -12,13 +12,6 @@ interface IProductsService
     public function getAllProducts();
 
     /**
-     * Get all available products.
-     *
-     * @return Collection $products
-     */
-    public function getAvailableProducts();
-
-    /**
      * Get available products filtered and sorted by the given column.
      * 
      * @param string $filter

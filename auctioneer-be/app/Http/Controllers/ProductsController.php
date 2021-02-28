@@ -19,10 +19,18 @@ class ProductsController extends Controller
         $this->products_service = $products_service;
     }
 
+    /**
+     * Get all products.
+     * 
+     * @param Illuminate\Http\Request
+     *
+     * @throws InternalErrorException
+     * @return Collection $products
+     */
     public function index(Request $request)
     {
         try {
-            return $this->products_service->getProducts();
+            return $this->products_service->getAllProducts();
         } catch (Exception $e) {
             Log::error('Get products, Exception', ['error' => $e->getMessage()]);
 
@@ -30,6 +38,14 @@ class ProductsController extends Controller
         }
     }
 
+    /**
+     * Get available products filtered and sorted by the given column.
+     * 
+     * @param Illuminate\Http\Request
+     *
+     * @throws InternalErrorException
+     * @return Collection $products
+     */
     public function getProducts(Request $request)
     {
         try {
@@ -40,7 +56,16 @@ class ProductsController extends Controller
             throw new InternalErrorException();
         }
     }
-
+    
+    /**
+     * Get product by the id.
+     *
+     * @param Illuminate\Http\Request
+     * @param int $id
+     *
+     * @throws InternalErrorException
+     * @return App\Models\Product $product
+     */
     public function show(Request $request, $id)
     {
         try {
@@ -52,6 +77,14 @@ class ProductsController extends Controller
         }
     }
 
+    /**
+     * Create a new product
+     *
+     * @param Illuminate\Http\Request
+     * 
+     * @throws InternalErrorException
+     * @return App\Models\Product
+     */
     public function create(ProductRequest $request)
     {
         try {   
@@ -77,6 +110,15 @@ class ProductsController extends Controller
         }
     }
 
+    /**
+     * Update an existing product
+     *
+     * @param Illuminate\Http\Request
+     * @param int $id
+     * 
+     * @throws InternalErrorException
+     * @return App\Models\Product
+     */
     public function update(ProductRequest $request, $id)
     {
         try {   
@@ -101,6 +143,15 @@ class ProductsController extends Controller
         }
     }
 
+    /**
+     * Delete an existing product
+     *
+     * @param Illuminate\Http\Request
+     * @param int $id
+     * 
+     * @throws InternalErrorException
+     * @return void
+     */
     public function delete(Request $request, $id){
         try {
             return $this->products_service->deleteProduct($request->user(), $id);
@@ -111,6 +162,15 @@ class ProductsController extends Controller
         }
     }
 
+    /**
+     * Create a new bid
+     *
+     * @param Illuminate\Http\Request
+     * @param int $id
+     * 
+     * @throws InternalErrorException
+     * @return App\Models\Bid
+     */
     public function createBid(Request $request, $id){
         try {
             $payload = $request->only([ "amount" ]);
@@ -123,6 +183,15 @@ class ProductsController extends Controller
         }
     }  
     
+    /**
+     * Enable autobidding on product
+     * 
+     * @param Illuminate\Http\Request
+     * @param int $id
+     * 
+     * @throws InternalErrorException
+     * @return App\Models\Bid
+     */
     public function enableAutobidding(Request $request, $id){
         try {
             return $this->products_service->enableAutobidding($request->user(), $id);
@@ -133,6 +202,15 @@ class ProductsController extends Controller
         }
     }
     
+    /**
+     * Enable autobidding on product
+     * 
+     * @param Illuminate\Http\Request
+     * @param int $id
+     * 
+     * @throws InternalErrorException
+     * @return mixed
+     */
     public function disableAutobidding(Request $request, $id){
         try {
             return $this->products_service->disableAutobidding($request->user(), $id);

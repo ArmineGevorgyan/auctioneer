@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Exceptions\InternalErrorException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -16,6 +17,7 @@ class LoginController extends Controller
      *
      * @param Request $request
      *
+     * @throws InternalErrorException 
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request){
@@ -38,7 +40,7 @@ class LoginController extends Controller
         }
         catch (Exception $e) {
             Log::warning('User login failed. Cannot provide token.', ['username' => $credentials['username'], ' error' => $e->getMessage()]);
-            throw new Exception($e);
+            throw new InternalErrorException($e);
         }
 
     }
