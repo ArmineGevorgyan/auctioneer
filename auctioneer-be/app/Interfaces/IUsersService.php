@@ -6,10 +6,12 @@ interface IUsersService
 {
     /**
      * Get all users.
+     * 
+     * @param App\Models\User $user
      *
      * @return Collection $users
      */
-    public function getAllUsers();
+    public function getAllUsers(User $user);
 
     /**
      * Get user by the id.

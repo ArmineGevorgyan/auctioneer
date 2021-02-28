@@ -29,7 +29,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         try {
-            return $this->users_service->getAllUsers();
+            return $this->users_service->getAllUsers($request->user());
         } catch (Exception $e) {
             Log::error('Get users, Exception', ['error' => $e->getMessage()]);
 
@@ -49,7 +49,7 @@ class UsersController extends Controller
     public function show(Request $request, $id)
     {
         try {
-            return $this->users_service->getUser($id);
+            return $this->users_service->getUser($request->user(), $id);
         } catch (Exception $e) {
             Log::error('Get user by id, Exception', ['error' => $e->getMessage()]);
 

@@ -13,9 +13,11 @@ class UsersService implements IUsersService
     /**
      * {@inheritdoc}
      */
-    public function getAllUsers()
+    public function getAllUsers($user)
     {
         Log::info('Getting all users');
+
+        $this->validateAdmin($user);
 
         return User::all();
     }
@@ -73,10 +75,7 @@ class UsersService implements IUsersService
      */
     public function createAdmin($user, $data)
     {
-        if(!$user->is_admin) {
-            Log::warning("Invalid User");
-            throw new \Exception("Invalid User");
-        }
+        $this->validateAdmin($user);
         
         $user = $this->create($data);
         $user->assignRole('admin');
@@ -93,6 +92,14 @@ class UsersService implements IUsersService
 
         foreach($notifications as $notification){
             $notification->update(['is_seen' => true]);
+        }
+    }
+    
+    private function validateAdmin($user)
+    {
+        if(!$user->is_admin) {
+            Log::warning("Invalid User");
+            throw new \Exception("Invalid User");
         }
     }
 }
