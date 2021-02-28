@@ -118,9 +118,9 @@
     "makeBidSuccess": "Successfully created bid",
     "makeBidFail": "Bid creation unsuccessful",
     "disableAutobiddingSuccess": "Successfully disabled autobidding",
-    "disableAutobiddingFail": "Could not enable autobidding",
-    "enableAutobiddingSuccess": "Successfully disabled autobidding",
-    "enableAutobiddingFail": "Could not disable autobidding",
+    "disableAutobiddingFail": "Could not disable autobidding",
+    "enableAutobiddingSuccess": "Successfully enabled autobidding",
+    "enableAutobiddingFail": "Could not enable autobidding",
     "registerSuccess": "Successfully registered user",
     "registerFail": "User registration unsuccessful"
   }

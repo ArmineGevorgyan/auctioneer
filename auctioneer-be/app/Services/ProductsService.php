@@ -117,14 +117,16 @@ class ProductsService implements IProductsService
         if(!$bid){
             $bid = $this->createBid($user, $id, [
                 'amount' => $highestBid ? $highestBid->amount + 1 : $product->current_price + 1,
-            ]);  
-
-            $highestBid = $product->getHighestBid();
+            ]);
+        }
+        else {
+            $nextBid = $highestBid->id == $bid->id ? $bid->amount : $highestBid->amount + 1;
+            $bid->update(['amount' => $nextBid]);
         }
 
-        $bid->update(['auto_bidding' => true]);
-        $bid->updateAmount();
         $this->dispatchUpdateJobs($bid);
+        $bid->updateAmount();
+        $bid->update(['auto_bidding' => true]);
 
         return true;
     }

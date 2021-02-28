@@ -38,6 +38,10 @@ In order to run jobs and broadcast events, you need to start the database queue 
 php artisan queue:work database
 ```
 
+This process needs to keep running in order to dispatch jobs.
+
+Alternatively, you can change `QUEUE_CONNECTION` in the .env file to `sync` and clear the application cache.
+
 ## Running the scheduler
 
 In a production server you can start the scheduler by adding a cron command that runs the schedule:run command every minute. You can do so by adding the following to your crontab configuration:
